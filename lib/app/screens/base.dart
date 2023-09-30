@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gocart/app/screens/home_screen.dart';
+import 'package:gocart/app/screens/tabs/dresses.dart';
 import 'package:gocart/app/screens/product_screen.dart';
 import 'package:gocart/app/screens/profile_screen.dart';
 import 'package:gocart/app/screens/whislist_screen.dart';

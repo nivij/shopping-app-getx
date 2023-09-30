@@ -5,16 +5,27 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../models/product_model.dart';
 
 class OrderController extends GetxController {
-  RxList<Modelphoto> cartItems = <Modelphoto>[].obs;
+  RxList<Dresses> cartItems = <Dresses>[].obs;
   var count = 0.obs;
+  late Dresses _item;
 
-  void increment() {
-    count.value++;
+  Dresses get getitem => _item;
+
+  void increment(Dresses item) {
+    cartItems.removeWhere((Dresses selectedItem) => selectedItem.id == item.id);
+  item.qty++;
+  cartItems.add(item);
+
   }
 
-  void decrement() {
-    if (count.value > 0) {
-      count.value--;
+  void decrement(Dresses item) {
+    if(item.qty==1){
+      cartItems.removeWhere((Dresses selectedItem) => selectedItem.id == item.id);
+      }
+    else {
+      cartItems.removeWhere((Dresses selectedItem) => selectedItem.id == item.id);
+    item.qty--;
+    cartItems.add(item);
     }
   }
   showSuccessSnackBar(var title) {
@@ -27,19 +38,19 @@ class OrderController extends GetxController {
       colorText: Colors.white,
     );
   }
-  void addToCart(Modelphoto item) {
+  void addToCart(Dresses item) {
     showSuccessSnackBar(
       'Added To Cart',
     );
     cartItems.add(item);
   }
-  var badgeValue = '1'.obs; // Initialize badge value with '0'
+  var badgeValue = '0'.obs; // Initialize badge value with '0'
 
-  void updateBadgeValue(int count) {
+  void updateBadgeValue( count ) {
     badgeValue.value = count.toString();
-    badgeValue.refresh();
+
   }
-  void removeFromCart(Modelphoto item) {
+  void removeFromCart(Dresses item) {
     showSuccessSnackBar(
       'Removed From  Cart',
     );

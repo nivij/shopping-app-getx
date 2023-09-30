@@ -98,6 +98,8 @@ class _ProductScreenState extends State<ProductScreen> {
               top: 40,
               right: 20,
               child:  badges.Badge(
+                badgeAnimation: badges.BadgeAnimation.fade(),
+                 showBadge:orderController.badgeValue == '0' ? false : true ,
                  badgeContent:  Obx(() => Text(orderController.badgeValue.value)),
                   child: Bounceable(
                     onTap: () {
@@ -203,7 +205,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   IconButton(
                                     padding: EdgeInsets.only(left: 10),
                                     onPressed: () {
-                                      orderController.decrement();
+                                      orderController.decrement(orderController.getitem);
                                     },
                                     icon: Icon(
                                       size: 20,
@@ -219,7 +221,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     padding: EdgeInsets.only(right: 19),
                                     onPressed: () {
 
-                                      orderController.increment();
+                                      orderController.increment(orderController.getitem);
                                     },
                                     icon: Icon(
                                       size: 20,
@@ -385,9 +387,12 @@ class _ProductScreenState extends State<ProductScreen> {
 
                 ),
                 onPressed: () {
+                       setState(() {
+                         orderController.updateBadgeValue( orderController.cartCount);
+                         orderController.addToCart(widget.product);
 
-               orderController.updateBadgeValue( orderController.cartCount);
-                  orderController.addToCart(widget.product);
+                       });
+
                 }, child: Row(
               mainAxisAlignment:MainAxisAlignment.center ,
 

@@ -48,7 +48,7 @@ class _CustomRatingBarState extends State<CustomRatingBar> {
                   : _currentRating > index
                   ? Icons.star_half
                   : Icons.star_border,
-              size: 22,
+              size: 18,
               color: Colors.amber, // Change the color to your desired color
             ),
           ),

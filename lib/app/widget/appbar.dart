@@ -8,7 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/text_controller.dart';
 
-import '../screens/home_screen.dart';
+import '../screens/tabs/dresses.dart';
+import '../screens/tabs/jackets.dart';
 
 class Customappbar extends StatefulWidget implements PreferredSizeWidget {
   const Customappbar({super.key});
@@ -165,7 +166,7 @@ class _CustomappbarState extends State<Customappbar> {
 
                         children:  [
                           Center(child: home(),),
-                          Center(child: Text("Jackets Pages"),),
+                          Center(child: jackets(),),
                           Center(child: Text('Jeans Page'),),
                           Center(child: Text('Shoes Page'),)
                         ],

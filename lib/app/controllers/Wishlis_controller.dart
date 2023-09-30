@@ -7,7 +7,7 @@ import '../models/product_model.dart';
 import 'details_controller.dart';
 
 class WishlistController extends GetxController {
-  final RxList<Modelphoto> products = <Modelphoto>[
+  final RxList<Dresses> products = <Dresses>[
   ].obs;
   RxList<WishlistItem> wishlist = <WishlistItem>[].obs;
   final detailsController = Get.put(DetailsController());
@@ -53,7 +53,7 @@ class WishlistController extends GetxController {
       colorText: Colors.white,
     );
   }
-  void addToWishlist(Modelphoto product) {
+  void addToWishlist(Dresses product) {
     if (!isInWishlist(product)) {
       wishlist.add(WishlistItem(product));
       update();
@@ -65,7 +65,7 @@ class WishlistController extends GetxController {
     }
   }
 
-  void removeFromWishlist(Modelphoto product) {
+  void removeFromWishlist(Dresses product) {
     wishlist.removeWhere((item) => item.product == product);
     showSuccessSnackBar(
       'Removed From Wishlist' ,
@@ -75,7 +75,7 @@ class WishlistController extends GetxController {
     wishlist.refresh();
   }
 
-  bool isInWishlist(Modelphoto product) {
+  bool isInWishlist(Dresses product) {
 
 
     return wishlist.any((item) => item.product == product);

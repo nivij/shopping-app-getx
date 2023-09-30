@@ -4,8 +4,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/widget/dress_card.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../controllers/Wishlis_controller.dart';
-import '../controllers/details_controller.dart';
+import '../../controllers/Wishlis_controller.dart';
+import '../../controllers/details_controller.dart';
 
 
 class home extends GetView<DetailsController> {

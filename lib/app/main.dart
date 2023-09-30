@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gocart/app/routes/app_pages.dart';
+import 'package:gocart/app/screens/auth_screen.dart';
 import 'package:gocart/app/screens/base.dart';
 import 'package:gocart/app/screens/binding/root_bindings.dart';
-import 'package:gocart/app/screens/home_screen.dart';
+import 'package:gocart/app/screens/tabs/dresses.dart';
 import 'package:gocart/app/screens/product_screen.dart';
-
 
 void main() async {
   await GetStorage.init();
@@ -24,13 +25,7 @@ class myApp extends StatelessWidget {
       initialBinding: RootBindings(),
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      home: base(),
-      getPages: [
-        GetPage(
-            name: '/home_screen', page: () => home(), binding: RootBindings()),
-      GetPage(name: '/product_screen', page: () => ProductScreen(),binding: RootBindings())
-      ],
-
+      getPages: AppPages.routes,
     );
   }
 }

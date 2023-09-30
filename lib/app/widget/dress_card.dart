@@ -127,7 +127,7 @@ class _DressCardState extends State<DressCard> {
                     fontWeight: FontWeight.w600),
               ),
               Text(
-                  detailsController.detailsList[widget.index].price,
+                 '\$ ${detailsController.detailsList[widget.index].price}',
                   style: GoogleFonts.poppins(
                     color: CupertinoColors.black, fontWeight: FontWeight.w600),
               )

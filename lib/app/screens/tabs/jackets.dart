@@ -28,20 +28,20 @@ class jackets extends GetView<DetailsController> {
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context,  index ) {
-          // final product = jacketController.JacketList[index];
+          final product = jacketController.JacketList[index];
 
           return (index ==4)
               ? Column(
             children: [
               SizedBox(height: 40),
               DressCard(index: index,
-                  // product: product
+                  product: product
               ),
             ],
           )
               : DressCard(index: index,
 
-              // product: product
+              product: product
           );
         },
 

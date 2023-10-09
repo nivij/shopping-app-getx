@@ -14,13 +14,14 @@ class AuthView extends GetView<AuthController> {
           height: context.height,
           child: SingleChildScrollView(
             child: Form(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+
               key: controller.authFormKey,
                 child: Column(
                   children: [
                     Text("welcome to gocart"),
                     SizedBox(height: 20,),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -33,7 +34,7 @@ class AuthView extends GetView<AuthController> {
                       keyboardType: TextInputType.emailAddress,
                       controller: controller.emailcontroller,
                       onSaved: (value) {
-                        controller.email=value!;
+                        // controller.email=value!;
                       },
                       validator: (value) {
                         return controller.validateEmail(value!);
@@ -41,6 +42,7 @@ class AuthView extends GetView<AuthController> {
                     ),
                     SizedBox(height: 16,),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -54,7 +56,7 @@ class AuthView extends GetView<AuthController> {
                       obscureText: true,
                       controller: controller.passwordcontroller,
                       onSaved: (value) {
-                        controller.password=value!;
+                        // controller.passwordcontroller=value!;
                       },
                       validator: (value) {
                         return controller.validatePass(value!);
@@ -91,6 +93,7 @@ class AuthView extends GetView<AuthController> {
                   ],
                 )
             ),
+
           ),
         ),
 

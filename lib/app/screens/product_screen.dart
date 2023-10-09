@@ -8,7 +8,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/controllers/Size_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Wishlis_controller.dart';
+import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
+import '../widget/counter.dart';
 import '../widget/test.dart';
 import 'Cart_screen.dart';
 
@@ -43,6 +45,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     final sizecontroller = Get.put(SizeController());
+    final detailsController = Get.put(DetailsController());
     final WishlistController wishlistController = Get.find();
      final OrderController orderController = Get.put(OrderController());    return Scaffold(
         backgroundColor: widget.colors[widget.index],
@@ -97,10 +100,10 @@ class _ProductScreenState extends State<ProductScreen> {
             Positioned(
               top: 40,
               right: 20,
-              child:  badges.Badge(
+              child: badges.Badge(
                 badgeAnimation: badges.BadgeAnimation.fade(),
                  showBadge:orderController.badgeValue == '0' ? false : true ,
-                 badgeContent:  Obx(() => Text(orderController.badgeValue.value)),
+                 badgeContent:   Text(orderController.badgeValue.value),
                   child: Bounceable(
                     onTap: () {
                       Get.to(CartPage());
@@ -119,6 +122,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         )),
                   ),
                 )
+
               ),
 
             Positioned(
@@ -189,50 +193,12 @@ class _ProductScreenState extends State<ProductScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("White Tees",
+                          Text( detailsController.detailsList[widget.index].name,
                               style: GoogleFonts.poppins(
                                   color: Colors.black,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w800)),
-                          Obx(
-                            () => Container(
-                              height: 38,
-                              decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(60)),
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    padding: EdgeInsets.only(left: 10),
-                                    onPressed: () {
-                                      orderController.decrement(orderController.getitem);
-                                    },
-                                    icon: Icon(
-                                      size: 20,
-                                      Icons.remove,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                      '${orderController.count}',
-                                    style: GoogleFonts.poppins(fontSize: 18),
-                                  ),
-                                  IconButton(
-                                    padding: EdgeInsets.only(right: 19),
-                                    onPressed: () {
-
-                                      orderController.increment(orderController.getitem);
-                                    },
-                                    icon: Icon(
-                                      size: 20,
-                                      Icons.add,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
+                          Counter()
                         ],
                       ),
                       Row(
@@ -389,6 +355,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 onPressed: () {
                        setState(() {
                          orderController.updateBadgeValue( orderController.cartCount);
+
                          orderController.addToCart(widget.product);
 
                        });

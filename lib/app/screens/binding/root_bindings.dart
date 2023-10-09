@@ -9,6 +9,7 @@ import 'package:gocart/app/controllers/text_controller.dart';
 
 import '../../controllers/Color_controller.dart';
 import '../../controllers/Size_controller.dart';
+import '../../controllers/splash_controller.dart';
 
 class RootBindings implements Bindings {
 
@@ -21,6 +22,7 @@ class RootBindings implements Bindings {
     Get.lazyPut(() => WishlistController(),);
     Get.lazyPut(() => SizeController(),);
     Get.lazyPut(() => AuthController(),);
+    Get.put(SplashController());
 
   }
 }

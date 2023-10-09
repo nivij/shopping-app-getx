@@ -8,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/text_controller.dart';
 
+import '../screens/profile_screen.dart';
 import '../screens/tabs/dresses.dart';
 import '../screens/tabs/jackets.dart';
+import 'SideNavigationDrawer.dart';
 
 class Customappbar extends StatefulWidget implements PreferredSizeWidget {
   const Customappbar({super.key});
@@ -35,6 +37,7 @@ class _CustomappbarState extends State<Customappbar> {
       
       length: 4,
       child: Scaffold(
+         drawer: Navdrawer(),
         backgroundColor: Colors.white,
         body: NestedScrollView(
 
@@ -51,13 +54,20 @@ class _CustomappbarState extends State<Customappbar> {
                     pinned: true,
                     leading: Padding(
                         padding: EdgeInsets.symmetric(vertical: 16),
-                        child: CircleAvatar(
-                          radius: 10,
-                          backgroundColor: CupertinoColors.black,
-                          child: Icon(
-                            FluentIcons.filter_12_filled,
-                            color: CupertinoColors.white,
-                            size: 30,
+                        child: InkWell(
+                          onTap: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          child: CircleAvatar(
+
+                            radius: 10,
+                            backgroundColor: CupertinoColors.black,
+                            child: Icon(
+
+                              FluentIcons.filter_12_filled,
+                              color: CupertinoColors.white,
+                              size: 30,
+                            ),
                           ),
                         )),
                     leadingWidth: 80,
@@ -97,6 +107,8 @@ class _CustomappbarState extends State<Customappbar> {
                                   style: GoogleFonts.poppins(
                                       color: Colors.white.withOpacity(0.6)),
                                   backgroundColor: Colors.black12,
+
+
                                 ),
                               ),
                               trailing: CircleAvatar(

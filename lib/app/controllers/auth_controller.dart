@@ -1,20 +1,27 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gocart/app/routes/app_pages.dart';
+import 'package:gocart/app/screens/base.dart';
 
 class AuthController extends GetxController{
 
   final GlobalKey<FormState>authFormKey=GlobalKey<FormState>();
+  final getstorage =GetStorage();
+  final TextEditingController passwordcontroller=TextEditingController();
+  final TextEditingController emailcontroller=TextEditingController();
+   // password =passwordcontroller.text;
 
-  late TextEditingController emailcontroller,passwordcontroller;
-  var email ='';
-  var password ='';
+
 
   @override
   void onInit(){
     super.onInit();
-    emailcontroller=TextEditingController();
-    passwordcontroller=TextEditingController();
+
+    emailcontroller.text = getstorage.read('email') ?? '';
+    passwordcontroller.text = getstorage.read('password')?? '';
+
   }
 
   @override
@@ -22,23 +29,23 @@ class AuthController extends GetxController{
     super.onReady();
   }
 
-  @override
-  void onClose(){
-    super.onClose();
-    emailcontroller.dispose();
-    passwordcontroller.dispose();
-  }
 
   String? validateEmail(String value){
+
     if(!GetUtils.isEmail(value)){
-      return "Provide valid Email";
+
+        return "Provide valid Email";
+
     }
     return null;
   }
 
   String? validatePass(String value){
-    if(value.length<6){
-      return "Password must be of 6 characters";
+      if (value.length < 6) {
+
+
+        return "Password must be of 6 characters";
+
     }
     return null;
   }
@@ -49,6 +56,27 @@ class AuthController extends GetxController{
     if(!isValid){
       return ;
     }
+
+    else{
+      final email = emailcontroller.text;
+      final password = passwordcontroller.text;
+      getstorage.write("email", email);
+      getstorage.write("password", password);
+      Get.offAllNamed(Routes.BASE);
+    }
     authFormKey.currentState!.save();
   }
+  void logout() {
+
+    getstorage.remove('email');
+    getstorage.remove('password');
+    emailcontroller.clear(); // Clear the text field
+    passwordcontroller.clear();
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+
+    // Optionally, navigate back to the login screen or any other desired route
+    Get.offAllNamed(Routes.LOGIN);
+  }
+
 }

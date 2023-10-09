@@ -1,44 +1,57 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:gocart/app/controllers/auth_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/order_controller.dart';
+import '../controllers/auth_controller.dart';
 
-class profile extends StatefulWidget {
-  const profile({super.key});
-
+class Navdrawer extends StatefulWidget {
   @override
-  State<profile> createState() => _profileState();
+  State<Navdrawer> createState() => _NavdrawerState();
 }
 
-class _profileState extends State<profile> {
+class _NavdrawerState extends State<Navdrawer> {
+  @override
   final AuthController auth = AuthController();
   late String savedemail;
-  @override
   void initState() {
     savedemail = auth.getstorage.read('email') ?? '';
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-  final AuthController Auth= AuthController();
-    return Scaffold(
-      body: Column(
+    final AuthController Auth = AuthController();
+    return Drawer(
+      width: 200,
 
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Center(child: Text(savedemail)),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.black,
+            ),
+            child: Text(savedemail,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () {
+              // Handle the Settings button tap
+              Navigator.pop(context); // Close the drawer
+            },
+          ),
           Container(
             padding: EdgeInsets.only(),
-            width: 180,
+
             height: 60,
             decoration: BoxDecoration(
                 color: Colors.black,
-                borderRadius: BorderRadius.circular(40)
+                borderRadius: BorderRadius.circular(90)
             ),
             child: ElevatedButton(
 
@@ -51,7 +64,7 @@ class _profileState extends State<profile> {
                 ),
                 onPressed: () {
                   setState(() {
-                     Auth.logout();
+                    Auth.logout();
                   });
 
                 }, child: Row(
@@ -68,8 +81,10 @@ class _profileState extends State<profile> {
               ],
             )),
           ),
+          // Add more list tiles as needed for your app
         ],
       ),
     );
   }
 }
+

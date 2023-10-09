@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '../models/model.dart';
 import '../models/product_model.dart';
+
 import 'details_controller.dart';
 
 class WishlistController extends GetxController {

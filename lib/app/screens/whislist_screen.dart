@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -46,7 +47,8 @@ class _WishlistPageState extends State<WishlistPage> {
 
         ],
       ),
-      body: ListView.builder(
+      body: Obx(
+    () =>ListView.builder(
         itemCount: wishlistController.wishlist.length,
         itemBuilder: (context, index) {
           final wishlistItem = wishlistController.wishlist[index];
@@ -105,46 +107,70 @@ class _WishlistPageState extends State<WishlistPage> {
                           SizedBox(height: 7,),
                           Text('\$${wishlistItem.product.price}',style: GoogleFonts.poppins(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w700)),
                           SizedBox(height: 7,),
-                          Container(
-                            padding: EdgeInsets.only(),
-                            width: 130,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: ElevatedButton(
-
-                                style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent
-
+                          Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(),
+                                width: 130,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(10)
                                 ),
-                                onPressed: () {
-                                //   setState(() {
-                                //     orderController.updateBadgeValue( orderController.cartCount);
-                                //     orderController.addToCart(widget.product);
-                                //
-                                //   });
+                                child: ElevatedButton(
 
-                                }, child: Row(
-                              mainAxisAlignment:MainAxisAlignment.center ,
+                                    style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+
+                                        backgroundColor: Colors.transparent,
+                                        shadowColor: Colors.transparent
+
+                                    ),
+                                    onPressed: () {
+                                    //   setState(() {
+                                    //     orderController.updateBadgeValue( orderController.cartCount);
+                                    //     orderController.addToCart(widget.product);
+                                    //
+                                    //   });
+
+                                    }, child: Row(
+                                  mainAxisAlignment:MainAxisAlignment.center ,
 
 
-                              children: [
-                                Image.asset(
-                                  "assets/shopping-bag.png",
-                                  color: Colors.white,height: 12,
+                                  children: [
+                                    Image.asset(
+                                      "assets/shopping-bag.png",
+                                      color: Colors.white,height: 12,
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Text("Add to cart",style: GoogleFonts.poppins(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700))
+                                  ],
+                                )),
+                              ),
+
+                              SizedBox(width: 10,),
+                              Container(
+                                padding: EdgeInsets.only(),
+                                width: 40,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(10)
                                 ),
-                                SizedBox(width: 10,),
-                                Text("Add to cart",style: GoogleFonts.poppins(
-                                    fontSize: 13,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700))
-                              ],
-                            )),
+                                child: IconButton(
+                                  icon: Icon(MfgLabs.heart_broken, color: Colors.white,size: 20),
+                                  onPressed: () {
+                                    wishlistController.removeFromWishlist(
+                                        wishlistItem.product);
+
+                                  },
+                                ),
+                              ),
+
+                            ],
                           )
                         ],
                       ),
@@ -156,6 +182,7 @@ class _WishlistPageState extends State<WishlistPage> {
           );
         },
 
+      )
       )
     );
   }

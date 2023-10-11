@@ -1,10 +1,13 @@
-class Dresses {
-  final int id; // Add 'id' parameter
+class Product {
+  final String id; // Add 'id' parameter
+  final String CategoryId; // Add 'id' parameter
+
   final String name;
   final String price;
   final String photo;
   late int qty;
-  Dresses({
+  Product( {
+    required this.CategoryId,
     required this.id, // Include 'id' parameter in the constructor
     required this.name,
     required this.price,
@@ -12,9 +15,10 @@ class Dresses {
     ,required this.qty
   });
 
-  factory Dresses.fromJson(Map<String, dynamic> json) {
-    return Dresses(
-      id: int.tryParse(json['id'].toString()) ?? 0, // Convert to int or use 0 as a default value
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      CategoryId: json['id'].toString() , // Convert to int or use 0 as a default value
+      id: json['id'].toString() , // Convert to int or use 0 as a default value
       name: json['name'] as String,
       price: json['price'] as String,
       photo: json['photo'] as String,
@@ -25,6 +29,7 @@ class Dresses {
   Map<String, dynamic> toJson() {
     return {
       'id': id,             // Include 'id' field in the JSON representation
+      'CategoryId': CategoryId,             // Include 'id' field in the JSON representation
       'name': name,
       'price': price,
       'photo': photo,
@@ -35,13 +40,13 @@ class Dresses {
   @override // Specify the type for 'other' in the == operator
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is Dresses && this.id == other.id;
+    return other is Product && this.id == other.id;
   }
 
-  @override
-  int get hashCode {
-    return id;
-  }
+  // @override
+  // String get hashCode {
+  //   return id;
+  // }
 }
 
 

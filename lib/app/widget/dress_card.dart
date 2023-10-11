@@ -72,7 +72,7 @@ class _DressCardState extends State<DressCard> {
                       height: 190,
                       width: 164,
                       child: Image.asset(
-                          detailsController.detailsList[widget.index].photo),
+                          widget.product.photo),
                     ),
                     Positioned(
                         top: 10,
@@ -114,7 +114,7 @@ class _DressCardState extends State<DressCard> {
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  detailsController.detailsList[widget.index].name  ,
+                  widget.product.name  ,
                   style: GoogleFonts.poppins(
                       color: CupertinoColors.black,
                       fontWeight: FontWeight.w600),
@@ -127,7 +127,7 @@ class _DressCardState extends State<DressCard> {
                     fontWeight: FontWeight.w600),
               ),
               Text(
-                 '\$ ${detailsController.detailsList[widget.index].price}',
+                 '\$ ${widget.product.price}',
                   style: GoogleFonts.poppins(
                     color: CupertinoColors.black, fontWeight: FontWeight.w600),
               )

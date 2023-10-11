@@ -16,6 +16,7 @@ class CustomRatingBar extends StatefulWidget {
 }
 
 class _CustomRatingBarState extends State<CustomRatingBar> {
+
   double _currentRating = 0.0;
 
   @override

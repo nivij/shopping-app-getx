@@ -2,9 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gocart/app/screens/tabs/dresses.dart';
-import 'package:gocart/app/screens/product_screen.dart';
+
 import 'package:gocart/app/screens/profile_screen.dart';
 import 'package:gocart/app/screens/whislist_screen.dart';
 import 'package:gocart/app/widget/appbar.dart';
@@ -71,7 +69,7 @@ class _baseState extends State<base> {
           });
 
 
-           } ,
+        } ,
         tabs: [
           GButton(icon: Elusive.home_circled,text: 'Home'),
           GButton(icon: Elusive.basket_circled,text: 'Cart'),

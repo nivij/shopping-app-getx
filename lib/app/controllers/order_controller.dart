@@ -6,11 +6,11 @@ import '../models/product_model.dart';
 
 class OrderController extends GetxController {
 
-  RxList<Dresses> cartItems = <Dresses>[].obs;
+  RxList<Product> cartItems = <Product>[].obs;
   var count = 0.obs;
-  late Dresses _item;
+  late Product _item;
   int get cartCount => cartItems.length;
-  Dresses get getitem => _item;
+  Product get getitem => _item;
 
   void increment() {
     count.value++;
@@ -33,7 +33,7 @@ class OrderController extends GetxController {
       colorText: Colors.white,
     );
   }
-  void addToCart(Dresses item) {
+  void addToCart(Product item) {
     showSuccessSnackBar(
       'Added To Cart',
     );
@@ -45,7 +45,7 @@ class OrderController extends GetxController {
     badgeValue.value = Count1.toString();
 
   }
-  void removeFromCart(Dresses item) {
+  void removeFromCart(Product item) {
     showSuccessSnackBar(
       'Removed From  Cart',
     );

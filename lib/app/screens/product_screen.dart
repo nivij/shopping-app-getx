@@ -27,7 +27,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  bool isWishlistItem = false;
+  bool isWishlistItem = true;
   int selectedSizeIndex = 0;
   // var data = Get.arguments;
   final box = GetStorage();
@@ -193,7 +193,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text( detailsController.detailsList[widget.index].name,
+                          Text( widget.product.name,
                               style: GoogleFonts.poppins(
                                   color: Colors.black,
                                   fontSize: 25,
@@ -328,7 +328,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500
             )),
-              Text("\$240.00",style: GoogleFonts.poppins(
+              Text('\$ ${widget.product.price}',style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.w700),),

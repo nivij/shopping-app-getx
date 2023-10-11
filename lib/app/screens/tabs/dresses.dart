@@ -8,26 +8,28 @@ import '../../controllers/Wishlis_controller.dart';
 import '../../controllers/details_controller.dart';
 
 
-class home extends GetView<DetailsController> {
+class ProductListByCategory extends StatelessWidget {
+  final String categoryId;
+  final DetailsController controller;
 
-  home({super.key});
-
+  ProductListByCategory({required this.categoryId, required this.controller});
   @override
   Widget build(BuildContext context) {
+    final products = controller.getProductsById(categoryId);
     // final detailsController = Get.put(DetailsController());
-    final WishlistController wishlistController = Get.put(WishlistController());
+    // final WishlistController wishlistController = Get.put(WishlistController());
 
     return Scaffold(
       backgroundColor: Colors.transparent,
 
       body: MasonryGridView.builder(
         physics: BouncingScrollPhysics(),
-          itemCount: wishlistController.products.length,
+          itemCount: products.length,
           gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
         itemBuilder: (BuildContext context, int index) {
-          final product = wishlistController.products[index];
+          final product = products[index];
 
           return (index == 1)
               ? Column(

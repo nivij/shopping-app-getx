@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:gocart/app/controllers/details_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../controllers/Wishlis_controller.dart';
 import '../controllers/text_controller.dart';
 
 import '../screens/profile_screen.dart';
@@ -32,9 +34,9 @@ class _CustomappbarState extends State<Customappbar> {
 
     final textController = Get.put(TextController());
 
-
+    // final WishlistController wishlistController = Get.put(WishlistController());
     return DefaultTabController(
-      
+
       length: 4,
       child: Scaffold(
          drawer: Navdrawer(),
@@ -172,14 +174,19 @@ class _CustomappbarState extends State<Customappbar> {
                       ],
                     ),
                   ),
+                  // for(var i=0;i<wishlistController.products.length;i++)
                   Expanded(
                       child: TabBarView(
                         physics: BouncingScrollPhysics(),
 
                         children:  [
-                          Center(child: home(),),
-                          Center(child: jackets(),),
-                          Center(child: Text('Jeans Page'),),
+
+
+                          // Center(child: jackets(),),
+                          Center(child: ProductListByCategory(categoryId: "Dresses",controller: DetailsController(),)),
+                          Center(child: ProductListByCategory(categoryId: "Jackets",controller: DetailsController(),)),
+                          Center(child: ProductListByCategory(categoryId: "",controller: DetailsController(),)),
+
                           Center(child: Text('Shoes Page'),)
                         ],
                       )
@@ -191,6 +198,6 @@ class _CustomappbarState extends State<Customappbar> {
 
         ),
     );
-    
+
   }
 }

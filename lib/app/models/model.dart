@@ -15,13 +15,13 @@ class Colorr{
   Colorr({required this.colorr,});
 }
 class WishlistItem {
-  final Dresses product;
+  final Product product;
 
   WishlistItem(this.product);
 
   // Define a factory method to create a WishlistItem from a JSON object
   factory WishlistItem.fromJson(Map<String, dynamic> json) {
-    return WishlistItem(Dresses.fromJson(json['product'])); // Adjust this based on your actual JSON structure
+    return WishlistItem(Product.fromJson(json['product'])); // Adjust this based on your actual JSON structure
   }
 
   // Define a method to convert WishlistItem to a JSON object

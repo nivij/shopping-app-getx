@@ -53,7 +53,7 @@ class _DressCardState extends State<DressCard> {
         Get.to(
           ProductScreen(
             index: widget.index,
-            colors: colorcontroller.colorlist,
+            colors: itemColor,
             photo: widget.product.photo,
             product: widget.product
           ),
@@ -73,7 +73,7 @@ class _DressCardState extends State<DressCard> {
                     Container(
                       color: itemColor,
                       height: 200,
-                      width: 164,
+                      width: 167,
                       child: Image.asset(
                           widget.product.photo),
                     ),

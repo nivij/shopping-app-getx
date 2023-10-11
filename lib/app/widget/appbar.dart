@@ -2,6 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:gocart/app/controllers/details_controller.dart';
@@ -10,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Wishlis_controller.dart';
 import '../controllers/text_controller.dart';
 
+import '../screens/Search_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/tabs/dresses.dart';
 import '../screens/tabs/jackets.dart';
@@ -102,15 +104,27 @@ class _CustomappbarState extends State<Customappbar> {
                               leading: SizedBox(
                                 height: 50,
                                 width: 260,
-                                child: CupertinoSearchTextField(
+                                child: Bounceable(
+                                  onTap: () {
+                                    Get.to(SearchScreen());
+                                  },
+                                  child: Container(
 
-                                  borderRadius: BorderRadius.circular(20),
-                                  itemColor: Colors.black,
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white.withOpacity(0.6)),
-                                  backgroundColor: Colors.black12,
-
-
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black.withOpacity(0.2)),
+                                      color: Colors.black.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(width: 10,),
+                                        Icon(Elusive.search_circled,color: Colors.black,size: 30,),
+                                        SizedBox(width: 20,),
+                                        Text("Search",style: GoogleFonts.poppins(color: Colors.black,fontSize: 16),)
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                               trailing: CircleAvatar(

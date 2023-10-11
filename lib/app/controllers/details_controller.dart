@@ -158,4 +158,21 @@ class DetailsController extends GetxController {
         .where((product) => product.CategoryId == CategoryId)
         .toList();
   }
+
+  final searchResults = <Product>[].obs;
+
+  // Function to filter products based on search query
+  void searchProducts(String query) {
+    searchResults.value = detailsList
+        .where((product) =>
+    product.name.toLowerCase().contains(query.toLowerCase()) ||
+        product.description.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
+
+  // Function to clear the search results
+  void clearSearchResults() {
+    searchResults.clear();
+  }
+
 }

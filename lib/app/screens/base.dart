@@ -9,6 +9,7 @@ import 'package:gocart/app/widget/appbar.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../widget/SideNavigationDrawer.dart';
 import 'Cart_screen.dart';
 
 class base extends StatefulWidget {
@@ -38,6 +39,7 @@ class _baseState extends State<base> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Navdrawer(),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {

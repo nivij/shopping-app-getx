@@ -27,7 +27,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  bool isWishlistItem = true;
+  bool isWishlistItem = false;
   int selectedSizeIndex = 0;
   // var data = Get.arguments;
   final box = GetStorage();
@@ -47,8 +47,9 @@ class _ProductScreenState extends State<ProductScreen> {
     final sizecontroller = Get.put(SizeController());
     final detailsController = Get.put(DetailsController());
     final WishlistController wishlistController = Get.find();
-     final OrderController orderController = Get.put(OrderController());    return Scaffold(
-        backgroundColor: widget.colors[widget.index],
+     final OrderController orderController = Get.put(OrderController());
+     return Scaffold(
+        backgroundColor: widget.colors,
         body: SafeArea(
           child: Stack(
 

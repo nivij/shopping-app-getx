@@ -11,4 +11,5 @@ class ColorController extends GetxController{
     Color(0xFFFEC9F5),
     Color(0xFFE9D4FF),
   ];
+
 }

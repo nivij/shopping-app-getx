@@ -27,6 +27,8 @@ class ProductListByCategory extends StatelessWidget {
           itemCount: products.length,
           gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
+
+
           ),
         itemBuilder: (BuildContext context, int index) {
           final product = products[index];

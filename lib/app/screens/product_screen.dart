@@ -49,269 +49,273 @@ class _ProductScreenState extends State<ProductScreen> {
     final WishlistController wishlistController = Get.find();
      final OrderController orderController = Get.put(OrderController());    return Scaffold(
         backgroundColor: widget.colors[widget.index],
-        body: Stack(
+        body: SafeArea(
+          child: Stack(
 
-          children: [
-            Positioned(
-              child: Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          height: 560.0,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(widget.photo))),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 0,
-              left: -10,
-              child: SizedBox(
-                height: 100,
-                width: 100,
-                child: IconButton(
-                  padding: EdgeInsets.all(30),
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Container(
-                      width: 40, // Set the desired width
-                      height: 40, // Set the desired height
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Image.asset(
-                        "assets/left-arrow.png",
-                        color: Colors.white,
-                      )),
+            children: [
+              Positioned(
+                child: Column(
+                  children: [
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            height: 400.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.contain,
+                                    image: AssetImage(widget.photo,),),),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Positioned(
-              top: 40,
-              right: 20,
-              child: badges.Badge(
-                badgeAnimation: badges.BadgeAnimation.fade(),
-                 showBadge:orderController.badgeValue == '0' ? false : true ,
-                 badgeContent:   Text(orderController.badgeValue.value),
-                  child: Bounceable(
-                    onTap: () {
-                      Get.to(CartPage());
+              Positioned(
+                top:-30,
+                left: -10,
+                child: SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: IconButton(
+                    padding: EdgeInsets.all(30),
+                    onPressed: () {
+                      Get.back();
                     },
-                    child: Container(
+                    icon: Container(
                         width: 40, // Set the desired width
                         height: 40, // Set the desired height
                         padding: EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.black,
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Image.asset(
-                          "assets/shopping-bag.png",
-                          color: Colors.black,
-                        )),
-                  ),
-                )
-
-              ),
-
-            Positioned(
-              top: -70,
-              bottom: 20,
-              right: -13,
-              child: SizedBox(
-                height: 10,
-                width: 90,
-
-                child: FittedBox(
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      
-                    ),
-                    padding: EdgeInsets.all(13),
-                    onPressed: () {
-                      setState(() {
-                        if (isWishlistItem) {
-                          box.remove('isWishlistItem${widget.product.id}');
-                          wishlistController.removeFromWishlist(widget.product);
-                          // Remove the state from Get Storage when removing from wishlist
-                        } else {
-                          wishlistController.addToWishlist(widget.product);
-                          // Save the wishlist state in Get Storage when adding to wishlist
-                          box.write('isWishlistItem${widget.product.id}', true);
-                        }
-
-                        isWishlistItem = !isWishlistItem;
-                      });
-                    },
-                    icon: Container(
-                        width: 35, // Set the desired width
-                        height: 35, // Set the desired height
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
+                          "assets/left-arrow.png",
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Image.asset(
-                          (isWishlistItem == true)
-                              ? "assets/heartfilled.png"
-                              : "assets/heart.png",
-                          color: Colors.black,
                         )),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              // top: 360,
-              bottom: -10,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 360,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40)),
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 15, left: 15,top: 30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text( widget.product.name,
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w800)),
-                          Counter()
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CustomRatingBar(
-                            maxRating: 5,
-                            initialRating: 3.5,
-                            onRatingChanged: (newRating) {
-                              print('New Rating: $newRating');
-                              setState(() {
-                                _currentRating = newRating;
-                              });
-                            },
+              Positioned(
+                top: 4,
+                right: 20,
+                child: badges.Badge(
+
+                  badgeAnimation: badges.BadgeAnimation.fade(),
+                   showBadge:orderController.badgeValue == '0' ? false : true ,
+                   badgeContent:   Text(orderController.badgeValue.value),
+                    child: Bounceable(
+                      onTap: () {
+                        Get.to(CartPage());
+                      },
+                      child: Container(
+                          width: 40, // Set the desired width
+                          height: 40, // Set the desired height
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(100),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "($_currentRating )",
-                            style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Size",
-                        style: GoogleFonts.poppins(
-                            fontSize: 18,
+                          child: Image.asset(
+                            "assets/shopping-bag.png",
                             color: Colors.black,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 45,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: sizecontroller.sizelist.length,
-                          itemBuilder: (context, index) {
-                            bool isSelected = index ==
-                                selectedSizeIndex; // Check if this size is selected
+                          )),
+                    ),
+                  )
 
-                            return GestureDetector(
-                              onTap: () {
+                ),
+
+              Positioned(
+                top: -20,
+                bottom: 0,
+                right: -13,
+                child: SizedBox(
+                  height: 10,
+                  width: 90,
+
+                  child: FittedBox(
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        
+                      ),
+                      padding: EdgeInsets.all(13),
+                      onPressed: () {
+                        setState(() {
+                          if (isWishlistItem) {
+                            box.remove('isWishlistItem${widget.product.id}');
+                            wishlistController.removeFromWishlist(widget.product);
+                            // Remove the state from Get Storage when removing from wishlist
+                          } else {
+                            wishlistController.addToWishlist(widget.product);
+                            // Save the wishlist state in Get Storage when adding to wishlist
+                            box.write('isWishlistItem${widget.product.id}', true);
+                          }
+
+                          isWishlistItem = !isWishlistItem;
+                        });
+                      },
+                      icon: Container(
+                          width: 35, // Set the desired width
+                          height: 35, // Set the desired height
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Image.asset(
+                            (isWishlistItem == true)
+                                ? "assets/heartfilled.png"
+                                : "assets/heart.png",
+                            color: Colors.black,
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                // top: 360,
+                bottom: -10,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40)),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 15, left: 15,top: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            Text( widget.product.name,
+                                style: GoogleFonts.poppins(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800)),
+                            Counter()
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CustomRatingBar(
+                              maxRating: 5,
+                              initialRating: 3.5,
+                              onRatingChanged: (newRating) {
+                                print('New Rating: $newRating');
                                 setState(() {
-                                  selectedSizeIndex =
-                                      index; // Update the selected size index
+                                  _currentRating = newRating;
                                 });
                               },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: 45,
-                                margin: EdgeInsets.only(right: 13),
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: isSelected
-                                        ? Colors.black
-                                        : Colors
-                                            .transparent, // Change color based on selection
-                                    borderRadius: BorderRadius.circular(25),
-                                    border: Border.all(color: Colors.black)),
-                                child: Text(
-                                  sizecontroller.sizelist[index].size,
-                                  style: GoogleFonts.poppins(
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors
-                                            .grey, // Change text color based on selection
-                                    fontWeight: FontWeight.bold,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "($_currentRating )",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Size",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 45,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: sizecontroller.sizelist.length,
+                            itemBuilder: (context, index) {
+                              bool isSelected = index ==
+                                  selectedSizeIndex; // Check if this size is selected
+
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedSizeIndex =
+                                        index; // Update the selected size index
+                                  });
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 45,
+                                  margin: EdgeInsets.only(right: 13),
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: isSelected
+                                          ? Colors.black
+                                          : Colors
+                                              .transparent, // Change color based on selection
+                                      borderRadius: BorderRadius.circular(25),
+                                      border: Border.all(color: Colors.black)),
+                                  child: Text(
+                                    sizecontroller.sizelist[index].size,
+                                    style: GoogleFonts.poppins(
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Colors
+                                              .grey, // Change text color based on selection
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Description",
-                        style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ",
-                        style: GoogleFonts.poppins(
-                            fontSize: 13,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700),
-                        textAlign: TextAlign.left,
-                      ),
-                     SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Description",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          widget.product.description,
+                          style: GoogleFonts.poppins(
+                              fontSize: 13,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.left,
+                        ),
+                       SizedBox(height: 20,),
 
 
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
     bottomNavigationBar:  Container(
       color: Colors.white,

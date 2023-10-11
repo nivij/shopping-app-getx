@@ -42,24 +42,27 @@ class _DressCardState extends State<DressCard> {
 
   @override
   Widget build(BuildContext context) {
+
     final WishlistController wishlistController = Get.find();
     final detailsController = Get.put(DetailsController());
     final colorcontroller = Get.put(ColorController());
-
+    int colorIndex = widget.index % colorcontroller.colorlist.length; // Use modulo to cycle through colors
+    Color itemColor = colorcontroller.colorlist[colorIndex];
     return InkWell(
       onTap: () {
         Get.to(
           ProductScreen(
             index: widget.index,
             colors: colorcontroller.colorlist,
-            photo: detailsController.detailsList[widget.index].photo,
+            photo: widget.product.photo,
             product: widget.product
           ),
           // arguments: [colorcontroller.colorlist, colorcontroller.colorlist]
         );
       },
+
       child: Container(
-        height: 270,
+        height: 325,
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Column(
@@ -68,8 +71,8 @@ class _DressCardState extends State<DressCard> {
                   borderRadius: BorderRadius.circular(30),
                   child: Stack(children: [
                     Container(
-                      color: colorcontroller.colorlist[widget.index],
-                      height: 190,
+                      color: itemColor,
+                      height: 200,
                       width: 164,
                       child: Image.asset(
                           widget.product.photo),
@@ -117,12 +120,16 @@ class _DressCardState extends State<DressCard> {
                   widget.product.name  ,
                   style: GoogleFonts.poppins(
                       color: CupertinoColors.black,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w600,
+
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Text(
-                "jkjljlkjlkjlk",
+                widget.product.description,textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
+                  fontSize: 12,
                     color: CupertinoColors.black.withOpacity(0.4),
                     fontWeight: FontWeight.w600),
               ),

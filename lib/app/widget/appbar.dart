@@ -130,7 +130,7 @@ class _CustomappbarState extends State<Customappbar> {
               padding: EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: 6,),
                   Container(
 
 
@@ -140,7 +140,7 @@ class _CustomappbarState extends State<Customappbar> {
                         borderRadius: BorderRadius.circular(25.0)
                     ),
                     child:  TabBar(
-                      labelPadding: EdgeInsets.symmetric(horizontal: 20),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 17),
                         physics: BouncingScrollPhysics(),
                       isScrollable: true,
                      labelStyle: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w700),
@@ -185,9 +185,10 @@ class _CustomappbarState extends State<Customappbar> {
                           // Center(child: jackets(),),
                           Center(child: ProductListByCategory(categoryId: "Dresses",controller: DetailsController(),)),
                           Center(child: ProductListByCategory(categoryId: "Jackets",controller: DetailsController(),)),
-                          Center(child: ProductListByCategory(categoryId: "",controller: DetailsController(),)),
+                          Center(child: ProductListByCategory(categoryId: "Jeans",controller: DetailsController(),)),
+                          Center(child: ProductListByCategory(categoryId: "Shoes",controller: DetailsController(),)),
 
-                          Center(child: Text('Shoes Page'),)
+
                         ],
                       )
                   )

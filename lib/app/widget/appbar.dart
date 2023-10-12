@@ -11,10 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Wishlis_controller.dart';
 import '../controllers/text_controller.dart';
 
+import '../models/product_model.dart';
 import '../screens/Search_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/tabs/dresses.dart';
-import '../screens/tabs/jackets.dart';
+
 import 'SideNavigationDrawer.dart';
 
 class Customappbar extends StatefulWidget implements PreferredSizeWidget {
@@ -127,12 +128,16 @@ class _CustomappbarState extends State<Customappbar> {
                                   ),
                                 ),
                               ),
-                              trailing: CircleAvatar(
+                              trailing:  IconButton(
+                                icon: CircleAvatar(
                                   backgroundColor: CupertinoColors.black,
                                   child: Icon(
                                     FluentIcons.arrow_sort_28_filled,
                                     color: Colors.white,
-                                  )),
+                                  ),
+                                ),
+                                onPressed: _showPriceFilterDialog,
+                              ),
                             ),
 
 
@@ -215,4 +220,63 @@ class _CustomappbarState extends State<Customappbar> {
     );
 
   }
+  // Inside your widget where you want to display the filter icon and the dialog:
+  void _showPriceFilterDialog() {
+    double minPrice = 0;
+    double maxPrice = 100; // You can set the initial price range here.
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text('Price Range Filter'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Select Price Range:'),
+              RangeSlider(
+                activeColor: Colors.black,
+                values: RangeValues(minPrice , maxPrice ),
+                min: 0,
+                max: 100, // Set the maximum price as needed.
+                onChanged: (RangeValues values) {
+                  setState(() {
+                    minPrice = values.start;
+                    maxPrice = values.end ;
+                  });
+                },
+              ),
+              Text('Min Price: $minPrice'),
+              Text('Max Price: $maxPrice'),
+            ],
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ),
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ),
+              child: Text('Apply'),
+              onPressed: () {
+                List<Product> filteredProducts = Get.find<DetailsController>()
+                    .filterProductsByPriceRange('Dresses', minPrice, maxPrice);
+                // Do something with the filtered products, e.g., update the UI.
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

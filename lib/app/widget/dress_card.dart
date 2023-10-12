@@ -134,7 +134,7 @@ class _DressCardState extends State<DressCard> {
                     fontWeight: FontWeight.w600),
               ),
               Text(
-                 '\$ ${widget.product.price}',
+                 '\₹ ${widget.product.price}',
                   style: GoogleFonts.poppins(
                     color: CupertinoColors.black, fontWeight: FontWeight.w600),
               )

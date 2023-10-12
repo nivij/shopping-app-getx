@@ -28,7 +28,7 @@ class _WishlistPageState extends State<WishlistPage> {
   Widget build(BuildContext context) {
     double _currentRating = 4.5;
     final colorcontroller = Get.put(ColorController());
-    // final DetailsController Product = Get.put(DetailsController());
+    final DetailsController Product = Get.put(DetailsController());
     final OrderController orderController = Get.put(OrderController());
     return Scaffold(
         appBar: AppBar(

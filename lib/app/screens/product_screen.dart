@@ -333,7 +333,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500
             )),
-              Text('\$ ${widget.product.price}',style: GoogleFonts.poppins(
+              Text('\₹ ${widget.product.price}',style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.w700),),

@@ -8,7 +8,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/model8.png",
       name: "SAIOM",
-      price: "100",
+      price: "1,199",
       id: "0",
       qty: 0,
       CategoryId: "Dresses",
@@ -17,7 +17,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/model6.png",
       name: "Oversized Punk Shirt",
-      price: "100",
+      price: "449",
       id: "1",
       qty: 0,
       CategoryId: 'Dresses',
@@ -26,7 +26,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/model5.png",
       name: "Toplot T-Shirt",
-      price: "100",
+      price: "329",
       id: "2",
       qty: 0,
       CategoryId: 'Dresses',
@@ -35,7 +35,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/model7.png",
       name: "Veirdo Oversized shirt",
-      price: "100",
+      price: "529",
       id: "3",
       qty: 0,
       CategoryId: 'Dresses',
@@ -44,7 +44,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/panther9.png",
       name: "Black Panther",
-      price: "100",
+      price: "1455",
       id: "4",
       qty: 0,
       CategoryId: 'Jackets',
@@ -53,7 +53,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/stranger10.png",
       name: "Stranger Things",
-      price: "100",
+      price: "2499",
       id: "5",
       qty: 0,
       CategoryId: 'Jackets',
@@ -62,7 +62,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/gangsta11.png",
       name: "Gangsta Jacket",
-      price: "100",
+      price: "2599",
       id: "6",
       qty: 0,
       CategoryId: 'Jackets',
@@ -71,7 +71,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/batman12.png",
       name: "Batman",
-      price: "100",
+      price: "2127",
       id: "7",
       qty: 0,
       CategoryId: 'Jackets',
@@ -80,7 +80,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/jeans1.png",
       name: "Highlander Men Grey",
-      price: "100",
+      price: "811",
       id: "8",
       qty: 0,
       CategoryId: 'Jeans',
@@ -89,7 +89,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/jeans2.png",
       name: "Highlander Navy Blue",
-      price: "100",
+      price: "649",
       id: "9",
       qty: 0,
       CategoryId: 'Jeans',
@@ -98,7 +98,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/jeans3.png",
       name: "Highlander Light Grey",
-      price: "100",
+      price: "706",
       id: "10",
       qty: 0,
       CategoryId: 'Jeans',
@@ -107,7 +107,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/jeans4.png",
       name: "Highlander Men",
-      price: "100",
+      price: "1680",
       id: "11",
       qty: 0,
       CategoryId: 'Jeans',
@@ -116,7 +116,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/shoes1.png",
       name: "RedTape Sneaker",
-      price: "100",
+      price: "499",
       id: "12",
       qty: 0,
       CategoryId: 'Shoes',
@@ -125,7 +125,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/shoes2.png",
       name: "RedTape Sneaker",
-      price: "100",
+      price: "499",
       id: "13",
       qty: 0,
       CategoryId: 'Shoes',
@@ -135,7 +135,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/shoes3.png",
       name: "RedTape Sneaker",
-      price: "100",
+      price: "1679",
       id: "14",
       qty: 0,
       CategoryId: 'Shoes',
@@ -144,7 +144,7 @@ class DetailsController extends GetxController {
     Product(
       photo: "assets/model/shoes4.png",
       name: "RedTape Sneaker",
-      price: "100",
+      price: "1449",
       id: "15",
       qty: 0,
       CategoryId: 'Shoes',
@@ -163,18 +163,38 @@ class DetailsController extends GetxController {
 
   // Function to filter products based on search query
   void searchProducts(String query) {
-    query = query.trim(); // Remove leading and trailing white spaces from the query
+    query = query.trim();
     searchResults.value = detailsList
         .where((product) =>
     product.name.trim().toLowerCase().contains(query) ||
         product.description.trim().toLowerCase().contains(query))
         .toList();
+    if (searchResults.isNotEmpty) {
+      addRecentSearch(searchResults[0]); // Add the first result to recent searches
+    }
   }
+
 
 
   // Function to clear the search results
   void clearSearchResults() {
     searchResults.clear();
+  }
+  final recentSearches = <Product>[].obs;
+
+  // Function to add a recently searched product
+  void addRecentSearch(Product product) {
+    if (!recentSearches.contains(product)) {
+      recentSearches.insert(0, product);
+    }
+  }
+  List<Product> filterProductsByPriceRange(String CategoryId, double minPrice, double maxPrice) {
+    return detailsList
+        .where((product) =>
+    product.CategoryId == CategoryId &&
+        int.parse(product.price) >= minPrice &&
+        int.parse(product.price) <= maxPrice)
+        .toList();
   }
 
 }

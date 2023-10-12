@@ -163,12 +163,14 @@ class DetailsController extends GetxController {
 
   // Function to filter products based on search query
   void searchProducts(String query) {
+    query = query.trim(); // Remove leading and trailing white spaces from the query
     searchResults.value = detailsList
         .where((product) =>
-    product.name.toLowerCase().contains(query.toLowerCase()) ||
-        product.description.toLowerCase().contains(query.toLowerCase()))
+    product.name.trim().toLowerCase().contains(query) ||
+        product.description.trim().toLowerCase().contains(query))
         .toList();
   }
+
 
   // Function to clear the search results
   void clearSearchResults() {

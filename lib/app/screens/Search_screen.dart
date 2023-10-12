@@ -4,6 +4,7 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/screens/product_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/Color_controller.dart';
 import '../controllers/details_controller.dart';
@@ -23,49 +24,69 @@ class SearchScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
+
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 90,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                     Bounceable(onTap: () => Get.back(),
-                         child: Container(
-                             width: 40, // Set the desired width
-                             height: 40, // Set the desired height
-                             padding: EdgeInsets.all(6),
-                             decoration: BoxDecoration(
-                               color: Colors.black,
-                               borderRadius: BorderRadius.circular(100),
-                             ),
-                             child: Image.asset(
-                               "assets/left-arrow.png",
-                               color: Colors.white,
-                             )),),
-                      SizedBox(width: 10), // Add some spacing between the icon and search field
-                      Expanded(
-                        child: CupertinoSearchTextField(
-                          autocorrect: true,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black.withOpacity(0.2),
+                height: 100,
+                decoration: BoxDecoration(
+                    color: Colors.black
+                ,borderRadius: BorderRadius.only(bottomRight: Radius.circular(50),bottomLeft:Radius.circular(50) ),
+                ),
+                child: Container(
+                  height: 90,
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      children: [
+                        Bounceable(onTap: () => Get.back(),
+                          child: Container(
+                              width: 40, // Set the desired width
+                              height: 40, // Set the desired height
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+
+                                  color: Colors.white.withOpacity(0.4)
+                                ),
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Image.asset(
+
+                                "assets/left-arrow.png",
+                                color: Colors.white,
+                              )),),
+                        SizedBox(width: 10), // Add some spacing between the icon and search field
+                        Expanded(
+                          child: CupertinoSearchTextField(
+                            prefixIcon: Icon(Elusive.search_circled),
+
+                            itemColor: Colors.white,
+                            style: GoogleFonts.poppins(color: Colors.white),
+                            autofocus: true,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white.withOpacity(0.2)),
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white.withOpacity(0.2),
+                            ),
+                            onSubmitted: (query) {
+                              searchController.searchProducts(query);
+                            },
+                            onChanged: (query) {
+                              if (query.isEmpty) {
+                                searchController.clearSearchResults();
+                              }
+                            },
                           ),
-                          onSubmitted: (query) {
-                            searchController.searchProducts(query);
-                          },
-                          onChanged: (query) {
-                            if (query.isEmpty) {
-                              searchController.clearSearchResults();
-                            }
-                          },
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
 
+            SizedBox(height: 20,),
               Obx(() {
                 final searchResults = searchController.searchResults;
                 return  Expanded(

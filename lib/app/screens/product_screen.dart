@@ -74,7 +74,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ),
               Positioned(
-                top:-30,
+                top:-21,
                 left: -10,
                 child: SizedBox(
                   height: 100,
@@ -100,7 +100,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ),
               Positioned(
-                top: 4,
+                top: 10,
                 right: 20,
                 child: badges.Badge(
 

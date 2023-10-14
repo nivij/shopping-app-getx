@@ -16,16 +16,22 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorcontroller = Get.put(ColorController());
 
-    return SafeArea(
-      child: Scaffold(
-        body: SizedBox(
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 10,
+        backgroundColor: Colors.black,
+        elevation: 0, 
+        leading: Icon(Icons.add,color: Colors.black,),
+      ),
+      body: SafeArea(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 100,
+                height: 90,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.only(

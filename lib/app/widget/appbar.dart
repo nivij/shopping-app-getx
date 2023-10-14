@@ -128,15 +128,26 @@ class _CustomappbarState extends State<Customappbar> {
                                   ),
                                 ),
                               ),
-                              trailing:  IconButton(
-                                icon: CircleAvatar(
-                                  backgroundColor: CupertinoColors.black,
-                                  child: Icon(
-                                    FluentIcons.arrow_sort_28_filled,
-                                    color: Colors.white,
-                                  ),
+                              trailing:  SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: Bounceable(
+
+                             onTap:  _showPriceFilterDialog,
+
+                                    child: Container(
+                                      width: 50, // Set the desired width
+                                      height: 50, // Set the desired height
+
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(90),
+                                      ),
+                                      child: Image.asset(
+                                        "assets/filter.png",
+                                        color: Colors.white,
+                                      )),
                                 ),
-                                onPressed: _showPriceFilterDialog,
                               ),
                             ),
 

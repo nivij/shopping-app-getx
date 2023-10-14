@@ -14,14 +14,20 @@ class CartPage extends StatelessWidget {
       ),
       body: Obx(() => ListView.builder(
         itemCount: cartController.cartItems.length,
+
         itemBuilder: (context, index) {
-          final item = cartController.cartItems[index];
+          final cartItem = cartController.cartItems[index];
+          final product = cartItem['product'] as Product;
+          final quantity = cartItem['quantity'] as int;
+          final size = cartItem['size'] as String;
+
           return ListTile(
-            title: Text(cartController.cartItems[index].name),
+            title: Text(product.name),
+            subtitle: Text("Size: $size, Quantity: $quantity"),
             trailing: IconButton(
               icon: Icon(Icons.remove_circle),
               onPressed: () {
-                cartController.removeFromCart(item);
+                cartController.removeFromCart(product);
               },
             ),
           );
@@ -30,6 +36,3 @@ class CartPage extends StatelessWidget {
     );
   }
 }
-
-
-

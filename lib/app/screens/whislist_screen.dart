@@ -156,7 +156,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                           onPressed: () {
                                               setState(() {
 
-                                                orderController.addToCart(wishlistItem.product);
+                                                // orderController.addToCart(wishlistItem.product);
 
                                               });
                                           },

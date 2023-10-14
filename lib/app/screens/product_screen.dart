@@ -35,9 +35,13 @@ class _ProductScreenState extends State<ProductScreen> {
   String selectedSize = '';
   double get currentRating => _currentRating;
   @override
+
   void initState() {
+
+    final OrderController orderController = Get.put(OrderController());
     super.initState();
     final productIndex = widget.index;
+    orderController.resetCounter();
     // Retrieve the wishlist state from Get Storage and initialize isWishlistItem
     isWishlistItem = box.read('isWishlistItem$productIndex') ?? false;
   }
@@ -255,8 +259,8 @@ class _ProductScreenState extends State<ProductScreen> {
                               return GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    selectedSizeIndex =
-                                        index; // Update the selected size index
+                                    selectedSize = sizecontroller.sizelist[index].size; // Update selectedSize
+                                    selectedSizeIndex = index;// Update the selected size index
                                   });
                                 },
                                 child: Container(
@@ -359,10 +363,8 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
                 onPressed: () {
                        setState(() {
-                         orderController.updateBadgeValue( orderController.cartCount);
-
-                         orderController.addToCart(widget.product);
-
+                         orderController.updateBadgeValue(orderController.cartCount);
+                         orderController.addToCart(widget.product, orderController.count.value, selectedSize);
                        });
 
                 }, child: Row(

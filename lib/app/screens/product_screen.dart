@@ -41,9 +41,11 @@ class _ProductScreenState extends State<ProductScreen> {
     final OrderController orderController = Get.put(OrderController());
     super.initState();
     final productIndex = widget.index;
+    orderController.updateBadgeValue();
     orderController.resetCounter();
     // Retrieve the wishlist state from Get Storage and initialize isWishlistItem
     isWishlistItem = box.read('isWishlistItem$productIndex') ?? false;
+
   }
 
   @override
@@ -106,31 +108,34 @@ class _ProductScreenState extends State<ProductScreen> {
               Positioned(
                 top: 10,
                 right: 20,
-                child: badges.Badge(
-
-                  badgeAnimation: badges.BadgeAnimation.fade(),
-                   showBadge:orderController.badgeValue == '0' ? false : true ,
-                   badgeContent:   Text(orderController.badgeValue.value),
+                child: Obx(() {
+                  return badges.Badge(
+                    badgeAnimation: badges.BadgeAnimation.fade(),
+                    showBadge: orderController.badgeValue == '0' ? false : true,
+                    badgeContent: Text(orderController.badgeValue.value),
                     child: Bounceable(
                       onTap: () {
                         Get.to(CartPage());
                       },
                       child: Container(
-                          width: 40, // Set the desired width
-                          height: 40, // Set the desired height
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Image.asset(
-                            "assets/shopping-bag.png",
-                            color: Colors.black,
-                          )),
+                        width: 40, // Set the desired width
+                        height: 40, // Set the desired height
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Image.asset(
+                          "assets/shopping-bag.png",
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
-                  )
+                  );
+                })
 
-                ),
+
+              ),
 
               Positioned(
                 top: -20,
@@ -363,7 +368,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
                 onPressed: () {
                        setState(() {
-                         orderController.updateBadgeValue(orderController.cartCount);
+                         orderController.updateBadgeValue();
                          orderController.addToCart(widget.product, orderController.count.value, selectedSize);
                        });
 

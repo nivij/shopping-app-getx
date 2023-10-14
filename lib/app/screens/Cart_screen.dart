@@ -22,6 +22,7 @@ class CartPage extends StatelessWidget {
           final size = cartItem['size'] as String;
 
           return ListTile(
+            leading: Image.asset(product.photo),
             title: Text(product.name),
             subtitle: Text("Size: $size, Quantity: $quantity"),
             trailing: IconButton(

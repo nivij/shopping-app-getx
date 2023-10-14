@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../models/product_model.dart';
 
@@ -9,7 +10,7 @@ class OrderController extends GetxController {
   var count = 0.obs;
   late Product _item;
   int get cartCount => cartItems.length;
-
+  final box = GetStorage();
   void increment() {
     count.value++;
 
@@ -50,6 +51,7 @@ class OrderController extends GetxController {
         'size': selectedSize,
       });
     }
+    updateBadgeValue();
   }
   void resetCounter() {
     count.value = 0;
@@ -57,9 +59,8 @@ class OrderController extends GetxController {
 
   var badgeValue = '0'.obs; // Initialize badge value with '0'
 
-  void updateBadgeValue( int Count1 ) {
-    badgeValue.value = Count1.toString();
-
+  void updateBadgeValue() {
+    badgeValue.value = cartCount.toString();
   }
   void removeFromCart(Product item) {
     final itemToRemove = cartItems.firstWhere((cartItem) {
@@ -71,6 +72,7 @@ class OrderController extends GetxController {
       cartItems.remove(itemToRemove);
       showSuccessSnackBar('Removed From Cart');
     }
+    updateBadgeValue();
   }
 
 

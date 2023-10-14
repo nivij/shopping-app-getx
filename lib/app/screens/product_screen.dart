@@ -110,9 +110,17 @@ class _ProductScreenState extends State<ProductScreen> {
                 right: 20,
                 child: Obx(() {
                   return badges.Badge(
+                     badgeStyle: badges.BadgeStyle(
+                       badgeColor: Colors.black
+                     ),
                     badgeAnimation: badges.BadgeAnimation.fade(),
                     showBadge: orderController.badgeValue == '0' ? false : true,
-                    badgeContent: Text(orderController.badgeValue.value),
+                    badgeContent:  Text(
+                        orderController.badgeValue.value,
+                        style: TextStyle(
+                          color: Colors.white, // Text color
+                        ),
+                    ),
                     child: Bounceable(
                       onTap: () {
                         Get.to(CartPage());

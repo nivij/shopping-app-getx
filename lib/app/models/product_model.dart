@@ -1,6 +1,6 @@
 class Product {
-  final String id; // Add 'id' parameter
-  final String CategoryId; // Add 'id' parameter
+  final String id;
+  final String CategoryId;
   final String description;
   final String name;
   final String price;
@@ -9,7 +9,7 @@ class Product {
   Product( {
     required this.CategoryId,
     required this.description,
-    required this.id, // Include 'id' parameter in the constructor
+    required this.id,
     required this.name,
     required this.price,
     required this.photo
@@ -18,11 +18,11 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      CategoryId: json['id'].toString() , // Convert to int or use 0 as a default value
-      id: json['id'].toString() , // Convert to int or use 0 as a default value
+      CategoryId: json['CategoryId'].toString(),
+      id: json['id'].toString(),
       name: json['name'] as String,
       price: json['price'] as String,
-      description: json['price'] as String,
+      description: json['description'] as String,
       photo: json['photo'] as String,
       qty: int.tryParse(json['qty'].toString()) ?? 0,
     );
@@ -30,8 +30,8 @@ class Product {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,             // Include 'id' field in the JSON representation
-      'CategoryId': CategoryId,             // Include 'id' field in the JSON representation
+      'id': id,
+      'CategoryId': CategoryId,
       'name': name,
       'price': price,
       'photo': photo,
@@ -40,7 +40,7 @@ class Product {
     };
   }
 
-  @override // Specify the type for 'other' in the == operator
+  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is Product && this.id == other.id;

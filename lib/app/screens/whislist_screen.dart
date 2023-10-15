@@ -9,7 +9,7 @@ import 'package:gocart/app/screens/product_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:badges/badges.dart' as badges;
 import '../controllers/Color_controller.dart';
-import '../controllers/Wishlis_controller.dart';
+import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
 import '../widget/test.dart';

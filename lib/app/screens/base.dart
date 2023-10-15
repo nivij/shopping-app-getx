@@ -20,6 +20,7 @@ class base extends StatefulWidget {
 }
 
 class _baseState extends State<base> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _currentIndex=0;
   late PageController _pageController;
@@ -39,6 +40,7 @@ class _baseState extends State<base> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey, // Assign the scaffold key here
       drawer: Navdrawer(),
       body: PageView(
         controller: _pageController,
@@ -50,7 +52,7 @@ class _baseState extends State<base> {
 
         },
         children: [
-          Customappbar(),
+          Customappbar(openDrawerCallback: () {  _scaffoldKey.currentState?.openDrawer(); },),
           CartPage(),
           WishlistPage(),
           profile()

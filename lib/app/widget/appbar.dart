@@ -8,7 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:gocart/app/controllers/details_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/Wishlis_controller.dart';
+import '../controllers/Wishlist_controller.dart';
 import '../controllers/text_controller.dart';
 
 import '../models/product_model.dart';
@@ -19,8 +19,9 @@ import '../screens/tabs/dresses.dart';
 import 'SideNavigationDrawer.dart';
 
 class Customappbar extends StatefulWidget implements PreferredSizeWidget {
-  const Customappbar({super.key});
+  final Function() openDrawerCallback; // Add this callback
 
+  Customappbar({Key? key, required this.openDrawerCallback}) : super(key: key);
   @override
   State<Customappbar> createState() => _CustomappbarState();
 
@@ -43,6 +44,7 @@ class _CustomappbarState extends State<Customappbar> {
       length: 4,
       child: Scaffold(
          drawer: Navdrawer(),
+
         backgroundColor: Colors.white,
         body: NestedScrollView(
 
@@ -61,7 +63,8 @@ class _CustomappbarState extends State<Customappbar> {
                         padding: EdgeInsets.symmetric(vertical: 16),
                         child: InkWell(
                           onTap: () {
-                            Scaffold.of(context).openDrawer();
+                            widget.openDrawerCallback();
+
                           },
                           child: CircleAvatar(
 
@@ -97,7 +100,7 @@ class _CustomappbarState extends State<Customappbar> {
                       )
                     ],
                     bottom: PreferredSize(
-                      preferredSize: Size(40, 60),
+                      preferredSize: Size(40, 56),
                       child: Padding(
                         padding: EdgeInsets.only(left: 10),
                         child:

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
-import 'package:gocart/app/controllers/Wishlis_controller.dart';
+import 'package:gocart/app/controllers/Wishlist_controller.dart';
 import 'package:gocart/app/controllers/auth_controller.dart';
 import 'package:gocart/app/controllers/details_controller.dart';
 import 'package:gocart/app/controllers/order_controller.dart';

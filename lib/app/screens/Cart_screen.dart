@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/order_controller.dart'; // Import your OrderController
-import '../models/product_model.dart'; // Import your Modelphoto class
+import '../controllers/order_controller.dart';
+import '../models/product_model.dart';
 
 class CartPage extends StatelessWidget {
   final OrderController cartController = Get.find();

@@ -77,7 +77,19 @@ class OrderController extends GetxController {
     updateBadgeValue();
   }
 
+  void updateCartItemQuantity(Product item, int newQuantity) {
+    final itemToUpdate = cartItems.firstWhere((cartItem) {
+      final productInCart = Product.fromJson(cartItem['product']);
+      return productInCart == item;
+    }, orElse: () => {});
 
+    if (itemToUpdate != null) {
+      itemToUpdate['quantity'] = newQuantity;
+      showSuccessSnackBar('Quantity Updated');
+    }
+    box.write('cartItems', cartItems);
+    updateBadgeValue();
+  }
   void loadCartItems() {
     final savedCartItems = box.read('cartItems');
     if (savedCartItems != null) {
@@ -86,6 +98,7 @@ class OrderController extends GetxController {
     }
     updateBadgeValue();
   }
+
   @override
   void onInit() {
     super.onInit();

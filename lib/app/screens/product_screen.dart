@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/controllers/Size_controller.dart';
+import 'package:gocart/app/screens/whislist_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';

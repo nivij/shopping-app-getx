@@ -17,7 +17,7 @@ class CartPage extends StatelessWidget {
 
         itemBuilder: (context, index) {
           final cartItem = cartController.cartItems[index];
-          final product = cartItem['product'] as Product;
+          final product = Product.fromJson(cartItem['product']); // Use your fromJson factory constructor
           final quantity = cartItem['quantity'] as int;
           final size = cartItem['size'] as String;
 

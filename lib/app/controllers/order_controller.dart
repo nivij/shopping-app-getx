@@ -22,6 +22,15 @@ class OrderController extends GetxController {
       count.value--;
     }
   }
+  void resetCounter() {
+    count.value = 0;
+  }
+
+  var badgeValue = '0'.obs; // Initialize badge value with '0'
+
+  void updateBadgeValue() {
+    badgeValue.value = cartCount.toString();
+  }
   showSuccessSnackBar(var title) {
     Get.snackbar(
       animationDuration: Duration(milliseconds: 400),
@@ -35,45 +44,51 @@ class OrderController extends GetxController {
   void addToCart(Product item, int quantity, String selectedSize) {
     showSuccessSnackBar('Added To Cart');
     final existingCartItemIndex = cartItems.indexWhere((cartItem) {
-      final productInCart = cartItem['product'] as Product;
-      final sizeInCart = cartItem['size'] as String;
+      final productInCart = Product.fromJson(cartItem['product']); // Deserialize the product
+      final sizeInCart = cartItem['size'];
       return productInCart == item && sizeInCart == selectedSize;
     });
 
     if (existingCartItemIndex != -1) {
-      // If the item with the same product and size is already in the cart, update its quantity
       cartItems[existingCartItemIndex]['quantity'] += quantity;
     } else {
-      // If the item is not in the cart, add it with the specified quantity and size
+      // Serialize the Product object to JSON and store it
       cartItems.add({
-        'product': item,
+        'product': item.toJson(), // Serialize the Product object
         'quantity': quantity,
         'size': selectedSize,
       });
     }
+    box.write('cartItems', cartItems);
     updateBadgeValue();
   }
-  void resetCounter() {
-    count.value = 0;
-  }
 
-  var badgeValue = '0'.obs; // Initialize badge value with '0'
-
-  void updateBadgeValue() {
-    badgeValue.value = cartCount.toString();
-  }
   void removeFromCart(Product item) {
     final itemToRemove = cartItems.firstWhere((cartItem) {
-      final productInCart = cartItem['product'] as Product;
+      final productInCart = Product.fromJson(cartItem['product']); // Deserialize the product
       return productInCart == item;
     }, orElse: () => {});
 
-    if (itemToRemove.isNotEmpty) {
+    if (itemToRemove != null) {
       cartItems.remove(itemToRemove);
       showSuccessSnackBar('Removed From Cart');
     }
+    box.write('cartItems', cartItems);
     updateBadgeValue();
   }
 
 
+  void loadCartItems() {
+    final savedCartItems = box.read('cartItems');
+    if (savedCartItems != null) {
+      // Cast the dynamic list to List<Map<String, dynamic>>
+      cartItems.assignAll(savedCartItems.cast<Map<String, dynamic>>());
+    }
+    updateBadgeValue();
+  }
+  @override
+  void onInit() {
+    super.onInit();
+    loadCartItems(); // Load cart items when the controller is initialized
+  }
 }

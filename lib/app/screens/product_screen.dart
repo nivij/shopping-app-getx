@@ -6,22 +6,20 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/controllers/Size_controller.dart';
-import 'package:gocart/app/screens/whislist_screen.dart';
+import 'package:gocart/app/screens/wishlist_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
+import '../routes/app_pages.dart';
 import '../widget/counter.dart';
-import '../widget/test.dart';
+import '../widget/Custom_rating_bar.dart';
 import 'Cart_screen.dart';
 
 class ProductScreen extends StatefulWidget {
-  final index;
-  final colors;
-  final photo;
-  final product;
+
   const ProductScreen(
-      {super.key, this.index, this.colors, this.photo, this.product});
+      {super.key,});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -41,7 +39,12 @@ class _ProductScreenState extends State<ProductScreen> {
 
     final OrderController orderController = Get.put(OrderController());
     super.initState();
-    final productIndex = widget.index;
+    final Map<String, dynamic> arguments = Get.arguments;
+
+    final index = arguments['index'];
+
+
+    final productIndex = index;
     orderController.updateBadgeValue();
     orderController.resetCounter();
     // Retrieve the wishlist state from Get Storage and initialize isWishlistItem
@@ -51,12 +54,17 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> arguments = Get.arguments;
+
+    final colors = arguments['color'];
+    final photo = arguments['photo'];
+    final product = arguments['product'];
+
     final sizecontroller = Get.put(SizeController());
-    final detailsController = Get.put(DetailsController());
     final WishlistController wishlistController = Get.find();
      final OrderController orderController = Get.put(OrderController());
      return Scaffold(
-        backgroundColor: widget.colors,
+        backgroundColor: colors,
         body: SafeArea(
           child: Stack(
 
@@ -72,7 +80,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     fit: BoxFit.contain,
-                                    image: AssetImage(widget.photo,),),),
+                                    image: AssetImage(photo,),),),
                           ),
                         )
                       ],
@@ -124,7 +132,8 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                     child: Bounceable(
                       onTap: () {
-                        Get.to(CartPage());
+                        Get.toNamed(Routes.CART);
+
                       },
                       child: Container(
                         width: 40, // Set the desired width
@@ -163,13 +172,13 @@ class _ProductScreenState extends State<ProductScreen> {
                       onPressed: () {
                         setState(() {
                           if (isWishlistItem) {
-                            box.remove('isWishlistItem${widget.product.id}');
-                            wishlistController.removeFromWishlist(widget.product);
+                            box.remove('isWishlistItem${product.id}');
+                            wishlistController.removeFromWishlist(product);
                             // Remove the state from Get Storage when removing from wishlist
                           } else {
-                            wishlistController.addToWishlist(widget.product);
+                            wishlistController.addToWishlist(product);
                             // Save the wishlist state in Get Storage when adding to wishlist
-                            box.write('isWishlistItem${widget.product.id}', true);
+                            box.write('isWishlistItem${product.id}', true);
                           }
 
                           isWishlistItem = !isWishlistItem;
@@ -215,7 +224,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                           children: [
-                            Text( widget.product.name,
+                            Text( product.name,
                                 style: GoogleFonts.poppins(
                                     color: Colors.black,
                                     fontSize: 18,
@@ -318,7 +327,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           height: 10,
                         ),
                         Text(
-                          widget.product.description,
+                          product.description,
                           style: GoogleFonts.poppins(
                               fontSize: 13,
                               color: Colors.black,
@@ -351,7 +360,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500
             )),
-              Text('\₹ ${widget.product.price}',style: GoogleFonts.poppins(
+              Text('\₹ ${product.price}',style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.w700),),
@@ -378,7 +387,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 onPressed: () {
                        setState(() {
                          orderController.updateBadgeValue();
-                         orderController.addToCart(widget.product, orderController.count.value, selectedSize);
+                         orderController.addToCart(product, orderController.count.value, selectedSize);
                        });
 
                 }, child: Row(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 
 import 'package:gocart/app/screens/profile_screen.dart';
-import 'package:gocart/app/screens/whislist_screen.dart';
+import 'package:gocart/app/screens/wishlist_screen.dart';
 import 'package:gocart/app/widget/appbar.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';

@@ -12,7 +12,9 @@ import '../controllers/Color_controller.dart';
 import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
-import '../widget/test.dart';
+import '../routes/app_pages.dart';
+import '../widget/Custom_rating_bar.dart';
+
 
 class WishlistPage extends StatefulWidget {
   @override
@@ -64,12 +66,17 @@ class _WishlistPageState extends State<WishlistPage> {
                 final wishlistItem = wishlistController.wishlist[index];
                 return Bounceable(
                   onTap: () {
-                    Get.to(ProductScreen(
-                        index: index,
-                        colors: itemColor,
-                        photo: wishlistItem.product.photo,
-                        product: wishlistItem.product
-                    ));
+
+                    Get.toNamed(
+                        Routes.PRODUCTVIEW,
+                        arguments: {
+                          'index': index,
+                          'color': itemColor,
+                          'photo': wishlistItem.product.photo,
+                          'product':  wishlistItem.product
+                        }
+                    );
+
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Color_controller.dart';
 import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';
+import '../routes/app_pages.dart';
 
 class DressCard extends StatefulWidget {
   final index;
@@ -50,15 +51,17 @@ class _DressCardState extends State<DressCard> {
     Color itemColor = colorcontroller.colorlist[colorIndex];
     return InkWell(
       onTap: () {
-        Get.to(
-          ProductScreen(
-            index: widget.index,
-            colors: itemColor,
-            photo: widget.product.photo,
-            product: widget.product
-          ),
-          // arguments: [colorcontroller.colorlist, colorcontroller.colorlist]
+        Get.toNamed(
+            Routes.PRODUCTVIEW,
+            arguments: {
+              'index': widget.index,
+              'color': itemColor,
+              'photo': widget.product.photo,
+              'product': widget.product,
+            }
         );
+
+
       },
 
       child: Container(

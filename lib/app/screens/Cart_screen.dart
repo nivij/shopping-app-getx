@@ -15,7 +15,7 @@ import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
 import '../models/product_model.dart';
-import '../widget/test.dart';
+import '../widget/Custom_rating_bar.dart';
 
 class CartPage extends StatefulWidget {
   @override

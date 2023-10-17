@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/Color_controller.dart';
 import '../controllers/details_controller.dart';
+import '../routes/app_pages.dart';
 
 class SearchScreen extends StatelessWidget {
   final DetailsController searchController = Get.put(DetailsController());
@@ -153,12 +154,16 @@ class SearchScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 18),
                           child: Bounceable(
                             onTap: () {
-                              Get.to(ProductScreen(
-                                index: index,
-                                colors: itemColor,
-                                photo: product.photo,
-                                product: product,
-                              ));
+                              Get.toNamed(
+                                  Routes.PRODUCTVIEW,
+                                  arguments: {
+                                    'index':index,
+                                    'color': itemColor,
+                                    'photo': product.photo,
+                                    'product': product,
+                                  }
+                              );
+
                             },
                             child: ListTile(
                               leading: Container(

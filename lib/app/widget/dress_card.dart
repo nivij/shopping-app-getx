@@ -45,7 +45,7 @@ class _DressCardState extends State<DressCard> {
   Widget build(BuildContext context) {
 
     final WishlistController wishlistController = Get.find();
-    final detailsController = Get.put(DetailsController());
+
     final colorcontroller = Get.put(ColorController());
     int colorIndex = widget.index % colorcontroller.colorlist.length; // Use modulo to cycle through colors
     Color itemColor = colorcontroller.colorlist[colorIndex];
@@ -54,14 +54,12 @@ class _DressCardState extends State<DressCard> {
         Get.toNamed(
             Routes.PRODUCTVIEW,
             arguments: {
-              'index': widget.index,
+              'index':widget.index,
               'color': itemColor,
-              'photo': widget.product.photo,
+              'photo':widget.product.photo,
               'product': widget.product,
             }
         );
-
-
       },
 
       child: Container(

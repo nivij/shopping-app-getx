@@ -35,22 +35,27 @@ class _ProductScreenState extends State<ProductScreen> {
   double get currentRating => _currentRating;
   @override
 
+  @override
   void initState() {
-
-    final OrderController orderController = Get.put(OrderController());
     super.initState();
+    final OrderController orderController = Get.put(OrderController());
+
+    // Retrieve the arguments and ensure it's not null
     final Map<String, dynamic> arguments = Get.arguments;
 
-    final index = arguments['index'];
+    if (arguments != null) {
+      final index = arguments['index'];
 
+      final productIndex = index;
+      orderController.updateBadgeValue();
+      orderController.resetCounter();
 
-    final productIndex = index;
-    orderController.updateBadgeValue();
-    orderController.resetCounter();
-    // Retrieve the wishlist state from Get Storage and initialize isWishlistItem
-    isWishlistItem = box.read('isWishlistItem$productIndex') ?? false;
+      // Retrieve the wishlist state from Get Storage and initialize isWishlistItem
+      isWishlistItem = box.read('isWishlistItem$productIndex') ?? false;
+    }
 
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +365,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500
             )),
-              Text('\₹ ${product.price}',style: GoogleFonts.poppins(
+              Text('\₹  ${product.price}',style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.w700),),

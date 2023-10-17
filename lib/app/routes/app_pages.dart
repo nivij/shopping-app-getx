@@ -30,7 +30,7 @@ class AppPages{
         binding: RootBindings()
     ),
     GetPage(
-        name: '${_Paths.PRODUCTVIEW}/:index/:color/:photo/:product',
+        name: _Paths.PRODUCTVIEW,
         page: () => ProductScreen(),
         binding: RootBindings()
     ),

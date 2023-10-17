@@ -98,7 +98,17 @@ class OrderController extends GetxController {
     }
     updateBadgeValue();
   }
+  double getTotalCartPrice() {
+    double total = 0.0;
+    for (var cartItem in cartItems) {
+      final productInCart = Product.fromJson(cartItem['product']);
+      final quantity = cartItem['quantity'] as int;
+      final price = double.parse(productInCart.price.replaceAll(',', '')); // Remove commas and convert to double
 
+      total += price * quantity;
+    }
+    return total;
+  }
   @override
   void onInit() {
     super.onInit();

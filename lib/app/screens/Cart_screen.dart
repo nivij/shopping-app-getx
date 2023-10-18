@@ -24,6 +24,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final WishlistController wishlistController = Get.find();
   final detailsController = Get.put(DetailsController());
+  final OrderController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,11 @@ class _CartPageState extends State<CartPage> {
     final colorcontroller = Get.put(ColorController());
 
     return Scaffold(
+
+      backgroundColor: Colors.white,
       appBar: AppBar(
+
+
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -45,142 +50,145 @@ class _CartPageState extends State<CartPage> {
           ),
         ),
       ),
-      body: Obx(() => ListView.builder(
-        itemCount: cartController.cartItems.length,
-        itemBuilder: (context, index) {
-          int colorIndex = index % colorcontroller.colorlist.length;
-          Color itemColor = colorcontroller.colorlist[colorIndex];
-          final cartItem = cartController.cartItems[index];
-          final product = Product.fromJson(cartItem['product']);
-          final quantity = cartItem['quantity'] as int;
-          final size = cartItem['size'] as String;
-          return Bounceable(
-            onTap: () {
-              // Get.to(ProductScreen(
-              //     index: index,
-              //     colors: itemColor,
-              //     photo: wishlistItem.product.photo,
-              //     product: wishlistItem.product
-              // ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: Colors.transparent,
-                height: 150,
-                child: Row(
-                  children: [
-                    Container(
-                      height: 130,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: itemColor,
-                        borderRadius: BorderRadius.circular(20),
+      body: SafeArea(
+        child: Obx(() => ListView.builder(
+          itemCount: cartController.cartItems.length,
+          itemBuilder: (context, index) {
+            int colorIndex = index % colorcontroller.colorlist.length;
+            Color itemColor = colorcontroller.colorlist[colorIndex];
+            final cartItem = cartController.cartItems[index];
+            final product = Product.fromJson(cartItem['product']);
+            final quantity = cartItem['quantity'] as int;
+            final size = cartItem['size'] as String;
+            return Bounceable(
+              onTap: () {
+                // Get.to(ProductScreen(
+                //     index: index,
+                //     colors: itemColor,
+                //     photo: wishlistItem.product.photo,
+                //     product: wishlistItem.product
+                // ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  color: Colors.transparent,
+                  height: 150,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 130,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: itemColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Image.asset(product.photo),
                       ),
-                      child: Image.asset(product.photo),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 195,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, top: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 195,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    product.name,
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  Bounceable(
+                                    onTap: () {
+                                      cartController.removeFromCart(product);
+                                    },
+                                    child: Icon(Elusive.cancel_circled),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Row(
                               children: [
                                 Text(
-                                  product.name,
+                                  "Size : ",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.black,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                Text(
+                                  "$size",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Quantity : ",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.black,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                  Text(
+                                    '$quantity',
                                   style: GoogleFonts.poppins(
                                     color: Colors.black,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                Bounceable(
-                                  onTap: () {
-                                    cartController.removeFromCart(product);
-                                  },
-                                  child: Icon(Elusive.cancel_circled),
-                                ),
+
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Size : ",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '\$${product.price}',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "$size",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w700,
+                                SizedBox(
+                                  width: 40,
                                 ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Quantity : ",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Text(
-                                '$quantity',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '\$${product.price}',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              Counter(),
-                            ],
-                          ),
-                        ],
+                                Counter(orderController: cartController, product: product,),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      )),
+            );
+          },
+        )),
+      ),
       bottomSheet: Obx(() {
         return Visibility(
           visible: cartController.cartItems.isNotEmpty,

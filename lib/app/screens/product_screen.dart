@@ -234,7 +234,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800)),
-                            Counter()
+                            Counter(orderController: orderController, product: product,)
                           ],
                         ),
                         Row(

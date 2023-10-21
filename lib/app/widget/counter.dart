@@ -10,12 +10,17 @@ import '../models/product_model.dart';
 
 
 
-class Counter extends StatelessWidget {
+class Counter extends StatefulWidget {
   final OrderController orderController;
   final Product product;
 
   Counter({required this.orderController, required this.product});
 
+  @override
+  State<Counter> createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
@@ -30,8 +35,8 @@ class Counter extends StatelessWidget {
             padding: EdgeInsets.only(left: 10),
             onPressed: () {
 
-              orderController.decrement();
-              orderController.updateCartItemQuantity(product, orderController.count.value,); // Pass the size here
+              widget.orderController.decrement();
+              widget.orderController.updateCartItemQuantity(widget.product, widget.orderController.count.value,); // Pass the size here
             },
             icon: Icon(
               Icons.remove,
@@ -39,14 +44,14 @@ class Counter extends StatelessWidget {
             ),
           ),
           Text(
-            '${orderController.count}',
+            '${widget.orderController.count}',
             style: GoogleFonts.poppins(fontSize: 18),
           ),
           IconButton(
             padding: EdgeInsets.only(right: 19),
             onPressed: () {
-              orderController.updateCartItemQuantity(product, orderController.count.value + 1, ); // Pass the size here
-              orderController.increment();
+              widget.orderController.updateCartItemQuantity(widget.product, widget.orderController.count.value + 1, ); // Pass the size here
+              widget.orderController.increment();
             },
             icon: Icon(
               Icons.add,

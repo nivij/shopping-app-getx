@@ -58,7 +58,7 @@ class _CartPageState extends State<CartPage> {
             Color itemColor = colorcontroller.colorlist[colorIndex];
             final cartItem = cartController.cartItems[index];
             final product = Product.fromJson(cartItem['product']);
-            final quantity = cartItem['quantity'] as int;
+            final quantity = cartItem['quantity'];
             final size = cartItem['size'] as String;
             return Bounceable(
               onTap: () {
@@ -148,17 +148,19 @@ class _CartPageState extends State<CartPage> {
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                  Text(
-                                    '$quantity',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
+                              Text(
+                                   '$quantity',
+                                   style: GoogleFonts.poppins(
+                                     color: Colors.black,
+                                     fontSize: 15,
+                                     fontWeight: FontWeight.w700,
+                                   ),
+                                 ),
+
 
                               ],
                             ),
+
                             SizedBox(
                               height: 7,
                             ),

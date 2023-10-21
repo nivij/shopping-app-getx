@@ -7,7 +7,7 @@ import '../models/product_model.dart';
 
 class OrderController extends GetxController {
   RxList<Map<String, dynamic>> cartItems = <Map<String, dynamic>>[].obs;
-  var count = 0.obs;
+  RxInt count = 0.obs;
   late Product _item;
   int get cartCount => cartItems.length;
   final box = GetStorage();
@@ -43,6 +43,7 @@ class OrderController extends GetxController {
       colorText: Colors.white,
     );
   }
+
   void addToCart(Product item, int quantity, String selectedSize) {
     showSuccessSnackBar('Added To Cart');
     final existingCartItemIndex = cartItems.indexWhere((cartItem) {
@@ -63,6 +64,7 @@ class OrderController extends GetxController {
     }
     box.write('cartItems', cartItems);
     updateBadgeValue();
+    cartItems.refresh();
   }
 
   void removeFromCart(Product item) {
@@ -77,6 +79,7 @@ class OrderController extends GetxController {
     }
     box.write('cartItems', cartItems);
     updateBadgeValue();
+    cartItems.refresh();
   }
 
 
@@ -93,6 +96,7 @@ class OrderController extends GetxController {
 
     box.write('cartItems', cartItems);
     updateBadgeValue();
+    cartItems.refresh();
   }
 
   void loadCartItems() {
@@ -102,6 +106,7 @@ class OrderController extends GetxController {
       cartItems.assignAll(savedCartItems.cast<Map<String, dynamic>>());
     }
     updateBadgeValue();
+    cartItems.refresh();
   }
   double getTotalCartPrice() {
     double total = 0.0;
@@ -113,6 +118,7 @@ class OrderController extends GetxController {
       total += price * quantity;
     }
     return total;
+
   }
 
   @override

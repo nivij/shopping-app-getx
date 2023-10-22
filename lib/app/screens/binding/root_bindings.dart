@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:gocart/app/controllers/Wishlist_controller.dart';
 import 'package:gocart/app/controllers/auth_controller.dart';
+import 'package:gocart/app/controllers/cart_controller.dart';
 import 'package:gocart/app/controllers/details_controller.dart';
 import 'package:gocart/app/controllers/order_controller.dart';
 import 'package:gocart/app/controllers/text_controller.dart';
@@ -22,6 +23,7 @@ class RootBindings implements Bindings {
     Get.lazyPut(() => SizeController(),);
     Get.lazyPut(() => AuthController(),);
     Get.put(SplashController());
+    Get.put(CartController());
 
 
   }

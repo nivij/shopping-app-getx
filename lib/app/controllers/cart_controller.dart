@@ -11,37 +11,62 @@ class CartController extends GetxController {
 
   final box = GetStorage();
   RxInt count = 0.obs;
-  void updateCartItemQuantity(Product item, int newQuantity) {
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadCounter();
+
+  }
+
+
+  void loadCounter() {
+    final savedCounter = box.read('counter');
+    if (savedCounter != null) {
+      count.value = savedCounter;
+    }
+  }
+
+  void saveCounter() {
+    box.write('counter', count.value);
+  }
+
+
+
+  void updateCartItemQuantity(Product item, int newQuantity, int index) {
     // Access the OrderController
     final OrderController orderController = Get.find<OrderController>();
 
     // Access the cartItems from OrderController
     final List<Map<String, dynamic>> cartItems = orderController.cartItems;
-      final itemToUpdate = cartItems.firstWhere((cartItem) {
-        final productInCart = Product.fromJson(cartItem['product']);
-        return productInCart == item;
-      }, orElse: () => {});
 
-      if (itemToUpdate != null) {
+    if (index >= 0 && index < cartItems.length) {
+      // Get the item at the specified index
+      final Map<String, dynamic> itemToUpdate = cartItems[index];
+      final productInCart = Product.fromJson(itemToUpdate['product']);
+
+      if (productInCart == item) {
         itemToUpdate['quantity'] = newQuantity;
-
       }
+
       box.write('cartItems', cartItems);
-      // updateBadgeValue();
-    orderController.cartItems.refresh();
-    // Now you can use cartItems as needed in CartController
+      orderController.cartItems.refresh();
+    }
   }
 
+
   void increment() {
+
     count.value++;
-    // saveCounter();
+    saveCounter();
   }
 
   // Function to decrement the counter
   void decrement() {
     if (count.value > 0) {
       count.value--;
-      // saveCounter();
+      saveCounter();
     }
   }
 

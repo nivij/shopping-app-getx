@@ -15,14 +15,14 @@ class OrderController extends GetxController {
 
   void increment() {
     count.value++;
-    saveCounter();
+
   }
 
   // Function to decrement the counter
   void decrement() {
     if (count.value > 0) {
       count.value--;
-      saveCounter();
+
     }
   }
   void resetCounter() {
@@ -121,20 +121,11 @@ class OrderController extends GetxController {
     return total;
 
   }
-  void loadCounter() {
-    final savedCounter = box.read('counter');
-    if (savedCounter != null) {
-      count.value = savedCounter;
-    }
-  }
 
-  void saveCounter() {
-    box.write('counter', count.value);
-  }
   @override
   void onInit() {
     super.onInit();
-    loadCounter();
+
     loadCartItems(); // Load cart items when the controller is initialized
   }
 }

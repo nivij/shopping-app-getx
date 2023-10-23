@@ -144,7 +144,7 @@ final quantity;
                         SizedBox(
                           width: 40,
                         ),
-                        _counter()
+                        _counter(index)
                       ],
                     ),
                   ],
@@ -156,7 +156,7 @@ final quantity;
       ),
     );
   }
-  Widget _counter(){
+  Widget _counter(int index){
 
     final CartController cartController = Get.find();
     return  Obx(() => Container(
@@ -171,9 +171,9 @@ final quantity;
             padding: EdgeInsets.only(left: 10),
             onPressed: () {
               cartController.decrement();
-              // widget.orderController.saveCounter();
 
-              cartController.updateCartItemQuantity(product, cartController.count.value,); // Pass the size here
+
+              cartController.updateCartItemQuantity(product, cartController.count.value,index); // Pass the size here
             },
             icon: Icon(
               Icons.remove,
@@ -181,14 +181,14 @@ final quantity;
             ),
           ),
           Text(
-            '${cartController.count.value}',
+            '${cartController.count}',
             style: GoogleFonts.poppins(fontSize: 18),
           ),
           IconButton(
             padding: EdgeInsets.only(right: 19),
             onPressed: () {
-              // widget.orderController.saveCounter();
-              cartController.updateCartItemQuantity(product, cartController.count.value + 1, ); // Pass the size here
+
+              cartController.updateCartItemQuantity(product, cartController.count.value + 1, index); // Pass the size here
 
               cartController.increment();
             },

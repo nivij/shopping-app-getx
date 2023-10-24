@@ -7,7 +7,7 @@ import '../models/product_model.dart';
 
 class OrderController extends GetxController {
   RxList<Map<String, dynamic>> cartItems = <Map<String, dynamic>>[].obs;
-  RxInt count = 0.obs;
+  RxInt count = 1.obs;
   late Product _item;
   int get cartCount => cartItems.length;
   final box = GetStorage();
@@ -20,13 +20,13 @@ class OrderController extends GetxController {
 
   // Function to decrement the counter
   void decrement() {
-    if (count.value > 0) {
+    if (count.value > 1) {
       count.value--;
 
     }
   }
   void resetCounter() {
-    count.value = 0;
+    count.value = 1;
   }
 
   var badgeValue = '0'.obs; // Initialize badge value with '0'

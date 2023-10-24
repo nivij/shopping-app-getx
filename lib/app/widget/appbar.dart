@@ -173,7 +173,9 @@ class _CustomappbarState extends State<Customappbar> {
                         borderRadius: BorderRadius.circular(25.0)
                     ),
                     child:  TabBar(
-                      labelPadding: EdgeInsets.symmetric(horizontal: 17),
+                      indicatorWeight: 1.0,
+
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
                         physics: BouncingScrollPhysics(),
                       isScrollable: true,
                      labelStyle: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w700),
@@ -189,20 +191,43 @@ class _CustomappbarState extends State<Customappbar> {
                       tabs: [
                         Container(
                             height:50 ,
-                          width: 60,
+                          width: 80,
+                           decoration: BoxDecoration(
 
+                               border: Border.all(color: Colors.black.withOpacity(0.2),),
+
+                               borderRadius:  BorderRadius.circular(25.0)
+                           ),
                             child: Tab(text: 'Dresses',)),
                         Container(
-                            height:30 ,
-                            width: 60,
+                            height:50 ,
+                            width: 80,
+                            decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.black.withOpacity(0.2),),
+
+                                borderRadius:  BorderRadius.circular(25.0)
+                            ),
                             child: Tab(text: 'Jackets',)),
                         Container(
-                            height:30 ,
-                            width: 60,
+                            height:50 ,
+                            width: 80,
+                            decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.black.withOpacity(0.2),),
+
+                                borderRadius:  BorderRadius.circular(25.0)
+                            ),
                             child: Tab(text: 'Jeans',)),
                         Container(
-                            height:30 ,
-                            width: 60,
+                            height:50 ,
+                            width: 80,
+                            decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.black.withOpacity(0.2),),
+
+                                borderRadius:  BorderRadius.circular(25.0)
+                            ),
                             child: Tab(text: 'Shoes',))
                       ],
                     ),

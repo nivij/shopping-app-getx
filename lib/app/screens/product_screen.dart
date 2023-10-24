@@ -26,18 +26,21 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  final sizecontroller = Get.put(SizeController());
   bool isWishlistItem = false;
   int selectedSizeIndex = 0;
   // var data = Get.arguments;
   final box = GetStorage();
   double _currentRating = 4.5; // Initial rating value
-  String selectedSize = '';
+   late String selectedSize;
   double get currentRating => _currentRating;
   @override
 
   @override
   void initState() {
     super.initState();
+    final sizecontroller = Get.put(SizeController());
+    selectedSize = sizecontroller.sizelist[0].size;
     final OrderController orderController = Get.put(OrderController());
 
     // Retrieve the arguments and ensure it's not null

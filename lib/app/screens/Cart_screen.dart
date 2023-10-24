@@ -47,6 +47,7 @@ class _CartPageState extends State<CartPage> {
 
         child:
         Obx(() => ListView.builder(
+          scrollDirection: Axis.vertical,
           itemCount: cartController.cartItems.length,
           itemBuilder: (context, index) {
             int colorIndex = index % colorcontroller.colorlist.length;
@@ -59,6 +60,7 @@ class _CartPageState extends State<CartPage> {
           },
         )),
       ),
+
       bottomSheet: Obx(() {
         return Visibility(
           visible: cartController.cartItems.isNotEmpty,

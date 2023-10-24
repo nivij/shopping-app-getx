@@ -27,7 +27,8 @@ class myApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Rapid",
       initialBinding: RootBindings(),
-      theme: ThemeData(),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       initialRoute: AppPages.INITIAL,

@@ -144,7 +144,7 @@ final quantity;
                         SizedBox(
                           width: 40,
                         ),
-                        _counter(index)
+                        _counter(index, quantity)
                       ],
                     ),
                   ],
@@ -156,10 +156,10 @@ final quantity;
       ),
     );
   }
-  Widget _counter(int index){
+  Widget _counter(int index, int quantity){
 
     final CartController cartController = Get.find();
-    return  Obx(() => Container(
+    return  Container(
       height: 38,
       decoration: BoxDecoration(
         color: Colors.black12,
@@ -181,7 +181,7 @@ final quantity;
             ),
           ),
           Text(
-            '${cartController.count}',
+            '$quantity',
             style: GoogleFonts.poppins(fontSize: 18),
           ),
           IconButton(
@@ -199,6 +199,6 @@ final quantity;
           ),
         ],
       ),
-    ));
+    );
   }
 }

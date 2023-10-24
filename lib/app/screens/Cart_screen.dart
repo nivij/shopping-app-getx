@@ -44,7 +44,9 @@ class _CartPageState extends State<CartPage> {
         ),
       ),
       body: SafeArea(
-        child: Obx(() => ListView.builder(
+
+        child:
+        Obx(() => ListView.builder(
           itemCount: cartController.cartItems.length,
           itemBuilder: (context, index) {
             int colorIndex = index % colorcontroller.colorlist.length;

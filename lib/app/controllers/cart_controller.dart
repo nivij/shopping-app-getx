@@ -59,14 +59,14 @@ class CartController extends GetxController {
   void increment() {
 
     count.value++;
-    saveCounter();
+
   }
 
   // Function to decrement the counter
   void decrement() {
     if (count.value > 0) {
       count.value--;
-      saveCounter();
+
     }
   }
 

@@ -46,18 +46,21 @@ class _CartPageState extends State<CartPage> {
       body: SafeArea(
 
         child:
-        Obx(() => ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: cartController.cartItems.length,
-          itemBuilder: (context, index) {
-            int colorIndex = index % colorcontroller.colorlist.length;
-            Color itemColor = colorcontroller.colorlist[colorIndex];
-            final cartItem = cartController.cartItems[index];
-            final product = Product.fromJson(cartItem['product']);
-            final quantity = cartItem['quantity'];
-            final size = cartItem['size'] as String;
-            return CartCard(product:product,quantity:quantity ,size:size ,itemcolor:itemColor, index: index,);
-          },
+        Obx(() => SizedBox(
+          height: 470,
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: cartController.cartItems.length,
+            itemBuilder: (context, index) {
+              int colorIndex = index % colorcontroller.colorlist.length;
+              Color itemColor = colorcontroller.colorlist[colorIndex];
+              final cartItem = cartController.cartItems[index];
+              final product = Product.fromJson(cartItem['product']);
+              final quantity = cartItem['quantity'];
+              final size = cartItem['size'] as String;
+              return CartCard(product:product,quantity:quantity ,size:size ,itemcolor:itemColor, index: index,);
+            },
+          ),
         )),
       ),
 
@@ -65,7 +68,7 @@ class _CartPageState extends State<CartPage> {
         return Visibility(
           visible: cartController.cartItems.isNotEmpty,
           child: Container(
-            height: 150,
+            height: 140,
             width: 400,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black.withOpacity(0.2)),

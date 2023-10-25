@@ -40,11 +40,11 @@ final quantity;
         padding: const EdgeInsets.all(8.0),
         child: Container(
           color: Colors.transparent,
-          height: 150,
+          height: 140,
           child: Row(
             children: [
               Container(
-                height: 130,
+                height: 120,
                 width: 120,
                 decoration: BoxDecoration(
                   color: itemcolor,
@@ -189,7 +189,7 @@ final quantity;
 
               cartController.updateCartItemQuantityByIndex(index, quantity + 1); // Pass the size here
 
-              cartController.increment();
+
             },
             icon: Icon(
               Icons.add,

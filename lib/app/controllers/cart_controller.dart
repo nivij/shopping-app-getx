@@ -52,23 +52,22 @@ class CartController extends GetxController {
 
 
 
-  void increment() {
-    saveCounter();
-    count.value++;
-
+  // void increment() {
+  //   saveCounter();
+  //   count.value++;
+  //
+  // }
+  //
+  // // Function to decrement the counter
+  // void decrement() {
+  //   if (count.value > 0) {
+  //     count.value--;
+  //     saveCounter();
+  //   }
   }
 
-  // Function to decrement the counter
-  void decrement() {
-    if (count.value > 0) {
-      count.value--;
-      saveCounter();
-    }
-  }
 
 
 
 
 
-
-}

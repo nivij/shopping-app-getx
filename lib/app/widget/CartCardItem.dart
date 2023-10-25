@@ -170,10 +170,9 @@ final quantity;
           IconButton(
             padding: EdgeInsets.only(left: 10),
             onPressed: () {
-              cartController.decrement();
-
-
-              cartController.updateCartItemQuantity(product, cartController.count.value,index); // Pass the size here
+              if (quantity > 1) {
+                cartController.updateCartItemQuantityByIndex(index, quantity - 1);
+              } // Pass the size here
             },
             icon: Icon(
               Icons.remove,
@@ -188,7 +187,7 @@ final quantity;
             padding: EdgeInsets.only(right: 19),
             onPressed: () {
 
-              cartController.updateCartItemQuantity(product, cartController.count.value + 1, index); // Pass the size here
+              cartController.updateCartItemQuantityByIndex(index, quantity + 1); // Pass the size here
 
               cartController.increment();
             },

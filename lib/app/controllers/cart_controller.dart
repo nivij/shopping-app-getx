@@ -34,26 +34,22 @@ class CartController extends GetxController {
 
 
 
-  void updateCartItemQuantity(Product item, int newQuantity, int index) {
+  void updateCartItemQuantityByIndex(int index, int newQuantity) {
     // Access the OrderController
     final OrderController orderController = Get.find<OrderController>();
 
     // Access the cartItems from OrderController
     final List<Map<String, dynamic>> cartItems = orderController.cartItems;
 
-    if (index >= 0 && index < cartItems.length) {
-      // Get the item at the specified index
-      final Map<String, dynamic> itemToUpdate = cartItems[index];
-      final productInCart = Product.fromJson(itemToUpdate['product']);
 
-      if (productInCart == item) {
-        itemToUpdate['quantity'] = newQuantity;
+      if (index >= 0 && index < cartItems.length) {
+        cartItems[index]['quantity'] = newQuantity;
+        box.write('cartItems', cartItems);
+
+        orderController.cartItems.refresh();
       }
-
-      box.write('cartItems', cartItems);
-      orderController.cartItems.refresh();
     }
-  }
+
 
 
   void increment() {

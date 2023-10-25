@@ -36,7 +36,7 @@ class _CounterState extends State<Counter> {
             onPressed: () {
 
               widget.orderController.decrement();
-              widget.orderController.updateCartItemQuantity(widget.product, widget.orderController.count.value,); // Pass the size here
+              // widget.orderController.updateCartItemQuantityByIndex(widget.product, widget.orderController.count.value,); // Pass the size here
             },
             icon: Icon(
               Icons.remove,
@@ -51,7 +51,7 @@ class _CounterState extends State<Counter> {
             padding: EdgeInsets.only(right: 19),
             onPressed: () {
 
-              widget.orderController.updateCartItemQuantity(widget.product, widget.orderController.count.value + 1, ); // Pass the size here
+              // widget.orderController.updateCartItemQuantityByIndex( widget.orderController.count.value + 1, index ); // Pass the size here
               widget.orderController.increment();
             },
             icon: Icon(

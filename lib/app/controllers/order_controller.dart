@@ -84,21 +84,21 @@ class OrderController extends GetxController {
   }
 
 
-  void updateCartItemQuantity(Product item, int newQuantity) {
-
-    final itemToUpdate = cartItems.firstWhere((cartItem) {
-      final productInCart = Product.fromJson(cartItem['product']);
-      return productInCart == item;
-    }, orElse: () => {});
-
-    if (itemToUpdate != null) {
-      itemToUpdate['quantity'] = newQuantity;
-    }
-
-    box.write('cartItems', cartItems);
-    updateBadgeValue();
-    cartItems.refresh();
-  }
+  // void updateCartItemQuantity(Product item, int newQuantity) {
+  //
+  //   final itemToUpdate = cartItems.firstWhere((cartItem) {
+  //     final productInCart = Product.fromJson(cartItem['product']);
+  //     return productInCart == item;
+  //   }, orElse: () => {});
+  //
+  //   if (itemToUpdate != null) {
+  //     itemToUpdate['quantity'] = newQuantity;
+  //   }
+  //
+  //
+  //   updateBadgeValue();
+  //
+  // }
 
   void loadCartItems() {
     final savedCartItems = box.read('cartItems');

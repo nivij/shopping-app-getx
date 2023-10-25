@@ -45,7 +45,7 @@ class _CustomappbarState extends State<Customappbar> {
       child: Scaffold(
          drawer: Navdrawer(),
 
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: NestedScrollView(
 
             floatHeaderSlivers: true,
@@ -55,7 +55,7 @@ class _CustomappbarState extends State<Customappbar> {
 
                     shadowColor: Colors.transparent,
                     toolbarHeight: 80,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
                     floating: true,
                     snap: true,
                     pinned: true,
@@ -69,11 +69,11 @@ class _CustomappbarState extends State<Customappbar> {
                           child: CircleAvatar(
 
                             radius: 10,
-                            backgroundColor: CupertinoColors.black,
+                            backgroundColor:  Theme.of(context).colorScheme.primary,
                             child: Icon(
 
                               FluentIcons.filter_12_filled,
-                              color: CupertinoColors.white,
+                              color:  Theme.of(context).colorScheme.secondary,
                               size: 30,
                             ),
                           ),
@@ -115,17 +115,17 @@ class _CustomappbarState extends State<Customappbar> {
                                   child: Container(
 
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black.withOpacity(0.2)),
-                                      color: Colors.black.withOpacity(0.1),
+                                      border: Border.all(color:Theme.of(context).colorScheme.outline.withOpacity(0.3)),
+                                      color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.12),
                                       borderRadius: BorderRadius.circular(20)
                                     ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         SizedBox(width: 10,),
-                                        Icon(Elusive.search_circled,color: Colors.black,size: 30,),
+                                        Icon(Elusive.search_circled,color: Theme.of(context).colorScheme.primary,size: 30,),
                                         SizedBox(width: 20,),
-                                        Text("Search",style: GoogleFonts.poppins(color: Colors.black,fontSize: 16),)
+                                        Text("Search",style: GoogleFonts.poppins(color:Theme.of(context).colorScheme.primary,fontSize: 16),)
                                       ],
                                     ),
                                   ),
@@ -143,12 +143,12 @@ class _CustomappbarState extends State<Customappbar> {
                                       height: 50, // Set the desired height
 
                                       decoration: BoxDecoration(
-                                        color: Colors.black,
+                                        color: Theme.of(context).colorScheme.primary,
                                         borderRadius: BorderRadius.circular(90),
                                       ),
                                       child: Image.asset(
                                         "assets/filter.png",
-                                        color: Colors.white,
+                                        color: Theme.of(context).colorScheme.secondary,
                                       )),
                                 ),
                               ),
@@ -178,23 +178,23 @@ class _CustomappbarState extends State<Customappbar> {
                       labelPadding: EdgeInsets.symmetric(horizontal: 10),
                         physics: BouncingScrollPhysics(),
                       isScrollable: true,
-                     labelStyle: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w700),
+                     labelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w700),
                       indicator: BoxDecoration(
 
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.secondaryContainer,
                           border: Border.all(color: Colors.black),
                           borderRadius:  BorderRadius.circular(25.0)
                       ) ,
-                      labelColor: Colors.white,
+                      labelColor: Theme.of(context).colorScheme.secondary,
 
-                      unselectedLabelColor: Colors.black,
+                      unselectedLabelColor:Theme.of(context).colorScheme.primary,
                       tabs: [
                         Container(
                             height:50 ,
                           width: 80,
                            decoration: BoxDecoration(
 
-                               border: Border.all(color: Colors.black.withOpacity(0.2),),
+                               border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2),),
 
                                borderRadius:  BorderRadius.circular(25.0)
                            ),
@@ -204,7 +204,7 @@ class _CustomappbarState extends State<Customappbar> {
                             width: 80,
                             decoration: BoxDecoration(
 
-                                border: Border.all(color: Colors.black.withOpacity(0.2),),
+                                border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2),),
 
                                 borderRadius:  BorderRadius.circular(25.0)
                             ),
@@ -214,7 +214,7 @@ class _CustomappbarState extends State<Customappbar> {
                             width: 80,
                             decoration: BoxDecoration(
 
-                                border: Border.all(color: Colors.black.withOpacity(0.2),),
+                                border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2),),
 
                                 borderRadius:  BorderRadius.circular(25.0)
                             ),
@@ -224,7 +224,7 @@ class _CustomappbarState extends State<Customappbar> {
                             width: 80,
                             decoration: BoxDecoration(
 
-                                border: Border.all(color: Colors.black.withOpacity(0.2),),
+                                border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2),),
 
                                 borderRadius:  BorderRadius.circular(25.0)
                             ),

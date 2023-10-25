@@ -10,6 +10,9 @@ import 'package:gocart/app/screens/base.dart';
 import 'package:gocart/app/screens/binding/root_bindings.dart';
 import 'package:gocart/app/screens/tabs/dresses.dart';
 import 'package:gocart/app/screens/product_screen.dart';
+import 'package:gocart/app/services/themedata.dart';
+
+import 'controllers/theme_controller.dart';
 
 void main() async {
   await GetStorage.init();
@@ -24,14 +27,17 @@ class myApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: "Rapid",
-      initialBinding: RootBindings(),
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-      getPages: AppPages.routes,
-      initialRoute: AppPages.INITIAL,
-    );
+    final ThemeController themeController = Get.put(ThemeController());
+    return Obx(() {
+      return GetMaterialApp(
+        title: "Rapid",
+        initialBinding: RootBindings(),
+        theme: themeController.currentTheme.value, // Set the theme based on the controller
+        darkTheme: Darkmode, // Replace with your dark theme if needed
+        debugShowCheckedModeBanner: false,
+        getPages: AppPages.routes,
+        initialRoute: AppPages.INITIAL,
+      );
+    });
   }
 }

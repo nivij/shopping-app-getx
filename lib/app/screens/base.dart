@@ -59,9 +59,9 @@ class _baseState extends State<base> {
         ],
       ),
       bottomNavigationBar: GNav(
-
+       backgroundColor: Theme.of(context).colorScheme.secondary,
         gap: 6.0,
-        tabBackgroundColor: Colors.black,
+        tabBackgroundColor: Theme.of(context).colorScheme.onBackground,
         activeColor: Colors.white,
         tabBorderRadius:30.0,
         iconSize: 30,

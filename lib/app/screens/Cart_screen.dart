@@ -49,6 +49,7 @@ class _CartPageState extends State<CartPage> {
         Obx(() => SizedBox(
           height: 470,
           child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemCount: cartController.cartItems.length,
             itemBuilder: (context, index) {

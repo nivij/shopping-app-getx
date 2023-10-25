@@ -120,7 +120,7 @@ class _DressCardState extends State<DressCard> {
                 child: Text(
                   widget.product.name  ,
                   style: GoogleFonts.poppins(
-                      color: CupertinoColors.black,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w600,
 
                   ),
@@ -131,13 +131,13 @@ class _DressCardState extends State<DressCard> {
                 widget.product.description,textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
                   fontSize: 12,
-                    color: CupertinoColors.black.withOpacity(0.4),
+                    color:Theme.of(context).colorScheme.primary.withOpacity(0.5),
                     fontWeight: FontWeight.w600),
               ),
               Text(
                  '\₹ ${widget.product.price}',
                   style: GoogleFonts.poppins(
-                    color: CupertinoColors.black, fontWeight: FontWeight.w600),
+                    color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600),
               )
             ],
           ),

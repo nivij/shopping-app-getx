@@ -89,7 +89,8 @@ class _ProductScreenState extends State<ProductScreen> {
                             height: 400.0,
                             child: CarouselSlider(
                               options: CarouselOptions(
-                                height: 800,
+                                viewportFraction: 1,
+                                height: 500,
                                 autoPlay: true,
                                 autoPlayInterval: Duration(seconds: 30),
                               ),
@@ -99,9 +100,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                   width: double.infinity,
                                   child: Image.asset(
                                     photo,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fitHeight,
                                     // Set the fit property to cover
-                                    height: 1000.0, // Set a fixed height
+                                    // Set a fixed height
                                   ),
                                 );
                               }).toList(),

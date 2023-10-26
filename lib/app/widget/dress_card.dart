@@ -82,9 +82,13 @@ class _DressCardState extends State<DressCard> {
                     Container(
                       color: itemColor,
                       height: 200,
-                      width: 167,
+
                       child: CarouselSlider(
+
                         options: CarouselOptions(
+
+                           autoPlayCurve: Curves.easeInOut,
+                          viewportFraction: 1,
                           autoPlay: true,
                           autoPlayInterval: Duration(seconds: 3),
                         ),
@@ -92,8 +96,9 @@ class _DressCardState extends State<DressCard> {
                           return Container(
                             width: double.infinity,
                             child: Image.asset(
+
                               photo, // Assuming that the photos are asset paths
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fitWidth,
                             ),
                           );
                         }).toList(),

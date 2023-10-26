@@ -26,7 +26,7 @@ class _CounterState extends State<Counter> {
     return Obx(() => Container(
       height: 38,
       decoration: BoxDecoration(
-        color: Colors.black12,
+        color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.2),
         borderRadius: BorderRadius.circular(60),
       ),
       child: Row(
@@ -40,7 +40,7 @@ class _CounterState extends State<Counter> {
             },
             icon: Icon(
               Icons.remove,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           Text(
@@ -56,7 +56,7 @@ class _CounterState extends State<Counter> {
             },
             icon: Icon(
               Icons.add,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],

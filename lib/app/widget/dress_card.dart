@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +14,22 @@ import '../controllers/details_controller.dart';
 import '../routes/app_pages.dart';
 
 class DressCard extends StatefulWidget {
-  final index;
-  final detailsList;
+  final int index;
+  final List<String> photos;
+  final String name;
+  final String description;
+  final String price;
   final product;
 
   const DressCard({
-    super.key,
-    this.index,
-    this.detailsList, this.product,
+    Key? key,
+    required this.index,
+    required this.photos,
+    required this.name,
+    required this.description,
+    required this.price, this.product,
   });
+
 
   @override
   State<DressCard> createState() => _DressCardState();
@@ -56,8 +64,8 @@ class _DressCardState extends State<DressCard> {
             arguments: {
               'index':widget.index,
               'color': itemColor,
-              'photo':widget.product.photo,
-              'product': widget.product,
+              'photos':widget.photos,
+              'product': widget.product
             }
         );
       },
@@ -75,8 +83,21 @@ class _DressCardState extends State<DressCard> {
                       color: itemColor,
                       height: 200,
                       width: 167,
-                      child: Image.asset(
-                          widget.product.photo),
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 3),
+                        ),
+                        items: (widget.photos ?? []).map((photo) {
+                          return Container(
+                            width: double.infinity,
+                            child: Image.asset(
+                              photo, // Assuming that the photos are asset paths
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                     Positioned(
                         top: 10,

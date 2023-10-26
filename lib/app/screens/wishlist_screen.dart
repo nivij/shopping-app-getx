@@ -39,7 +39,7 @@ class _WishlistPageState extends State<WishlistPage> {
           centerTitle: true,
           title: Text('Wishlist',
               style: GoogleFonts.poppins(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 23,
                   fontWeight: FontWeight.w700)),
           actions: [
@@ -51,7 +51,7 @@ class _WishlistPageState extends State<WishlistPage> {
                   Text("11", style: GoogleFonts.poppins(fontSize: 17)),
               child: Padding(
                 padding: const EdgeInsets.only(right: 20, top: 15),
-                child: Icon(Typicons.bell, color: Colors.black, size: 25),
+                child: Icon(Typicons.bell, color: Theme.of(context).colorScheme.primary, size: 25),
               ),
             ),
           ],
@@ -72,7 +72,7 @@ class _WishlistPageState extends State<WishlistPage> {
                         arguments: {
                           'index': index,
                           'color': itemColor,
-                          'photo': wishlistItem.product.photo,
+                          'photo': wishlistItem.product.photos,
                           'product':  wishlistItem.product
                         }
                     );
@@ -91,7 +91,7 @@ class _WishlistPageState extends State<WishlistPage> {
                             decoration: BoxDecoration(
                                 color: itemColor,
                                 borderRadius: BorderRadius.circular(20)),
-                            child: Image.asset(wishlistItem.product.photo),
+                            child: Image.asset(wishlistItem.product.photos[0] as String),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 20, top: 10),
@@ -100,7 +100,7 @@ class _WishlistPageState extends State<WishlistPage> {
                               children: [
                                 Text(wishlistItem.product.name,
                                     style: GoogleFonts.poppins(
-                                        color: Colors.black,
+                                        color: Theme.of(context).colorScheme.primary,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700)),
                                 SizedBox(
@@ -110,7 +110,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                   children: [
                                     Text("Review",
                                         style: GoogleFonts.poppins(
-                                            color: Colors.black,
+                                            color: Theme.of(context).colorScheme.primary,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w700)),
                                     SizedBox(
@@ -129,7 +129,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       "$_currentRating ",
                                       style: GoogleFonts.poppins(
                                           fontSize: 14,
-                                          color: Colors.black,
+                                          color:Theme.of(context).colorScheme.primary,
                                           fontWeight: FontWeight.w700),
                                     )
                                   ],
@@ -139,7 +139,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                 ),
                                 Text('\$${wishlistItem.product.price}',
                                     style: GoogleFonts.poppins(
-                                        color: Colors.black,
+                                        color: Theme.of(context).colorScheme.primary,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700)),
                                 SizedBox(
@@ -152,7 +152,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       width: 130,
                                       height: 40,
                                       decoration: BoxDecoration(
-                                          color: Colors.black,
+                                          color: Theme.of(context).colorScheme.primary,
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: ElevatedButton(
@@ -173,7 +173,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                             children: [
                                               Image.asset(
                                                 "assets/shopping-bag.png",
-                                                color: Colors.white,
+                                                color: Theme.of(context).colorScheme.secondary,
                                                 height: 12,
                                               ),
                                               SizedBox(
@@ -182,7 +182,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                               Text("Add to cart",
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 13,
-                                                      color: Colors.white,
+                                                      color:Theme.of(context).colorScheme.secondary,
                                                       fontWeight:
                                                           FontWeight.w700))
                                             ],
@@ -196,12 +196,12 @@ class _WishlistPageState extends State<WishlistPage> {
                                       width: 40,
                                       height: 32,
                                       decoration: BoxDecoration(
-                                          color: Colors.black,
+                                          color: Theme.of(context).colorScheme.primary,
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: IconButton(
                                         icon: Icon(MfgLabs.heart_broken,
-                                            color: Colors.white, size: 20),
+                                            color: Theme.of(context).colorScheme.secondary, size: 20),
                                         onPressed: () {
                                           wishlistController.removeFromWishlist(
                                               wishlistItem.product);

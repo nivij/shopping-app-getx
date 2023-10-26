@@ -4,16 +4,17 @@ class Product {
   final String description;
   final String name;
   final String price;
-  final String photo;
+  final List<String> photos; // Change the data type to List<String>
   late int qty;
-  Product( {
+
+  Product({
     required this.CategoryId,
     required this.description,
     required this.id,
     required this.name,
     required this.price,
-    required this.photo
-    ,required this.qty
+    required this.photos, // Change the property name to photos
+    required this.qty,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -23,7 +24,7 @@ class Product {
       name: json['name'] as String,
       price: json['price'] as String,
       description: json['description'] as String,
-      photo: json['photo'] as String,
+      photos: (json['photos'] as List<dynamic>).cast<String>(), // Change to List<String>
       qty: int.tryParse(json['qty'].toString()) ?? 0,
     );
   }
@@ -34,9 +35,9 @@ class Product {
       'CategoryId': CategoryId,
       'name': name,
       'price': price,
-      'photo': photo,
-      "qty": qty,
-      "description": description,
+      'photos': photos, // Change the property name to photos
+      'qty': qty,
+      'description': description,
     };
   }
 
@@ -45,13 +46,4 @@ class Product {
     if (identical(this, other)) return true;
     return other is Product && this.id == other.id;
   }
-
-  // @override
-  // String get hashCode {
-  //   return id;
-  // }
 }
-
-
-
-

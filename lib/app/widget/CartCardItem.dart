@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
@@ -50,7 +52,7 @@ final quantity;
                   color: itemcolor,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Image.asset(product.photo),
+                child: Image.asset(product.photos[0]),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 10),
@@ -65,7 +67,7 @@ final quantity;
                           Text(
                             product.name,
                             style: GoogleFonts.poppins(
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                             ),
@@ -87,7 +89,7 @@ final quantity;
                         Text(
                           "Size : ",
                           style: GoogleFonts.poppins(
-                            color: Colors.black,
+                            color:Theme.of(context).colorScheme.primary,
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
                           ),
@@ -96,7 +98,7 @@ final quantity;
                           "$size",
                           style: GoogleFonts.poppins(
                             fontSize: 14,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.w700,
                           ),
                         )
@@ -110,7 +112,7 @@ final quantity;
                         Text(
                           "Quantity : ",
                           style: GoogleFonts.poppins(
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.primary,
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
                           ),
@@ -118,7 +120,7 @@ final quantity;
                         Text(
                           '$quantity',
                           style: GoogleFonts.poppins(
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.primary,
                             fontSize: 15,
                             fontWeight: FontWeight.w700,
                           ),
@@ -136,7 +138,7 @@ final quantity;
                         Text(
                           '\$${product.price}',
                           style: GoogleFonts.poppins(
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.primary,
                             fontSize: 15,
                             fontWeight: FontWeight.w700,
                           ),
@@ -144,7 +146,7 @@ final quantity;
                         SizedBox(
                           width: 40,
                         ),
-                        _counter(index, quantity)
+                        _counter(index, quantity,context)
                       ],
                     ),
                   ],
@@ -156,13 +158,13 @@ final quantity;
       ),
     );
   }
-  Widget _counter(int index, int quantity){
+  Widget _counter(int index, int quantity,context){
 
     final CartController cartController = Get.find();
     return  Container(
       height: 38,
       decoration: BoxDecoration(
-        color: Colors.black12,
+        color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.2),
         borderRadius: BorderRadius.circular(60),
       ),
       child: Row(
@@ -176,7 +178,7 @@ final quantity;
             },
             icon: Icon(
               Icons.remove,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           Text(
@@ -193,7 +195,7 @@ final quantity;
             },
             icon: Icon(
               Icons.add,
-              color: Colors.black,
+              color:Theme.of(context).colorScheme.primary,
             ),
           ),
         ],

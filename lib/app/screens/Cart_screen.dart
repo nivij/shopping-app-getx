@@ -27,7 +27,7 @@ class _CartPageState extends State<CartPage> {
 
     return Scaffold(
 
-      backgroundColor: Colors.white,
+
       appBar: AppBar(
 
 
@@ -37,7 +37,7 @@ class _CartPageState extends State<CartPage> {
         title: Text(
           'Cart',
           style: GoogleFonts.poppins(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.primary,
             fontSize: 23,
             fontWeight: FontWeight.w700,
           ),
@@ -47,7 +47,7 @@ class _CartPageState extends State<CartPage> {
 
         child:
         Obx(() => SizedBox(
-          height: 470,
+          height: 490,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -73,7 +73,7 @@ class _CartPageState extends State<CartPage> {
             width: 400,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black.withOpacity(0.2)),
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(30),
                 topLeft: Radius.circular(30),
@@ -86,7 +86,7 @@ class _CartPageState extends State<CartPage> {
                   leading: Text(
                     "Total Price   :   ",
                     style: GoogleFonts.poppins(
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                     ),
@@ -94,7 +94,7 @@ class _CartPageState extends State<CartPage> {
                   trailing: Text(
                     "\₹  ${cartController.getTotalCartPrice().toStringAsFixed(2)}",
                     style: GoogleFonts.poppins(
-                      color: Colors.black,
+                      color:Theme.of(context).colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                     ),
@@ -107,7 +107,7 @@ class _CartPageState extends State<CartPage> {
                     width: 180,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(40),
                     ),
                     child: ElevatedButton(
@@ -126,7 +126,7 @@ class _CartPageState extends State<CartPage> {
                         children: [
                           Image.asset(
                             "assets/checkout.png",
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.secondary,
                             height: 25,
                           ),
                           SizedBox(width: 10),
@@ -134,7 +134,7 @@ class _CartPageState extends State<CartPage> {
                             "Checkout",
                             style: GoogleFonts.poppins(
                               fontSize: 17,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

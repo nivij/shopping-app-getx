@@ -6,6 +6,7 @@ import 'package:gocart/app/widget/dress_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../controllers/Wishlist_controller.dart';
 import '../../controllers/details_controller.dart';
+import '../../models/product_model.dart';
 
 
 class ProductListByCategory extends StatelessWidget {
@@ -31,19 +32,28 @@ class ProductListByCategory extends StatelessWidget {
 
           ),
         itemBuilder: (BuildContext context, int index) {
-          final product = products[index];
+          final Product product = products[index];
 
           return (index == 1)
               ? Column(
             children: [
               SizedBox(height: 40),
-              DressCard(index: index,
-                  product: product
+              DressCard(
+                product:product,
+                index: index,
+                photos: product.photos ?? [],
+                name: product.name,
+                description: product.description,
+                price: product.price,
               ),
             ],
           )
-              : DressCard(index: index,
-
+              : DressCard(
+              index: index,
+              photos: product.photos ?? [],
+              name: product.name,
+              description: product.description,
+              price: product.price,
               product: product
           );
         },

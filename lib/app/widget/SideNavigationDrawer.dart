@@ -34,11 +34,11 @@ class _NavdrawerState extends State<Navdrawer> {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: Text(savedemail,
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
                 fontSize: 20,
               ),
             ),
@@ -67,6 +67,7 @@ class _NavdrawerState extends State<Navdrawer> {
 
          themeController.toggleTheme();
              },
+            activeColor: Theme.of(context).colorScheme.primary,
          );
       }),
     ),
@@ -81,7 +82,7 @@ class _NavdrawerState extends State<Navdrawer> {
 
             height: 60,
             decoration: BoxDecoration(
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(90)
             ),
             child: ElevatedButton(
@@ -107,7 +108,7 @@ class _NavdrawerState extends State<Navdrawer> {
 
                 Text("logout",style: GoogleFonts.poppins(
                     fontSize: 17,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w700))
               ],
             )),

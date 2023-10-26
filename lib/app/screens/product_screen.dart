@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart' as badges;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
@@ -65,7 +66,7 @@ class _ProductScreenState extends State<ProductScreen> {
     final Map<String, dynamic> arguments = Get.arguments;
 
     final colors = arguments['color'];
-    final photo = arguments['photo'];
+    final List<String> photos = arguments['photos'];
     final product = arguments['product'];
 
     final sizecontroller = Get.put(SizeController());
@@ -86,11 +87,28 @@ class _ProductScreenState extends State<ProductScreen> {
                           child: Container(
                             height: 400.0,
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.contain,
-                                    image: AssetImage(photo,),),),
+                                // image: DecorationImage(
+                                //     fit: BoxFit.contain,
+                                //     image: AssetImage(photos as String,),
+                                // ),
+                            ),
+                          child:  CarouselSlider(
+                              options: CarouselOptions(
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                              ),
+                              items: (photos ?? []).map((photo) {
+                                return Container(
+                                  width: double.infinity,
+                                  child: Image.asset(
+                                    photo, // Assuming that the photos are asset paths
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              }).toList(),
                           ),
-                        )
+
+                        ))
                       ],
                     ),
                   ],
@@ -221,7 +239,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(40),
                         topRight: Radius.circular(40)),
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(right: 15, left: 15,top: 30),
@@ -234,7 +252,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           children: [
                             Text( product.name,
                                 style: GoogleFonts.poppins(
-                                    color: Colors.black,
+                                    color: Theme.of(context).colorScheme.primary,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800)),
                             Counter(orderController: orderController, product: product,)
@@ -260,7 +278,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               "($_currentRating )",
                               style: GoogleFonts.poppins(
                                   fontSize: 14,
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.primary,
                                   fontWeight: FontWeight.w700),
                             )
                           ],
@@ -272,7 +290,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           "Size",
                           style: GoogleFonts.poppins(
                               fontSize: 18,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
@@ -301,16 +319,16 @@ class _ProductScreenState extends State<ProductScreen> {
                                   padding: EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                       color: isSelected
-                                          ? Colors.black
+                                          ? Theme.of(context).colorScheme.secondaryContainer
                                           : Colors
                                               .transparent, // Change color based on selection
                                       borderRadius: BorderRadius.circular(25),
-                                      border: Border.all(color: Colors.black)),
+                                      border: Border.all(color: Theme.of(context).colorScheme.outline)),
                                   child: Text(
                                     sizecontroller.sizelist[index].size,
                                     style: GoogleFonts.poppins(
                                       color: isSelected
-                                          ? Colors.white
+                                          ? Theme.of(context).colorScheme.secondary
                                           : Colors
                                               .grey, // Change text color based on selection
                                       fontWeight: FontWeight.bold,
@@ -328,7 +346,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           "Description",
                           style: GoogleFonts.poppins(
                               fontSize: 18,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
@@ -338,7 +356,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           product.description,
                           style: GoogleFonts.poppins(
                               fontSize: 13,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w700),
                           textAlign: TextAlign.left,
                         ),
@@ -354,7 +372,7 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ),
     bottomNavigationBar:  Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       padding: EdgeInsets.symmetric(horizontal: 15),
       height: 80,
       child: Row(
@@ -365,12 +383,12 @@ class _ProductScreenState extends State<ProductScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [ Text("Total price", style: GoogleFonts.poppins(
                 fontSize: 13,
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500
             )),
               Text('\₹  ${product.price}',style: GoogleFonts.poppins(
                   fontSize: 20,
-                  color: Colors.black,
+                  color:Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w700),),
             ],
           ),
@@ -380,7 +398,7 @@ class _ProductScreenState extends State<ProductScreen> {
             width: 180,
             height: 60,
             decoration: BoxDecoration(
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(40)
             ),
             child: ElevatedButton(
@@ -405,12 +423,12 @@ class _ProductScreenState extends State<ProductScreen> {
               children: [
                 Image.asset(
                   "assets/shopping-bag.png",
-                  color: Colors.white,height: 25,
+                  color: Theme.of(context).colorScheme.secondary,height: 25,
                 ),
                 SizedBox(width: 10,),
                 Text("Add to cart",style: GoogleFonts.poppins(
                     fontSize: 17,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w700))
               ],
             )),

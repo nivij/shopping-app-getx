@@ -275,7 +275,7 @@ class _CustomappbarState extends State<Customappbar> {
             children: <Widget>[
               Text('Select Price Range:'),
               RangeSlider(
-                activeColor: Colors.black,
+                activeColor: Theme.of(context).colorScheme.primary,
                 values: RangeValues(minPrice , maxPrice ),
                 min: 0,
                 max: 100, // Set the maximum price as needed.
@@ -293,7 +293,7 @@ class _CustomappbarState extends State<Customappbar> {
           actions: <Widget>[
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary),
               ),
               child: Text('Cancel'),
               onPressed: () {
@@ -302,7 +302,7 @@ class _CustomappbarState extends State<Customappbar> {
             ),
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary),
               ),
               child: Text('Apply'),
               onPressed: () {

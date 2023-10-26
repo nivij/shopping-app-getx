@@ -92,7 +92,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 viewportFraction: 1,
                                 height: 500,
                                 autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 30),
+                                autoPlayInterval: Duration(seconds: 4),
                               ),
                               items: (photos ?? []).map((photo) {
                                 return Container(

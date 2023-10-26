@@ -7,9 +7,9 @@ class DetailsController extends GetxController {
   final detailsList = <Product>[
     Product(
       photos: [
-        "assets/model/model8.png",
-        "assets/model/model8.png",
-        "assets/model/model8.png",
+        "assets/model/saiom1.png",
+        "assets/model/saiom2.png",
+        "assets/model/saiom3.png",
 
       ],
 
@@ -22,9 +22,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/model6.png",
-        "assets/model/model6.png",
-        "assets/model/model6.png",
+        "assets/model/punk1.png",
+        "assets/model/punk2.png",
+        "assets/model/punk3.png",
 
       ],
       name: "Oversized Punk Shirt",
@@ -37,9 +37,9 @@ class DetailsController extends GetxController {
     Product(
       photos:[
 
-        "assets/model/model5.png",
-        "assets/model/model5.png",
-        "assets/model/model5.png",
+        "assets/model/toplot1.png",
+        "assets/model/toplot2.png",
+        "assets/model/toplot3.png",
       ],
       name: "Toplot T-Shirt",
       price: "329",
@@ -50,9 +50,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos:[
-        "assets/model/model7.png",
-        "assets/model/model7.png",
-        "assets/model/model7.png",
+        "assets/model/verido1.png",
+        "assets/model/verido2.png",
+        "assets/model/verido3.png",
 
       ],
       name: "Veirdo Oversized shirt",
@@ -64,9 +64,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos:[
-        "assets/model/panther9.png",
-        "assets/model/panther9.png",
-        "assets/model/panther9.png",
+        "assets/model/blackpanther1.png",
+        "assets/model/blackpanther2.png",
+        "assets/model/blackpanther3.png",
 
       ],
       name: "Black Panther",
@@ -78,9 +78,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/stranger10.png",
-        "assets/model/stranger10.png",
-        "assets/model/stranger10.png",
+        "assets/model/stranger1.png",
+        "assets/model/stranger2.png",
+        "assets/model/stranger3.png",
       ],
       name: "Stranger Things",
       price: "2499",
@@ -91,9 +91,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/gangsta11.png",
-        "assets/model/gangsta11.png",
-        "assets/model/gangsta11.png",
+        "assets/model/gangsta1.png",
+        "assets/model/gangsta2.png",
+        "assets/model/gangsta3.png",
       ],
       name: "Gangsta Jacket",
       price: "2599",
@@ -104,9 +104,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/batman12.png",
-        "assets/model/batman12.png",
-        "assets/model/batman12.png",
+        "assets/model/batman1.png",
+        "assets/model/batman2.png",
+        "assets/model/batman3.png",
 
       ],
       name: "Batman",

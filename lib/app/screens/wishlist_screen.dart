@@ -28,10 +28,12 @@ class _WishlistPageState extends State<WishlistPage> {
 
   @override
   Widget build(BuildContext context) {
+
     double _currentRating = 4.5;
     final colorcontroller = Get.put(ColorController());
     final DetailsController Product = Get.put(DetailsController());
     final OrderController orderController = Get.put(OrderController());
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -64,6 +66,7 @@ class _WishlistPageState extends State<WishlistPage> {
                         .colorlist.length; // Use modulo to cycle through colors
                 Color itemColor = colorcontroller.colorlist[colorIndex];
                 final wishlistItem = wishlistController.wishlist[index];
+                bool isItemInCart = orderController.isItemInCart(wishlistItem.product);
                 return Bounceable(
                   onTap: () {
 
@@ -72,7 +75,7 @@ class _WishlistPageState extends State<WishlistPage> {
                         arguments: {
                           'index': index,
                           'color': itemColor,
-                          'photo': wishlistItem.product.photos,
+                          'photos': wishlistItem.product.photos,
                           'product':  wishlistItem.product
                         }
                     );
@@ -155,38 +158,26 @@ class _WishlistPageState extends State<WishlistPage> {
                                           color: Theme.of(context).colorScheme.primary,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              backgroundColor: Colors.transparent,
-                                              shadowColor: Colors.transparent),
-                                          onPressed: () {
-                                              setState(() {
-
-                                                // orderController.addToCart(wishlistItem.product);
-
-                                              });
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                "assets/shopping-bag.png",
-                                                color: Theme.of(context).colorScheme.secondary,
-                                                height: 12,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Add to cart",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 13,
-                                                      color:Theme.of(context).colorScheme.secondary,
-                                                      fontWeight:
-                                                          FontWeight.w700))
-                                            ],
-                                          )),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/shopping-bag.png",
+                                            color: Theme.of(context).colorScheme.secondary,
+                                            height: 12,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text( isItemInCart ? "In Cart" : "Not in cart",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 13,
+                                                  color:Theme.of(context).colorScheme.secondary,
+                                                  fontWeight:
+                                                      FontWeight.w700))
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 10,

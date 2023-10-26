@@ -240,7 +240,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(40),
                         topRight: Radius.circular(40)),
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.background,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(right: 15, left: 15,top: 30),
@@ -373,7 +373,7 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ),
     bottomNavigationBar:  Container(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.secondary,
       padding: EdgeInsets.symmetric(horizontal: 15),
       height: 80,
       child: Row(

@@ -82,12 +82,17 @@ class OrderController extends GetxController {
     updateBadgeValue();
     cartItems.refresh();
   }
+
+
   bool isItemInCart(Product item) {
-    return cartItems.any((cartItem) {
+    final isItemInCart = cartItems.any((cartItem) {
       final productInCart = Product.fromJson(cartItem['product']);
       return productInCart == item;
     });
+    cartItems.refresh(); // Refresh the cartItems list after checking
+    return isItemInCart;
   }
+
 
   // void updateCartItemQuantity(Product item, int newQuantity) {
   //

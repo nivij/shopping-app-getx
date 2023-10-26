@@ -172,7 +172,7 @@ class SearchScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   color: itemColor,
                                 ),
-                                child: Image.asset(product.photos as String),
+                                child: Image.asset(product.photos[0] as String),
                               ),
                               title: Text(product.name,style: GoogleFonts.poppins(fontWeight: FontWeight.w500)),
                             ),

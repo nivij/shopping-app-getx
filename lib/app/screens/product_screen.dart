@@ -82,33 +82,33 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: Column(
                   children: [
                     Row(
+
                       children: <Widget>[
                         Expanded(
                           child: Container(
                             height: 400.0,
-                            decoration: BoxDecoration(
-                                // image: DecorationImage(
-                                //     fit: BoxFit.contain,
-                                //     image: AssetImage(photos as String,),
-                                // ),
-                            ),
-                          child:  CarouselSlider(
+                            child: CarouselSlider(
                               options: CarouselOptions(
+                                height: 800,
                                 autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayInterval: Duration(seconds: 30),
                               ),
                               items: (photos ?? []).map((photo) {
                                 return Container(
+
                                   width: double.infinity,
                                   child: Image.asset(
-                                    photo, // Assuming that the photos are asset paths
+                                    photo,
                                     fit: BoxFit.cover,
+                                    // Set the fit property to cover
+                                    height: 1000.0, // Set a fixed height
                                   ),
                                 );
                               }).toList(),
+                            ),
                           ),
+                        )
 
-                        ))
                       ],
                     ),
                   ],

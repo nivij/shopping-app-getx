@@ -33,7 +33,7 @@ class myApp extends StatelessWidget {
         title: "Rapid",
         initialBinding: RootBindings(),
         theme: themeController.currentTheme.value, // Set the theme based on the controller
-        darkTheme: Darkmode, // Replace with your dark theme if needed
+         // Replace with your dark theme if needed
         debugShowCheckedModeBanner: false,
         getPages: AppPages.routes,
         initialRoute: AppPages.INITIAL,

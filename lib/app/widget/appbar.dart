@@ -30,6 +30,8 @@ class Customappbar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomappbarState extends State<Customappbar> {
+  double minPrice = 0;
+  double maxPrice = 100;
   int choice = 0;
 
   @override
@@ -150,7 +152,7 @@ class _CustomappbarState extends State<Customappbar> {
                       height: 40,
                       width: 40,
                       child: Bounceable(
-                        onTap: _showPriceFilterDialog,
+                        onTap:() =>  _showPriceFilterDialog(context),
                         child: Container(
                           width: 50, // Set the desired width
                           height: 50, // Set the desired height
@@ -253,30 +255,11 @@ class _CustomappbarState extends State<Customappbar> {
                   child: TabBarView(
                     physics: BouncingScrollPhysics(),
                     children: [
-                      Center(
-                        child: ProductListByCategory(
-                          categoryId: "Dresses",
-                          controller: DetailsController(),
-                        ),
-                      ),
-                      Center(
-                        child: ProductListByCategory(
-                          categoryId: "Jackets",
-                          controller: DetailsController(),
-                        ),
-                      ),
-                      Center(
-                        child: ProductListByCategory(
-                          categoryId: "Jeans",
-                          controller: DetailsController(),
-                        ),
-                      ),
-                      Center(
-                        child: ProductListByCategory(
-                          categoryId: "Shoes",
-                          controller: DetailsController(),
-                        ),
-                      ),
+                      _buildProductListByCategory("Dresses"),
+                      _buildProductListByCategory("Jackets"),
+                      _buildProductListByCategory("Jeans"),
+                      _buildProductListByCategory("Shoes"),
+
                     ],
                   ),
                 )
@@ -287,63 +270,84 @@ class _CustomappbarState extends State<Customappbar> {
       ),
     );
   }
+  Widget _buildProductListByCategory(String categoryId) {
+    final detailsController =Get.put(DetailsController());
+        List<Product> filteredProducts = detailsController.filterProductsByPriceRange(categoryId, minPrice, maxPrice);
+        return Center(
+          child: ProductListByCategory(
+            categoryId: categoryId,
+            controller: detailsController,
+            // products: filteredProducts,
+          ),
+        );
 
-  void _showPriceFilterDialog() {
+  }
+
+  void _showPriceFilterDialog(context) {
     double minPrice = 0;
     double maxPrice = 100;
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: Text('Price Range Filter'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text('Select Price Range:'),
-              RangeSlider(
-                activeColor: Theme.of(context).colorScheme.primary,
-                values: RangeValues(minPrice, maxPrice),
-                min: 0,
-                max: 100,
-                onChanged: (RangeValues values) {
-                  setState(() {
-                    minPrice = values.start;
-                    maxPrice = values.end;
-                  });
+        return StatefulBuilder(builder: (context, setState) {
+          // Use StatefulBuilder to update the dialog's state
+
+          return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: Text('Price Range Filter'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text('Select Price Range:'),
+                RangeSlider(
+                  activeColor: Theme.of(context).colorScheme.primary,
+                  values: RangeValues(minPrice, maxPrice),
+                  min: 0,
+                  max: 2000, // Set your maximum price here
+                  divisions: 100, // Adjust the number of divisions as needed
+                  onChanged: (RangeValues values) {
+                    setState(() {
+                      minPrice = values.start;
+                      maxPrice = values.end;
+                    });
+                  },
+                ),
+                Text('Min Price: ${minPrice.toStringAsFixed(2)}'), // Display prices with two decimal places
+                Text('Max Price: ${maxPrice.toStringAsFixed(2)}'), // Display prices with two decimal places
+              ],
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
                 },
               ),
-              Text('Min Price: $minPrice'),
-              Text('Max Price: $maxPrice'),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                child: Text('Apply'),
+                onPressed: () {
+                  // You should update the filtered products and refresh your UI here
+                  List<Product> filteredProducts = Get.find<DetailsController>()
+                      .filterProductsByPriceRange('Dresses', minPrice, maxPrice);
+                  Navigator.of(context).pop();
+                },
+              ),
             ],
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).colorScheme.primary),
-              ),
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).colorScheme.primary),
-              ),
-              child: Text('Apply'),
-              onPressed: () {
-                List<Product> filteredProducts = Get.find<DetailsController>()
-                    .filterProductsByPriceRange('Dresses', minPrice, maxPrice);
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+          );
+        });
       },
     );
   }
+
 }

@@ -265,13 +265,24 @@ class DetailsController extends GetxController {
       recentSearches.insert(0, product);
     }
   }
-  List<Product> filterProductsByPriceRange(String CategoryId, double minPrice, double maxPrice) {
+
+  int parsePrice(String price) {
+    return int.parse(price.replaceAll(',', ''));
+  }
+
+  // Function to filter products by price range
+  List<Product> filterProductsByPriceRange(
+      String CategoryId, double minPrice, double maxPrice) {
     return detailsList
         .where((product) =>
     product.CategoryId == CategoryId &&
-        int.parse(product.price) >= minPrice &&
-        int.parse(product.price) <= maxPrice)
+        parsePrice(product.price) >= minPrice &&
+        parsePrice(product.price) <= maxPrice)
         .toList();
   }
-
+  List<Product> filteredProducts = [];
+  void updateFilteredProducts(List<Product> products) {
+    filteredProducts = products;
+    update(); // Notify listeners
+  }
 }

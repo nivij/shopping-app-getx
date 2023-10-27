@@ -13,7 +13,7 @@ class ProductListByCategory extends StatelessWidget {
   final String categoryId;
   final DetailsController controller;
 
-  ProductListByCategory({required this.categoryId, required this.controller});
+  ProductListByCategory({required this.categoryId, required this.controller,});
   @override
   Widget build(BuildContext context) {
     final products = controller.getProductsById(categoryId);

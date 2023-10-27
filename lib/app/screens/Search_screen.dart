@@ -159,7 +159,7 @@ class SearchScreen extends StatelessWidget {
                                   arguments: {
                                     'index':index,
                                     'color': itemColor,
-                                    'photo': product.photos,
+                                    'photos': product.photos,
                                     'product': product,
                                   }
                               );

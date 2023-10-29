@@ -6,7 +6,6 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/controllers/order_controller.dart';
-import 'package:gocart/app/models/product_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/cart_controller.dart';

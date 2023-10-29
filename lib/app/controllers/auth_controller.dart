@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/routes/app_pages.dart';
-import 'package:gocart/app/screens/base.dart';
 
 class AuthController extends GetxController{
 

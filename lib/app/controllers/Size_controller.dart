@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 import '../models/model.dart';
-import '../models/product_model.dart';
 
 class SizeController extends GetxController {
   final sizelist = <ItemSize>[

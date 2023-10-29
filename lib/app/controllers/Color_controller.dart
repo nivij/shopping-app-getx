@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../models/model.dart';
-
 class ColorController extends GetxController{
   
   final List<Color>colorlist =[

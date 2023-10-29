@@ -5,7 +5,6 @@ import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:gocart/app/screens/product_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:badges/badges.dart' as badges;
 import '../controllers/Color_controller.dart';
@@ -31,7 +30,6 @@ class _WishlistPageState extends State<WishlistPage> {
 
     double _currentRating = 4.5;
     final colorcontroller = Get.put(ColorController());
-    final DetailsController Product = Get.put(DetailsController());
     final OrderController orderController = Get.put(OrderController());
 
     return Scaffold(

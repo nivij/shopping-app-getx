@@ -8,7 +8,6 @@ import '../models/product_model.dart';
 class OrderController extends GetxController {
   RxList<Map<String, dynamic>> cartItems = <Map<String, dynamic>>[].obs;
   RxInt count = 1.obs;
-  late Product _item;
   int get cartCount => cartItems.length;
   final box = GetStorage();
 

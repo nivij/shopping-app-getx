@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:gocart/app/controllers/splash_controller.dart';
 
 class Splash extends StatelessWidget{

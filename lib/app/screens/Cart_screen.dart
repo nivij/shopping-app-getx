@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,28 +10,26 @@ import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
 import '../models/product_model.dart';
 
+
 class CartPage extends StatefulWidget {
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
+  Map<String, dynamic>? paymentIntentData;
+
   final WishlistController wishlistController = Get.find();
   final detailsController = Get.put(DetailsController());
   final OrderController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    double _currentRating = 4.5;
     final OrderController cartController = Get.find();
     final colorcontroller = Get.put(ColorController());
 
     return Scaffold(
-
-
       appBar: AppBar(
-
-
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -44,27 +43,30 @@ class _CartPageState extends State<CartPage> {
         ),
       ),
       body: SafeArea(
-
-        child:
-        Obx(() => SizedBox(
-          height: 490,
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            itemCount: cartController.cartItems.length,
-            itemBuilder: (context, index) {
-              int colorIndex = index % colorcontroller.colorlist.length;
-              Color itemColor = colorcontroller.colorlist[colorIndex];
-              final cartItem = cartController.cartItems[index];
-              final product = Product.fromJson(cartItem['product']);
-              final quantity = cartItem['quantity'];
-              final size = cartItem['size'] as String;
-              return CartCard(product:product,quantity:quantity ,size:size ,itemcolor:itemColor, index: index,);
-            },
-          ),
-        )),
+        child: Obx(() => SizedBox(
+              height: 490,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemCount: cartController.cartItems.length,
+                itemBuilder: (context, index) {
+                  int colorIndex = index % colorcontroller.colorlist.length;
+                  Color itemColor = colorcontroller.colorlist[colorIndex];
+                  final cartItem = cartController.cartItems[index];
+                  final product = Product.fromJson(cartItem['product']);
+                  final quantity = cartItem['quantity'];
+                  final size = cartItem['size'] as String;
+                  return CartCard(
+                    product: product,
+                    quantity: quantity,
+                    size: size,
+                    itemcolor: itemColor,
+                    index: index,
+                  );
+                },
+              ),
+            )),
       ),
-
       bottomSheet: Obx(() {
         return Visibility(
           visible: cartController.cartItems.isNotEmpty,
@@ -94,7 +96,7 @@ class _CartPageState extends State<CartPage> {
                   trailing: Text(
                     "\₹  ${cartController.getTotalCartPrice().toStringAsFixed(2)}",
                     style: GoogleFonts.poppins(
-                      color:Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                     ),
@@ -116,10 +118,8 @@ class _CartPageState extends State<CartPage> {
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          // Handle button click logic here
-                        });
+                      onPressed: ()  {
+
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

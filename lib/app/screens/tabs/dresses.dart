@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:get/get.dart';
 import 'package:gocart/app/widget/dress_card.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../controllers/Wishlist_controller.dart';
 import '../../controllers/details_controller.dart';
 import '../../models/product_model.dart';
 

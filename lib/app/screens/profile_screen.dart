@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:gocart/app/controllers/auth_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../controllers/order_controller.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});

@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-
-import '../models/model.dart';
 import '../models/product_model.dart';
 
 class DetailsController extends GetxController {
@@ -118,9 +116,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/jeans1.png",
-        "assets/model/jeans1.png",
-        "assets/model/jeans1.png",
+        "assets/model/jeangrey1.png",
+        "assets/model/jeangrey2.png",
+        "assets/model/jeangrey3.png",
       ],
       name: "Highlander Men Grey",
       price: "811",
@@ -131,9 +129,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/jeans2.png",
-        "assets/model/jeans2.png",
-        "assets/model/jeans2.png",
+        "assets/model/jeannavyblue1.png",
+        "assets/model/jeannavyblue2.png",
+        "assets/model/jeannavyblue3.png",
 
       ],
       name: "Highlander Navy Blue",
@@ -145,9 +143,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos:[
-        "assets/model/jeans3.png",
-        "assets/model/jeans3.png",
-        "assets/model/jeans3.png",
+        "assets/model/jeanlightgrey1.png",
+        "assets/model/jeanlightgrey2.png",
+        "assets/model/jeanlightgrey3.png",
 
       ],
       name: "Highlander Light Grey",
@@ -159,9 +157,9 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/jeans4.png",
-        "assets/model/jeans4.png",
-        "assets/model/jeans4.png",
+        "assets/model/jeandarkgrey1.png",
+        "assets/model/jeandarkgrey2.png",
+        "assets/model/jeandarkgrey3.png",
 
       ],
       name: "Highlander Men",
@@ -174,11 +172,11 @@ class DetailsController extends GetxController {
     Product(
       photos: [
 
-        "assets/model/shoes1.png",
-        "assets/model/shoes1.png",
-        "assets/model/shoes1.png",
+        "assets/model/RedTapeBlue1.png",
+        "assets/model/RedTapeBlue2.png",
+        "assets/model/RedTapeBlue3.png",
       ],
-      name: "RedTape Sneaker",
+      name: "RedTape Men Blue",
       price: "499",
       id: "12",
       qty: 0,
@@ -187,12 +185,12 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/shoes2.png",
-        "assets/model/shoes2.png",
-        "assets/model/shoes2.png",
+        "assets/model/RedTapewb1.png",
+        "assets/model/RedTapewb2.png",
+        "assets/model/RedTapewb3.png",
 
       ],
-      name: "RedTape Sneaker",
+      name: "RedTape white black",
       price: "499",
       id: "13",
       qty: 0,
@@ -202,11 +200,11 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/shoes3.png",
-        "assets/model/shoes3.png",
-        "assets/model/shoes3.png",
+        "assets/model/RedtapeBeige1.png",
+        "assets/model/RedtapeBeige2.png",
+        "assets/model/RedtapeBeige3.png",
       ],
-      name: "RedTape Sneaker",
+      name: "RedTape Beige",
       price: "1679",
       id: "14",
       qty: 0,
@@ -215,12 +213,12 @@ class DetailsController extends GetxController {
     ),
     Product(
       photos: [
-        "assets/model/shoes4.png",
-        "assets/model/shoes4.png",
-        "assets/model/shoes4.png",
+        "assets/model/Redtapewhite1.png",
+        "assets/model/Redtapewhite2.png",
+        "assets/model/Redtapewhite3.png",
 
       ],
-      name: "RedTape Sneaker",
+      name: "RedTape White",
       price: "1449",
       id: "15",
       qty: 0,

@@ -5,13 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/routes/app_pages.dart';
-import 'package:gocart/app/screens/auth_screen.dart';
-import 'package:gocart/app/screens/base.dart';
 import 'package:gocart/app/screens/binding/root_bindings.dart';
-import 'package:gocart/app/screens/tabs/dresses.dart';
-import 'package:gocart/app/screens/product_screen.dart';
-import 'package:gocart/app/services/themedata.dart';
-
 import 'controllers/theme_controller.dart';
 
 void main() async {
@@ -30,7 +24,7 @@ class myApp extends StatelessWidget {
     final ThemeController themeController = Get.put(ThemeController());
     return Obx(() {
       return GetMaterialApp(
-        title: "Rapid",
+        title: "Go cart",
         initialBinding: RootBindings(),
         theme: themeController.currentTheme.value, // Set the theme based on the controller
          // Replace with your dark theme if needed

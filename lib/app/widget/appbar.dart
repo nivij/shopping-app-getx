@@ -7,12 +7,10 @@ import 'package:get/get.dart';
 import 'package:gocart/app/controllers/details_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/Wishlist_controller.dart';
 import '../controllers/text_controller.dart';
 
 import '../models/product_model.dart';
 import '../screens/Search_screen.dart';
-import '../screens/profile_screen.dart';
 import '../screens/tabs/dresses.dart';
 
 import 'SideNavigationDrawer.dart';

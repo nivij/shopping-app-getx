@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:get/get.dart';
-import 'package:gocart/app/screens/product_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/Color_controller.dart';

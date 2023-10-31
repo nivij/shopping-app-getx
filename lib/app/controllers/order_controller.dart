@@ -130,7 +130,11 @@ class OrderController extends GetxController {
     return total;
 
   }
+  void clearCart() {
 
+    cartItems.clear();
+    box.remove('cartItems');
+  }
   @override
   void onInit() {
     super.onInit();

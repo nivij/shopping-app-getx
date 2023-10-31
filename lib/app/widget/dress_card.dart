@@ -85,7 +85,9 @@ class _DressCardState extends State<DressCard> {
 
                       child: CarouselSlider(
 
+
                         options: CarouselOptions(
+
 
                            autoPlayCurve: Curves.easeInOut,
                           viewportFraction: 1,

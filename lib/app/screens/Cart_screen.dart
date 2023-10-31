@@ -1,7 +1,11 @@
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/widget/CartCardItem.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/Color_controller.dart';
@@ -9,7 +13,9 @@ import '../controllers/Wishlist_controller.dart';
 import '../controllers/details_controller.dart';
 import '../controllers/order_controller.dart';
 import '../models/product_model.dart';
+import 'package:http/http.dart' as http;
 
+import 'myorder_screen.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -17,11 +23,116 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  Map<String, dynamic>? paymentIntentData;
+  Map<String, dynamic>? paymentIntent;
+  final GetStorage box = GetStorage();
+  final OrderController cartController = Get.find();
+  List<Map<String, dynamic>> cartItemsAtPayment = [];
+
+  Future<void> makePayment() async {
+    try {
+      int totalAmountInCents = (cartController.getTotalCartPrice() * 100).toInt();
+      cartItemsAtPayment = List<Map<String, dynamic>>.from(cartController.cartItems);
+
+
+      paymentIntent = await createPaymentIntent(totalAmountInCents.toString(), 'INR');
+      var gpay = PaymentSheetGooglePay(
+          merchantCountryCode: "INR", currencyCode: "INR", testEnv: true);
+      //STEP 2: Initialize Payment Sheet
+      await Stripe.instance
+          .initPaymentSheet(
+              paymentSheetParameters: SetupPaymentSheetParameters(
+                  paymentIntentClientSecret: paymentIntent![
+                      'client_secret'], //Gotten from payment intent
+                  // style: ThemeMode.light,
+                  merchantDisplayName: 'Nivij',
+                  googlePay: gpay))
+          .then((value) {
+        return displayPaymentSheet();
+      });
+
+      //STEP 3: Display Payment sheet
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      //Request body
+      Map<String, dynamic> body = {
+        'amount': amount,
+        'currency': currency,
+      };
+
+      //Make post request to Stripe
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        headers: {
+          'Authorization':
+              'Bearer sk_test_51O4eNqSBlVVnbSrglcqBKNOdjHfGcmq29VCpbzAl9hDBQWLdgntSM3rQJG8UUz5nLzdGvjePgU3NcJXmPU8I4R8200VOwqW9EM',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body,
+      );
+      return json.decode(response.body);
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then((value) {
+        showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 100.0,
+                      ),
+                      SizedBox(height: 10.0),
+                      Text("Payment Successful!"),
+                    ],
+                  ),
+                ));
+        box.write('cartItemsAtPayment', cartItemsAtPayment);
+       Get.to(OrderConfirmationScreen());
+        cartController.clearCart();
+        setState(() {
+          paymentIntent = null;
+        });
+      }).onError((error, stackTrace) {
+        throw Exception(error);
+      });
+    } on StripeException catch (e) {
+      print('Error is:---> $e');
+      AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: const [
+                Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                ),
+                Text("Payment Failed"),
+              ],
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      print('$e');
+    }
+  }
 
   final WishlistController wishlistController = Get.find();
   final detailsController = Get.put(DetailsController());
-  final OrderController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +229,8 @@ class _CartPageState extends State<CartPage> {
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                       ),
-                      onPressed: ()  {
-
+                      onPressed: () {
+                        makePayment();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -150,6 +261,4 @@ class _CartPageState extends State<CartPage> {
       }),
     );
   }
-
-
 }

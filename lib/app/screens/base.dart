@@ -10,6 +10,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../widget/SideNavigationDrawer.dart';
 import 'Cart_screen.dart';
+import 'myorder_screen.dart';
 
 class base extends StatefulWidget {
   const base({super.key});
@@ -54,7 +55,7 @@ class _baseState extends State<base> {
           Customappbar(openDrawerCallback: () {  _scaffoldKey.currentState?.openDrawer(); },),
           CartPage(),
           WishlistPage(),
-          profile()
+          OrderConfirmationScreen()
         ],
       ),
       bottomNavigationBar: GNav(

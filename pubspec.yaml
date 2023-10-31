@@ -51,6 +51,7 @@ dependencies:
   flutter_stripe: ^5.0.0
   flutter_dotenv: ^5.0.2
   http:
+  intl: ^0.17.0
 
 
 

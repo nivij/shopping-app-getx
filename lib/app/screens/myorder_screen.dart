@@ -8,7 +8,8 @@ import 'package:intl/intl.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {
   @override
-  State<OrderConfirmationScreen> createState() => _OrderConfirmationScreenState();
+  State<OrderConfirmationScreen> createState() =>
+      _OrderConfirmationScreenState();
 }
 
 class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
@@ -31,7 +32,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   void deleteItem(int index) {
     setState(() {
       storedItems.removeAt(index);
-      final items = storedItems.map((item) => Map<String, dynamic>.from(item)).toList();
+      final items =
+          storedItems.map((item) => Map<String, dynamic>.from(item)).toList();
       box.write('cartItemsAtPayment', items);
       // Update your storage or state management logic here if necessary
     });
@@ -49,35 +51,46 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 23,
                 fontWeight: FontWeight.w700)),
-
       ),
       body: ListView.builder(
         itemCount: storedItems.length,
         itemBuilder: (context, index) {
-          final item = storedItems[index];
-          final timestamp = item['timestamp'] != null ? DateTime.parse(item['timestamp']) : null;
-           
-          return InkWell(
-            onTap: () => Get.to(TimelineDemo()),
-            child: Dismissible(
 
+          final item = storedItems[index];
+          final photosDynamic = item['product']?['photos'];
+          final photos = photosDynamic is List ? photosDynamic.cast<String>() as List<String>? : null;
+          final productNameDynamic = item['product']?['name'];
+          final productName = productNameDynamic is String ? productNameDynamic as String : null;
+          // Convert the int quantity to a String
+          final quantity = item['quantity'].toString();
+          final timestamp = item['timestamp'] != null
+              ? DateTime.parse(item['timestamp'])
+              : null;
+
+          return InkWell(
+            onTap: () => Get.to(TimelineDemo(
+              photo: photos != null && photos.isNotEmpty ? photos[0] : 'default_photo.png',
+              name: productName ?? 'Unknown Product',
+               qunatity: quantity,
+            )),
+            child: Dismissible(
               key: Key(item.toString()), // Provide a unique key for each item
               onDismissed: (direction) {
                 deleteItem(index); // Call the delete function
               },
               background: Container(
                 color: Theme.of(context).colorScheme.primary,
-                child: Icon(Icons.delete, color: Theme.of(context).colorScheme.secondary),
+                child: Icon(Icons.delete,
+                    color: Theme.of(context).colorScheme.secondary),
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.only(right: 20),
               ),
               child: ListTile(
-
-            leading: item['product']['photos'][0] != null
-            ? Image.asset(item['product']['photos'][0])
-                : SizedBox.shrink(),
-
-                title: Text('Item Name: ${item['product']['name']} - Quantity: ${item['quantity']}'),
+                leading: item['product']['photos'][0] != null
+                    ? Image.asset(item['product']['photos'][0])
+                    : SizedBox.shrink(),
+                title: Text(
+                    'Item Name: ${item['product']['name']} - Quantity: ${item['quantity']}'),
                 subtitle: timestamp != null
                     ? Text('Added on: ${_formatTimestamp(timestamp)}')
                     : Text('Timestamp not available'),
@@ -94,4 +107,3 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return formatter.format(timestamp);
   }
 }
-

@@ -71,7 +71,11 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             onTap: () => Get.to(TimelineDemo(
               photo: photos != null && photos.isNotEmpty ? photos[0] : 'default_photo.png',
               name: productName ?? 'Unknown Product',
-               qunatity: quantity,
+              qunatity: quantity,
+              onDelete: () {
+                deleteItem(index);
+                Get.back();// Call the delete function when "Ok" is pressed
+              },
             )),
             child: Dismissible(
               key: Key(item.toString()), // Provide a unique key for each item

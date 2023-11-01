@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/mfg_labs_icons.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widget/timeline_widget.dart';
@@ -10,9 +12,9 @@ class TimelineDemo extends StatelessWidget {
   final String photo;
   final String qunatity;
   final String name;
+  final Function() onDelete;
 
-
- TimelineDemo({super.key, required this.photo, required this.qunatity, required this.name});
+ TimelineDemo({super.key, required this.photo, required this.qunatity, required this.name, required this.onDelete});
 
 
   @override
@@ -74,7 +76,19 @@ class TimelineDemo extends StatelessWidget {
           ),
       ),
     ),
-            )
+            ),
+                  Container(
+                    padding: EdgeInsets.only(),
+                    width: 140,
+                    height: 32,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius:
+                        BorderRadius.circular(10)),
+                    child: ElevatedButton(onPressed: () {
+                      _showPriceFilterDialog(context);
+                    }, child: Text("Cancel Order",style: GoogleFonts.poppins(color: Colors.black)), )
+                  ),
   ]
 
               ),
@@ -82,4 +96,53 @@ class TimelineDemo extends StatelessWidget {
         ),
         );
   }
+  void _showPriceFilterDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          // Use StatefulBuilder to update the dialog's state
+
+          return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: Text('Cancel Your Order'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text('Are You Sure'),
+
+
+              ],
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                child: Text('Ok'),
+                onPressed: () {
+                  onDelete(); // Call the onDelete callback
+                  Get.back();
+                },
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
 }

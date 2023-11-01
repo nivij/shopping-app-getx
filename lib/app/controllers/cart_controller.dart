@@ -61,6 +61,12 @@ class CartController extends GetxController {
       int totalAmountInCents = (orderController.getTotalCartPrice() * 100).toInt();
       List<Map<String, dynamic>> cartItemsAtPayment = List<Map<String, dynamic>>.from(orderController.cartItems);
 
+      final DateTime now = DateTime.now();
+      for (final item in cartItemsAtPayment) {
+        item['timestamp'] = now;
+      }
+
+
       final paymentIntent = await createPaymentIntent(totalAmountInCents.toString(), 'INR');
       var gpay = PaymentSheetGooglePay(
           merchantCountryCode: "INR", currencyCode: "INR", testEnv: true);

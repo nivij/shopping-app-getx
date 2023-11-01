@@ -9,7 +9,6 @@ class OrderConfirmationScreen extends StatefulWidget {
 
 class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   final GetStorage box = GetStorage();
-
   List<Map<String, dynamic>> storedItems = [];
 
   @override
@@ -21,9 +20,17 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   void loadStoredItems() {
     final items = box.read('cartItemsAtPayment');
     if (items != null) {
-
-        storedItems = List<Map<String, dynamic>>.from(items);
+      storedItems = List<Map<String, dynamic>>.from(items);
     }
+  }
+
+  void deleteItem(int index) {
+    setState(() {
+      storedItems.removeAt(index);
+      final items = storedItems.map((item) => Map<String, dynamic>.from(item)).toList();
+      box.write('cartItemsAtPayment', items);
+      // Update your storage or state management logic here if necessary
+    });
   }
 
   @override
@@ -37,11 +44,23 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
         itemBuilder: (context, index) {
           final item = storedItems[index];
           final timestamp = item['timestamp'] as DateTime?;
-          return ListTile(
-            title: Text('Item Name: ${item['product']['name']}'),
-            subtitle: timestamp != null
-                ? Text('Added on: ${_formatTimestamp(timestamp)}')
-                : Text('Timestamp not available'),
+          return Dismissible(
+            key: Key(item.toString()), // Provide a unique key for each item
+            onDismissed: (direction) {
+              deleteItem(index); // Call the delete function
+            },
+            background: Container(
+              color: Colors.red,
+              child: Icon(Icons.delete, color: Colors.white),
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 20),
+            ),
+            child: ListTile(
+              title: Text('Item Name: ${item['product']['name']}'),
+              subtitle: timestamp != null
+                  ? Text('Added on: ${_formatTimestamp(timestamp)}')
+                  : Text('Timestamp not available'),
+            ),
           );
         },
       ),
@@ -53,3 +72,4 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return formatter.format(timestamp);
   }
 }
+

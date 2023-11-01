@@ -99,7 +99,14 @@ class CartController extends GetxController {
                 ],
               ),
             ));
-        box.write('cartItemsAtPayment', cartItemsAtPayment);
+        final existingCartItemsAtPayment = box.read('cartItemsAtPayment') ?? [];
+
+        // Merge existing data with new data
+        final updatedCartItemsAtPayment = List<Map<String, dynamic>>.from(existingCartItemsAtPayment)
+          ..addAll(cartItemsAtPayment);
+
+        // Write the merged data back
+        box.write('cartItemsAtPayment', updatedCartItemsAtPayment);
         Get.to(OrderConfirmationScreen());
         orderController.clearCart();
 

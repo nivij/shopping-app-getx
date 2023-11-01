@@ -32,6 +32,7 @@ class OrderController extends GetxController {
 
   void updateBadgeValue() {
     badgeValue.value = cartCount.toString();
+    update();
   }
   showSuccessSnackBar(var title) {
     Get.snackbar(
@@ -131,10 +132,15 @@ class OrderController extends GetxController {
 
   }
   void clearCart() {
-
+    // Clear the cart list and save it to GetStorage
     cartItems.clear();
-    box.remove('cartItems');
+    box.write('cartItems', cartItems);
+
+    // You might also want to reset the cart count if you have one
+    count.value = 0;
+    box.write('counter', count.value);
   }
+
   @override
   void onInit() {
     super.onInit();

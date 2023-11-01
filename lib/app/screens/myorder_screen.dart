@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gocart/app/screens/timeline_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -53,27 +56,32 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
         itemBuilder: (context, index) {
           final item = storedItems[index];
           final timestamp = item['timestamp'] != null ? DateTime.parse(item['timestamp']) : null;
+           
+          return InkWell(
+            onTap: () => Get.to(TimelineDemo()),
+            child: Dismissible(
 
-          return Dismissible(
-            key: Key(item.toString()), // Provide a unique key for each item
-            onDismissed: (direction) {
-              deleteItem(index); // Call the delete function
-            },
-            background: Container(
-              color: Colors.red,
-              child: Icon(Icons.delete, color: Colors.white),
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.only(right: 20),
-            ),
-            child: ListTile(
-              leading: item['photo'] != null
-                  ? Image.asset(item['photo'[index]])
-                  : SizedBox(width: 0, height: 0), // You can use an empty SizedBox or a placeholder image
+              key: Key(item.toString()), // Provide a unique key for each item
+              onDismissed: (direction) {
+                deleteItem(index); // Call the delete function
+              },
+              background: Container(
+                color: Theme.of(context).colorScheme.primary,
+                child: Icon(Icons.delete, color: Theme.of(context).colorScheme.secondary),
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(right: 20),
+              ),
+              child: ListTile(
 
-              title: Text('Item Name: ${item['product']['name']} - Quantity: ${item['quantity']}'),
-              subtitle: timestamp != null
-                  ? Text('Added on: ${_formatTimestamp(timestamp)}')
-                  : Text('Timestamp not available'),
+            leading: item['product']['photos'][0] != null
+            ? Image.asset(item['product']['photos'][0])
+                : SizedBox.shrink(),
+
+                title: Text('Item Name: ${item['product']['name']} - Quantity: ${item['quantity']}'),
+                subtitle: timestamp != null
+                    ? Text('Added on: ${_formatTimestamp(timestamp)}')
+                    : Text('Timestamp not available'),
+              ),
             ),
           );
         },
@@ -82,7 +90,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   }
 
   String _formatTimestamp(DateTime timestamp) {
-    final formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    final formatter = DateFormat('yyyy-MM-dd ');
     return formatter.format(timestamp);
   }
 }

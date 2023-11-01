@@ -18,10 +18,11 @@ class Mytimeline extends StatelessWidget {
         isFirst: isFirst,
         isLast: isLast,
 
-        beforeLineStyle: LineStyle(color: isPast? Colors.white : Colors.grey.shade600),
-        indicatorStyle: IndicatorStyle(color:isPast? Colors.white : Colors.grey.shade600,
+        beforeLineStyle: LineStyle(color: isPast? Theme.of(context).colorScheme.secondary : Colors.grey.shade600),
+        indicatorStyle: IndicatorStyle(width: 27,
+            color:isPast? Theme.of(context).colorScheme.secondary : Colors.grey.shade600,
         iconStyle: IconStyle(iconData: Icons.done,
-        color: isPast ? Colors.black : Colors.grey.shade600
+        color: isPast ? Theme.of(context).colorScheme.primary: Colors.grey.shade600
         )),
         endChild: EventCard(isPast: isPast,child: child),
       ),

@@ -20,6 +20,16 @@ class TimelineDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text('Order Details',
+            style: GoogleFonts.poppins(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 23,
+                fontWeight: FontWeight.w700)),
+      ),
         body: SafeArea(
           child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -31,19 +41,19 @@ class TimelineDemo extends StatelessWidget {
                 children: [
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-                decoration: BoxDecoration(color: Colors.white10,
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(20)
                 ),
                 child: ListTile(
                   leading: Image.asset(photo),
-                  trailing: Text(qunatity),
-                  subtitle: Text(name),
+                  trailing: Text(qunatity,style: GoogleFonts.poppins(color:Theme.of(context).colorScheme.secondary )),
+                  subtitle: Text(name,style: GoogleFonts.poppins(color:Theme.of(context).colorScheme.secondary )),
                 ),
               ),
             Container(
                  margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
 
-                decoration: BoxDecoration(color: Colors.white10,
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(30)
                 ),
                 child: Padding(
@@ -59,19 +69,19 @@ class TimelineDemo extends StatelessWidget {
                         isLast: false,
                         isPast: true,
                         child:
-                            Text("Order Placed", style: GoogleFonts.poppins(color: Colors.black))),
+                            Text("Order Placed", style: GoogleFonts.poppins(color: Theme.of(context).colorScheme.primary))),
                     Mytimeline(
                         isFirst: false,
                         isLast: false,
                         isPast: false,
                         child:
-                            Text("Shipped", style: GoogleFonts.poppins(color: Colors.black))),
+                            Text("Shipped", style: GoogleFonts.poppins(color:  Theme.of(context).colorScheme.primary))),
                     Mytimeline(
                         isFirst: false,
                         isLast: true,
                         isPast: false,
                         child:
-                            Text("Delivery", style: GoogleFonts.poppins(color: Colors.black))),
+                            Text("Delivery", style: GoogleFonts.poppins(color:  Theme.of(context).colorScheme.primary))),
                   ],
           ),
       ),
@@ -87,7 +97,7 @@ class TimelineDemo extends StatelessWidget {
                         BorderRadius.circular(10)),
                     child: ElevatedButton(onPressed: () {
                       _showPriceFilterDialog(context);
-                    }, child: Text("Cancel Order",style: GoogleFonts.poppins(color: Colors.black)), )
+                    }, child: Text("Cancel Order",style: GoogleFonts.poppins(color: Theme.of(context).colorScheme.secondary)), )
                   ),
   ]
 

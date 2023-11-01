@@ -62,9 +62,12 @@ class CartController extends GetxController {
       List<Map<String, dynamic>> cartItemsAtPayment = List<Map<String, dynamic>>.from(orderController.cartItems);
 
       final DateTime now = DateTime.now();
+
+      // Add a timestamp to each item in cartItemsAtPayment
       for (final item in cartItemsAtPayment) {
-        item['timestamp'] = now;
+        item['timestamp'] = now.toUtc().toIso8601String(); // Save timestamp as an ISO 8601 string
       }
+
 
 
       final paymentIntent = await createPaymentIntent(totalAmountInCents.toString(), 'INR');

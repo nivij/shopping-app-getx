@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {
@@ -37,13 +38,22 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Confirmation'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text('My Order',
+            style: GoogleFonts.poppins(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 23,
+                fontWeight: FontWeight.w700)),
+
       ),
       body: ListView.builder(
         itemCount: storedItems.length,
         itemBuilder: (context, index) {
           final item = storedItems[index];
-          final timestamp = item['timestamp'] as DateTime?;
+          final timestamp = item['timestamp'] != null ? DateTime.parse(item['timestamp']) : null;
+
           return Dismissible(
             key: Key(item.toString()), // Provide a unique key for each item
             onDismissed: (direction) {
@@ -56,7 +66,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               padding: EdgeInsets.only(right: 20),
             ),
             child: ListTile(
-              title: Text('Item Name: ${item['product']['name']}'),
+              title: Text('Item Name: ${item['product']['name']} - Quantity: ${item['quantity']}'),
               subtitle: timestamp != null
                   ? Text('Added on: ${_formatTimestamp(timestamp)}')
                   : Text('Timestamp not available'),

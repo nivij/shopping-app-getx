@@ -66,6 +66,10 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               padding: EdgeInsets.only(right: 20),
             ),
             child: ListTile(
+              leading: item['photo'] != null
+                  ? Image.asset(item['photo'[index]])
+                  : SizedBox(width: 0, height: 0), // You can use an empty SizedBox or a placeholder image
+
               title: Text('Item Name: ${item['product']['name']} - Quantity: ${item['quantity']}'),
               subtitle: timestamp != null
                   ? Text('Added on: ${_formatTimestamp(timestamp)}')

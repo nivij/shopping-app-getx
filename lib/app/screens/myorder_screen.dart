@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gocart/app/screens/timeline_test.dart';
+import 'package:gocart/app/screens/timeline_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -60,6 +60,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           final photosDynamic = item['product']?['photos'];
           final photos = photosDynamic is List ? photosDynamic.cast<String>() as List<String>? : null;
           final productNameDynamic = item['product']?['name'];
+
           final productName = productNameDynamic is String ? productNameDynamic as String : null;
           // Convert the int quantity to a String
           final quantity = item['quantity'].toString();
@@ -72,6 +73,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               photo: photos != null && photos.isNotEmpty ? photos[0] : 'default_photo.png',
               name: productName ?? 'Unknown Product',
               qunatity: quantity,
+
               onDelete: () {
                 deleteItem(index);
                 Get.back();// Call the delete function when "Ok" is pressed

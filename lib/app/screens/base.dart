@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 
 import 'package:gocart/app/screens/profile_screen.dart';
-import 'package:gocart/app/screens/timeline_test.dart';
+import 'package:gocart/app/screens/timeline_screen.dart';
 import 'package:gocart/app/screens/wishlist_screen.dart';
 import 'package:gocart/app/widget/appbar.dart';
 
@@ -80,7 +80,7 @@ class _baseState extends State<base> {
           GButton(icon: Elusive.home_circled,text: 'Home'),
           GButton(icon: Elusive.basket_circled,text: 'Cart'),
           GButton(icon: Elusive.heart_circled,text: 'Whislist'),
-          GButton(icon: CupertinoIcons.person_circle_fill,text: 'Profile',iconSize: 34),
+          GButton(icon: Elusive.calendar_circled,text: 'Orders',),
         ],
 
       ),

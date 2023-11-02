@@ -53,6 +53,7 @@ dependencies:
   http:
   intl: ^0.17.0
   timeline_tile: ^2.0.0
+  google_maps_flutter: ^2.5.0
 
 
 

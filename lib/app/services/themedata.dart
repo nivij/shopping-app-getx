@@ -11,7 +11,8 @@ ThemeData Lightmode =ThemeData(
     outline: Colors.grey.shade900,
     secondaryContainer: Colors.grey.shade900,
     onBackground: Colors.grey.shade900,
-  onPrimary: Colors.grey.shade100
+  onPrimary: Colors.grey.shade100,
+      inversePrimary: Colors.black,
   )
 );
 
@@ -27,6 +28,7 @@ ThemeData Darkmode =ThemeData(
       secondaryContainer: Colors.grey.shade100,
       onBackground: Colors.grey.shade800,
      onPrimary: Colors.black12,
+      inversePrimary: Colors.yellow
     )
 );
 

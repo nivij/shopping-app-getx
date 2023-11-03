@@ -72,8 +72,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             onTap: () => Get.to(TimelineDemo(
               photo: photos != null && photos.isNotEmpty ? photos[0] : 'default_photo.png',
               name: productName ?? 'Unknown Product',
-              qunatity: quantity,
-
+              quantity: quantity,
+              timestamp: timestamp ?? DateTime.now(),
               onDelete: () {
                 deleteItem(index);
                 Get.back();// Call the delete function when "Ok" is pressed

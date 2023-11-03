@@ -8,7 +8,8 @@ class Mytimeline extends StatelessWidget {
   final bool isLast;
   final bool isPast;
   final child;
-  const Mytimeline({super.key, required this.isFirst, required this.isLast, required this.isPast,required this.child});
+  final child2;
+  const Mytimeline({super.key, required this.isFirst, required this.isLast, required this.isPast,required this.child,required this.child2});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class Mytimeline extends StatelessWidget {
         iconStyle: IconStyle(iconData: Icons.done,
         color: isPast ? Theme.of(context).colorScheme.primary: Colors.grey.shade600
         )),
-        endChild: EventCard(isPast: isPast,child: child),
+        endChild: EventCard(isPast: isPast,child: child,child2:child2),
       ),
     );
   }

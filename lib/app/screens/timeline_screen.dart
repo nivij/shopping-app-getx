@@ -85,7 +85,7 @@ class _TimelineDemoState extends State<TimelineDemo> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             ListTile(
-                              leading: Text('Added On : ${widget.timestamp != null ? DateFormat('yyyy-MM-dd').format(widget.timestamp!) : "N/A"}',
+                              leading: Text('Ordered On : ${widget.timestamp != null ? DateFormat('yyyy-MM-dd').format(widget.timestamp!) : "N/A"}',
                               style: GoogleFonts.poppins(color: Theme.of(context).colorScheme.primary),
                               ),
                               trailing:  ElevatedButton(
@@ -105,7 +105,7 @@ class _TimelineDemoState extends State<TimelineDemo> {
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
                               decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                                   borderRadius: BorderRadius.circular(10)),
                               child: ListTile(
                                 leading: Image.asset(widget.photo),
@@ -135,6 +135,11 @@ class _TimelineDemoState extends State<TimelineDemo> {
                                           isFirst: true,
                                           isLast: false,
                                           isPast: true,
+                                          child2:  Text("Order placed, awaiting shipment",
+                                                    style: GoogleFonts.poppins(
+                                                      color: Theme.of(context)
+                                                     .colorScheme
+                                                      .secondary)),
                                           child: Text("Order Placed",
                                               style: GoogleFonts.poppins(
                                                   color: Theme.of(context)
@@ -144,6 +149,11 @@ class _TimelineDemoState extends State<TimelineDemo> {
                                           isFirst: false,
                                           isLast: false,
                                           isPast: false,
+                                          child2: Text("Order shipped, on its way!",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary)),
                                           child: Text("Shipped",
                                               style: GoogleFonts.poppins(
                                                   color: Theme.of(context)
@@ -153,6 +163,11 @@ class _TimelineDemoState extends State<TimelineDemo> {
                                           isFirst: false,
                                           isLast: true,
                                           isPast: false,
+                                          child2: Text("Order successfully delivered",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary)),
                                           child: Text("Delivery",
                                               style: GoogleFonts.poppins(
                                                   color: Theme.of(context)

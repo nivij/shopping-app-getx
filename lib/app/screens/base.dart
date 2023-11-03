@@ -45,6 +45,7 @@ class _baseState extends State<base> {
       key: _scaffoldKey, // Assign the scaffold key here
       drawer: Navdrawer(),
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: (index) {
           setState(() {
@@ -61,12 +62,14 @@ class _baseState extends State<base> {
         ],
       ),
       bottomNavigationBar: GNav(
+
        backgroundColor: Theme.of(context).colorScheme.secondary,
         gap: 6.0,
         tabBackgroundColor: Theme.of(context).colorScheme.onBackground,
         activeColor: Colors.white,
         tabBorderRadius:30.0,
         iconSize: 30,
+
         padding: EdgeInsets.all(5),
         tabMargin: EdgeInsets.all(10),
         onTabChange: (index) {
@@ -76,6 +79,8 @@ class _baseState extends State<base> {
 
 
         } ,
+
+
         tabs: [
           GButton(icon: Elusive.home_circled,text: 'Home'),
           GButton(icon: Elusive.basket_circled,text: 'Cart'),

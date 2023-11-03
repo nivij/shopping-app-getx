@@ -55,7 +55,7 @@ class _TimelineDemoState extends State<TimelineDemo> {
             SizedBox(height: 500,
               child: GoogleMap(
                 initialCameraPosition: CameraPosition(
-                  target: LatLng(37.7749, -122.4194), // Initial map location
+                  target: LatLng(11.182218,75.8475772), // Initial map location
                   zoom: 14.0, // Zoom level
                 ),
                 onMapCreated: (controller) {

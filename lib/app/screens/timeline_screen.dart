@@ -212,9 +212,9 @@ class _TimelineDemoState extends State<TimelineDemo> {
                     Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                child: Text('Cancel'),
+                child: Text('Cancel',style: GoogleFonts.poppins(color:   Theme.of(context).colorScheme.secondary)),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Get.back();
                 },
               ),
               ElevatedButton(
@@ -223,10 +223,11 @@ class _TimelineDemoState extends State<TimelineDemo> {
                     Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                child: Text('Ok'),
+                child: Text('Ok',style: GoogleFonts.poppins(color:   Theme.of(context).colorScheme.secondary)),
                 onPressed: () {
                   widget.onDelete(); // Call the onDelete callback
                   Get.back();
+                  _showSnackbar();
                 },
               ),
             ],
@@ -234,5 +235,14 @@ class _TimelineDemoState extends State<TimelineDemo> {
         });
       },
     );
+  }
+  void _showSnackbar() {
+    final snackBar = SnackBar(
+      content: Text('Order has been canceled'),
+      backgroundColor: Theme.of(context).colorScheme.primary, // Customize the background color
+      duration: Duration(seconds: 3), // Control how long the Snackbar is visible
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

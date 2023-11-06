@@ -12,6 +12,8 @@ abstract class Routes{
   static const PROFILE =_Paths.PROFILE;
   static const WHISHLIST =_Paths.WHISHLIST;
   static const CART =_Paths.CART;
+  static const ORDER =_Paths.ORDER;
+  static const TIMELINE =_Paths.TIMELINE;
 }
 abstract class _Paths {
   _Paths._();
@@ -23,4 +25,6 @@ abstract class _Paths {
   static const PROFILE ='/profile_screen';
   static const WHISHLIST ='/wishlist_screen';
   static const CART ='/Cart_screen';
+  static const ORDER ='/myorder_screen';
+  static const TIMELINE ='/timeline_screen';
 }

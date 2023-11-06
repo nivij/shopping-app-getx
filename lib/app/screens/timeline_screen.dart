@@ -67,14 +67,17 @@ class _TimelineDemoState extends State<TimelineDemo> {
             ),
             DraggableScrollableSheet(
               snap: true,
+
+
+                shouldCloseOnMinExtent: true,
                 builder: (BuildContext context, scrollController) {
                   return Container(
 
                     decoration:BoxDecoration(
-                      border: Border.all(
-
-                        color: Theme.of(context).colorScheme.primary
-                      ),
+                      // border: Border.all(
+                      //
+                      //   color: Theme.of(context).colorScheme.primary
+                      // ),
                         color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
                     ),

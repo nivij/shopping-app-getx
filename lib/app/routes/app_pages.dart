@@ -6,8 +6,10 @@ import '../screens/Search_screen.dart';
 import '../screens/auth_screen.dart';
 import '../screens/base.dart';
 import '../screens/binding/root_bindings.dart';
+import '../screens/myorder_screen.dart';
 import '../screens/product_screen.dart';
 import '../screens/profile_screen.dart';
+import '../screens/timeline_screen.dart';
 import '../screens/wishlist_screen.dart';
 part 'routing.dart';
 class AppPages{
@@ -54,6 +56,12 @@ class AppPages{
         page: () => WishlistPage(),
         binding: RootBindings()
     ),
+    GetPage(
+        name: _Paths.ORDER,
+        page: () => OrderConfirmationScreen(),
+        binding: RootBindings()
+    ),
+
 
   ];
 }

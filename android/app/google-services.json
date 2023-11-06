@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121660091243",
+    "project_id": "gocart-85016",
+    "storage_bucket": "gocart-85016.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121660091243:android:48d58bddd13937b4173a2e",
+        "android_client_info": {
+          "package_name": "com.example.gocart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw9DrHf8jog3DEyzT22m7nIOcmNzxP0sg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

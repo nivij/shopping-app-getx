@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../controllers/auth_controller.dart';
 import '../widget/Forgetcontainer.dart';
+import '../widget/Forgotpassword.dart';
 
 class AuthView extends GetView<AuthController> {
   @override
@@ -69,77 +70,30 @@ class AuthView extends GetView<AuthController> {
                     SizedBox(
                       height: 16,
                     ),
-                    TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        labelText: "phone no",
-                        prefixIcon: Icon(Icons.email),
-                      ),
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      controller: controller.passwordcontroller,
-                      onSaved: (value) {
-                        // controller.passwordcontroller=value!;
-                      },
-                      validator: (value) {
-                        return controller.validatePass(value!);
-                      },
-                    ),
+                    // TextFormField(
+                    //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                    //   decoration: InputDecoration(
+                    //     border: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //     labelText: "phone no",
+                    //     prefixIcon: Icon(Icons.email),
+                    //   ),
+                    //   keyboardType: TextInputType.visiblePassword,
+                    //   obscureText: true,
+                    //   controller: controller.passwordcontroller,
+                    //   onSaved: (value) {
+                    //     // controller.passwordcontroller=value!;
+                    //   },
+                    //   validator: (value) {
+                    //     return controller.validatePass(value!);
+                    //   },
+                    // ),
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           onPressed: () {
-                            showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              context: context,
-                              builder: (context) => Container(
-                                padding: EdgeInsets.all(30),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Make Selection!",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          ?.copyWith(fontSize: 30),
-                                    ),
-                                    Text(
-                                      "Select one of the options given below to reset your password",
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    forgotscontainer(
-                                      onTap: () {
-
-                                      },
-                                        title: "E-mail",
-                                        subtitle:
-                                            "Reset via E-mail Verification",
-                                        Iconn: Icons.email_outlined),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    forgotscontainer(
-                                      onTap: () {
-
-                                      },
-                                      title: "Phone no",
-                                      subtitle:
-                                          "Reset via Phone no Verfication",
-                                      Iconn: Icons.phone_android_outlined,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
+                            ForgotPassword.buildShowModalBottomSheet(context);
                           },
                           child: Text("Forget?")),
                     ),
@@ -168,7 +122,15 @@ class AuthView extends GetView<AuthController> {
                             "Login",
                             style: TextStyle(fontSize: 14, color: Colors.white),
                           )),
-                    )
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: TextButton(
+                          onPressed: () {
+
+                          },
+                          child: Text("Do you have a account? Signup")),
+                    ),
                   ],
                 )),
           ),
@@ -176,6 +138,8 @@ class AuthView extends GetView<AuthController> {
       ),
     );
   }
+
+
 }
 
 

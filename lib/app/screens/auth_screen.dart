@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/auth_controller.dart';
+import '../routes/app_pages.dart';
 import '../widget/Forgetcontainer.dart';
 import '../widget/Forgotpassword.dart';
 
@@ -127,7 +128,7 @@ class AuthView extends GetView<AuthController> {
                       alignment: Alignment.center,
                       child: TextButton(
                           onPressed: () {
-
+                            Get.offAllNamed(Routes.SIGNUP);
                           },
                           child: Text("Do you have a account? Signup")),
                     ),

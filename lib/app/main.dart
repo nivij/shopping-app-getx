@@ -1,3 +1,7 @@
+
+
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +18,11 @@ import 'controllers/theme_controller.dart';
 void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+
+    options: FirebaseOptions(apiKey: "AIzaSyCw9DrHf8jog3DEyzT22m7nIOcmNzxP0sg", appId: "1:121660091243:android:48d58bddd13937b4173a2e", messagingSenderId: "121660091243", projectId: "gocart-85016")
+  );
   Stripe.publishableKey = 'pk_test_51O4eNqSBlVVnbSrgqTTHYvP4m0nqUhYVCiqNLhOiguZ1sEKw1G3K1bTW5KaiTneHVS7dZijpU5oJLvCS6qBDormU00W8JGFrx8';
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

@@ -54,9 +54,9 @@ dependencies:
   intl: ^0.17.0
   timeline_tile: ^2.0.0
   google_maps_flutter: ^2.5.0
-  firebase_core:
+  firebase_core: ^2.21.0
   firebase_analytics:
-  firebase_auth:
+  firebase_auth: ^4.12.1
   cloud_firestore:
   flutter_otp_text_field: ^1.1.1
 

@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:gocart/app/screens/Signup_screen.dart';
 import 'package:gocart/app/screens/splash_screen.dart';
 
 import '../screens/Cart_screen.dart';
@@ -60,6 +63,11 @@ class AppPages{
     GetPage(
         name: _Paths.ORDER,
         page: () => OrderConfirmationScreen(),
+        binding: RootBindings()
+    ),
+ GetPage(
+        name: _Paths.SIGNUP,
+        page: () => SignupPage(),
         binding: RootBindings()
     ),
 

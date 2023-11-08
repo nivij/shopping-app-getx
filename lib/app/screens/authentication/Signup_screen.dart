@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/controllers/SignUp_controller.dart';
 
-import 'auth_screen.dart';
+import 'login/login_screen.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});

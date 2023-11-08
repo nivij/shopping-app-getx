@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:gocart/app/widget/dress_card.dart';
-import '../../controllers/details_controller.dart';
-import '../../models/product_model.dart';
+import '../../../controllers/details_controller.dart';
+import '../../../models/product_model.dart';
+import 'dress_card.dart';
 
 
 class ProductListByCategory extends StatelessWidget {

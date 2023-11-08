@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gocart/app/widget/EventCard.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+
+import 'EventCard.dart';
 
 class Mytimeline extends StatelessWidget {
   final bool isFirst;

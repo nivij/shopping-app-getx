@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:gocart/app/controllers/order_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/cart_controller.dart';
+import '../../../controllers/cart_controller.dart';
 
 class CartCard extends StatelessWidget {
 late int index;

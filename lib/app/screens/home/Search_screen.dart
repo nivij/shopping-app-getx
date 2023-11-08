@@ -5,9 +5,9 @@ import 'package:fluttericon/elusive_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/Color_controller.dart';
-import '../controllers/details_controller.dart';
-import '../routes/app_pages.dart';
+import '../../controllers/Color_controller.dart';
+import '../../controllers/details_controller.dart';
+import '../../routes/app_pages.dart';
 
 class SearchScreen extends StatelessWidget {
   final DetailsController searchController = Get.put(DetailsController());

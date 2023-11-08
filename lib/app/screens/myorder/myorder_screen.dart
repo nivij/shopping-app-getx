@@ -3,11 +3,11 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gocart/app/screens/timeline_screen.dart';
+import 'package:gocart/app/screens/track_order/timeline_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../controllers/Color_controller.dart';
+import '../../controllers/Color_controller.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {
   @override

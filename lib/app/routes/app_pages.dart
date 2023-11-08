@@ -1,20 +1,20 @@
 import 'dart:ffi';
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:gocart/app/screens/Signup_screen.dart';
-import 'package:gocart/app/screens/splash_screen.dart';
+import 'package:gocart/app/screens/authentication/Signup_screen.dart';
+import 'package:gocart/app/screens/authentication/splash_screen.dart';
 
-import '../screens/Cart_screen.dart';
-import '../screens/Search_screen.dart';
-import '../screens/auth_screen.dart';
-import '../screens/base.dart';
-import '../screens/binding/root_bindings.dart';
+import '../binding/root_bindings.dart';
+import '../screens/cart/Cart_screen.dart';
+import '../screens/home/Search_screen.dart';
+import '../screens/authentication/login/login_screen.dart';
+import '../screens/bottom_navigation/base.dart';
 
-import '../screens/myorder_screen.dart';
-import '../screens/product_screen.dart';
-import '../screens/profile_screen.dart';
-import '../screens/timeline_screen.dart';
-import '../screens/wishlist_screen.dart';
+import '../screens/myorder/myorder_screen.dart';
+import '../screens/product_details/product_screen.dart';
+import '../screens/profile/profile_screen.dart';
+import '../screens/track_order/timeline_screen.dart';
+import '../screens/wishlist/wishlist_screen.dart';
 part 'routing.dart';
 class AppPages{
   AppPages._();

@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:get/get.dart';
+import 'package:gocart/app/screens/track_order/widgets/timeline_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
-import '../widget/timeline_widget.dart';
 
 
 const LatLng currentLocation = LatLng(25.1193,55.3773);

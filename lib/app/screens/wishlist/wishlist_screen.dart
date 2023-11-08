@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:badges/badges.dart' as badges;
-import '../controllers/Color_controller.dart';
-import '../controllers/Wishlist_controller.dart';
-import '../controllers/details_controller.dart';
-import '../controllers/order_controller.dart';
-import '../routes/app_pages.dart';
-import '../widget/Custom_rating_bar.dart';
+import '../../controllers/Color_controller.dart';
+import '../../controllers/Wishlist_controller.dart';
+import '../../controllers/details_controller.dart';
+import '../../controllers/order_controller.dart';
+import '../../routes/app_pages.dart';
+import '../../common_widgets/Custom_rating_bar.dart';
 
 
 class WishlistPage extends StatefulWidget {

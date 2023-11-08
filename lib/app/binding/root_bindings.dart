@@ -8,9 +8,11 @@ import 'package:gocart/app/controllers/details_controller.dart';
 import 'package:gocart/app/controllers/order_controller.dart';
 import 'package:gocart/app/controllers/text_controller.dart';
 
-import '../../controllers/Color_controller.dart';
-import '../../controllers/Size_controller.dart';
-import '../../controllers/splash_controller.dart';
+import '../controllers/Color_controller.dart';
+import '../controllers/Size_controller.dart';
+import '../controllers/splash_controller.dart';
+
+
 class RootBindings implements Bindings {
 
   @override

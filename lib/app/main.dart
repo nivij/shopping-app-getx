@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/routes/app_pages.dart';
-import 'package:gocart/app/screens/binding/root_bindings.dart';
+import 'binding/root_bindings.dart';
 import 'controllers/theme_controller.dart';
 
 void main() async {
@@ -20,10 +18,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-
-    options: FirebaseOptions(apiKey: "AIzaSyCw9DrHf8jog3DEyzT22m7nIOcmNzxP0sg", appId: "1:121660091243:android:48d58bddd13937b4173a2e", messagingSenderId: "121660091243", projectId: "gocart-85016")
+      options: FirebaseOptions(
+          apiKey: "AIzaSyD92uaP4prsmr8VyenQoEYZVBlwKzuWChQ",
+          appId: "1:800239740642:android:3b67504de315befe1ea0bb",
+          messagingSenderId: "800239740642",
+          projectId: "gocart-21c88")
   );
-  Stripe.publishableKey = 'pk_test_51O4eNqSBlVVnbSrgqTTHYvP4m0nqUhYVCiqNLhOiguZ1sEKw1G3K1bTW5KaiTneHVS7dZijpU5oJLvCS6qBDormU00W8JGFrx8';
+  Stripe.publishableKey =
+      'pk_test_51O4eNqSBlVVnbSrgqTTHYvP4m0nqUhYVCiqNLhOiguZ1sEKw1G3K1bTW5KaiTneHVS7dZijpU5oJLvCS6qBDormU00W8JGFrx8';
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // status bar color
@@ -41,8 +43,9 @@ class myApp extends StatelessWidget {
       return GetMaterialApp(
         title: "Go cart",
         initialBinding: RootBindings(),
-        theme: themeController.currentTheme.value, // Set the theme based on the controller
-         // Replace with your dark theme if needed
+        theme: themeController
+            .currentTheme.value, // Set the theme based on the controller
+        // Replace with your dark theme if needed
         debugShowCheckedModeBanner: false,
         getPages: AppPages.routes,
         initialRoute: AppPages.INITIAL,

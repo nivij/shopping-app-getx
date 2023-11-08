@@ -7,12 +7,13 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/controllers/Size_controller.dart';
+import 'package:gocart/app/common_widgets/Custom_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../controllers/Wishlist_controller.dart';
-import '../controllers/order_controller.dart';
-import '../routes/app_pages.dart';
-import '../widget/counter.dart';
-import '../widget/Custom_rating_bar.dart';
+import '../../common_widgets/counter.dart';
+import '../../controllers/Wishlist_controller.dart';
+import '../../controllers/order_controller.dart';
+import '../../routes/app_pages.dart';
+
 
 class ProductScreen extends StatefulWidget {
 

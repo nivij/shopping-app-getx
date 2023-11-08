@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gocart/app/screens/product_screen.dart';
+import 'package:gocart/app/screens/product_details/product_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/Color_controller.dart';
-import '../controllers/Wishlist_controller.dart';
-import '../controllers/details_controller.dart';
-import '../routes/app_pages.dart';
+import '../../../controllers/Color_controller.dart';
+import '../../../controllers/Wishlist_controller.dart';
+import '../../../controllers/details_controller.dart';
+import '../../../routes/app_pages.dart';
 
 class DressCard extends StatefulWidget {
   final int index;

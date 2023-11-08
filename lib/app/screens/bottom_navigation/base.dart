@@ -2,16 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 
-import 'package:gocart/app/screens/profile_screen.dart';
-import 'package:gocart/app/screens/timeline_screen.dart';
-import 'package:gocart/app/screens/wishlist_screen.dart';
-import 'package:gocart/app/widget/appbar.dart';
+import 'package:gocart/app/screens/profile/profile_screen.dart';
+import 'package:gocart/app/screens/track_order/timeline_screen.dart';
+import 'package:gocart/app/screens/wishlist/wishlist_screen.dart';
+
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../widget/SideNavigationDrawer.dart';
-import 'Cart_screen.dart';
-import 'myorder_screen.dart';
+
+import '../../common_widgets/SideNavigationDrawer.dart';
+import '../home/appbar.dart';
+import '../cart/Cart_screen.dart';
+import '../myorder/myorder_screen.dart';
 
 class base extends StatefulWidget {
 

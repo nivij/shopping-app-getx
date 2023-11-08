@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:gocart/app/respository/authentication_respositary/exception/signup_email_password_failure.dart';
 import 'package:gocart/app/screens/bottom_navigation/base.dart';
 
 import '../../screens/authentication/login/login_screen.dart';
@@ -22,14 +23,22 @@ class AuthenticationRespository extends GetxController{
   user ==null ? Get.offAll(() => login()) : Get.offAll(base());
   }
 
-  Future<void> createUserWithEmailAndPassword(String email,String password) async {
+  Future<String?> createUserWithEmailAndPassword(String email,String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      firebaseUser.value !=null ?Get.offAll(()=>base()) : Get.to(()=> login());
     } on FirebaseAuthException catch (e) {
+      final ex = SignupWithEmailAndPasswordFailure.code(e.code);
+      return ex.message;
+    }catch(_){
+      final ex = SignupWithEmailAndPasswordFailure();
+      return ex.message;
+    }
+  }
 
-    }catch(_){}
-  } Future<void> loginWithEmailAndPassword(String email,String password) async {
+
+  Future<void> loginWithEmailAndPassword(String email,String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
           email: email, password: password);

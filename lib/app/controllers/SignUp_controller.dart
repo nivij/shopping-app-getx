@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:gocart/app/respository/authentication_respositary/authentication_respository.dart';
 
 class SignupController extends GetxController{
   static SignupController get instance=> Get.find();
@@ -9,9 +10,11 @@ class SignupController extends GetxController{
   final fullname =TextEditingController();
   final password =TextEditingController();
 
-   void registerUser(String email,String password){
-
-   }
-
+  void registerUser(String email, String password) {
+    String? error = AuthenticationRespository.instance.createUserWithEmailAndPassword(email, password) as String;
+    if(error != null) {
+      Get.showSnackbar(GetSnackBar(message: error.toString(),));
+    }
+  }
 
 }

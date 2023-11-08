@@ -15,17 +15,17 @@ class SplashController extends GetxController {
   final getstorage =GetStorage();
 
   // print("Email from getstorage: $email");
-  if (getstorage.read("email") != null) {
-    Future.delayed(Duration(milliseconds: 2000), () {
-      Get.offAllNamed(Routes.BASE);
-
-    });
-
-  }
-  else {
+  // if (getstorage.read("email") != null) {
+  //   Future.delayed(Duration(milliseconds: 2000), () {
+  //     Get.offAllNamed(Routes.BASE);
+  //
+  //   });
+  //
+  // }
+  // else {
 
     Get.offAllNamed(Routes.LOGIN);
-  }
+  // }
 
 
 

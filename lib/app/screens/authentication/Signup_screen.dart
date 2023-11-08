@@ -6,12 +6,12 @@ import 'package:gocart/app/controllers/SignUp_controller.dart';
 import 'login/login_screen.dart';
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
-
+   SignupPage({super.key});
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignupController());
-    final _formKey = GlobalKey<FormState>();
+
 
     return Scaffold(
       body: SafeArea(

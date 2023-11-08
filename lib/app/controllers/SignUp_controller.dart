@@ -10,11 +10,9 @@ class SignupController extends GetxController{
   final fullname =TextEditingController();
   final password =TextEditingController();
 
-  void registerUser(String email, String password) {
-    String? error = AuthenticationRespository.instance.createUserWithEmailAndPassword(email, password) as String;
-    if(error != null) {
-      Get.showSnackbar(GetSnackBar(message: error.toString(),));
-    }
-  }
+   void registerUser(String email,String password){
+  AuthenticationRespository.instance.createUserWithEmailAndPassword(email, password);
+   }
+
 
 }

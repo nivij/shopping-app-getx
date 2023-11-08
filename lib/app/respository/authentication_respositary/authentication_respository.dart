@@ -23,17 +23,19 @@ class AuthenticationRespository extends GetxController{
   user ==null ? Get.offAll(() => login()) : Get.offAll(base());
   }
 
-  Future<String?> createUserWithEmailAndPassword(String email,String password) async {
+  Future<void> createUserWithEmailAndPassword(String email,String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser.value !=null ?Get.offAll(()=>base()) : Get.to(()=> login());
     } on FirebaseAuthException catch (e) {
-      final ex = SignupWithEmailAndPasswordFailure.code(e.code);
-      return ex.message;
+     final ex=SignupWithEmailAndPasswordFailure.code(e.code);
+     print("FIRBASE AUTH EXCEPTION - ${ex.message}");
+     throw ex;
     }catch(_){
-      final ex = SignupWithEmailAndPasswordFailure();
-      return ex.message;
+      final ex =SignupWithEmailAndPasswordFailure();
+      print('EXCEPTION - ${ex.message}');
+      throw ex;
     }
   }
 

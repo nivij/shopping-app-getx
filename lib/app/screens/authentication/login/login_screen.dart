@@ -6,7 +6,7 @@ import '../../../routes/app_pages.dart';
 import 'widgets/Forgetcontainer.dart';
 import 'widgets/Forgotpassword.dart';
 
-class AuthView extends GetView<AuthController> {
+class login extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

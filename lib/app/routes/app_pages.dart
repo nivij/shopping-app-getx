@@ -28,7 +28,7 @@ class AppPages{
     ),
     GetPage(
         name: _Paths.LOGIN,
-        page: () => AuthView(),
+        page: () => login(),
         binding: RootBindings()
     ), GetPage(
         name: _Paths.SPLASH,

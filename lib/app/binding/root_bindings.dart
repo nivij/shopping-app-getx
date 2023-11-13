@@ -24,7 +24,7 @@ class RootBindings implements Bindings {
     Get.put( OrderController(),);
     Get.lazyPut(() => WishlistController(),);
     Get.lazyPut(() => SizeController(),);
-    Get.lazyPut(() => AuthController(),);
+    Get.lazyPut(() => LoginController(),);
     Get.put(SplashController());
     Get.put(CartController());
     Get.put(SignupController());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/auth_controller.dart';
@@ -6,9 +7,13 @@ import '../../../routes/app_pages.dart';
 import 'widgets/Forgetcontainer.dart';
 import 'widgets/Forgotpassword.dart';
 
-class login extends GetView<AuthController> {
+class login extends GetView<LoginController> {
+  login({super.key});
+  final loginFormKey = GlobalKey<FormState>();
   @override
+
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -21,7 +26,7 @@ class login extends GetView<AuthController> {
           height: context.height,
           child: SingleChildScrollView(
             child: Form(
-                key: controller.authFormKey,
+                key: loginFormKey,
                 child: Column(
                   children: [
                     Text("welcome to gocart"),
@@ -38,35 +43,36 @@ class login extends GetView<AuthController> {
                         prefixIcon: Icon(Icons.email),
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      controller: controller.emailcontroller,
-                      onSaved: (value) {
-                        // controller.email=value!;
-                      },
-                      validator: (value) {
-                        return controller.validateEmail(value!);
-                      },
+                      controller: controller.email,
+
                     ),
                     SizedBox(
                       height: 16,
                     ),
-                    TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    Obx(
+                          () => TextFormField(
+
+                        controller: controller.password,
+                        validator: (value) {
+                          if (value!.isEmpty) return 'Enter your password';
+                          return null;
+                        },
+
+                        obscureText: controller.showPassword.value ? false : true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                          prefixIcon: const Icon(Icons.fingerprint),
+                          labelText: "password",
+
+                          suffixIcon: IconButton(
+                            icon: controller.showPassword.value
+                                ? const Icon(Elusive.eye)
+                                : const Icon(Elusive.eye_off),
+                            onPressed: () => controller.showPassword.value = !controller.showPassword.value,
+                          ),
                         ),
-                        labelText: "password",
-                        prefixIcon: Icon(Icons.email),
                       ),
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      controller: controller.passwordcontroller,
-                      onSaved: (value) {
-                        // controller.passwordcontroller=value!;
-                      },
-                      validator: (value) {
-                        return controller.validatePass(value!);
-                      },
                     ),
                     SizedBox(
                       height: 16,
@@ -116,8 +122,7 @@ class login extends GetView<AuthController> {
                                 MaterialStateProperty.all(EdgeInsets.all(14)),
                           ),
                           onPressed: () {
-                            //check login in auth_controlller
-                            controller.checklogin();
+                            controller.login();
                           },
                           child: Text(
                             "Login",

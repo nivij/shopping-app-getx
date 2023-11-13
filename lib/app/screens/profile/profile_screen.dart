@@ -11,17 +11,17 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> {
-  final AuthController auth = AuthController();
+  final LoginController auth = LoginController();
   late String savedemail;
   @override
   void initState() {
-    savedemail = auth.getstorage.read('email') ?? '';
+    // savedemail = auth.getstorage.read('email') ?? '';
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-  final AuthController Auth= AuthController();
+  final LoginController Auth= LoginController();
     return Scaffold(
       body: Column(
 
@@ -47,7 +47,7 @@ class _profileState extends State<profile> {
                 ),
                 onPressed: () {
                   setState(() {
-                     Auth.logout();
+                     // Auth.logout();
                   });
 
                 }, child: Row(

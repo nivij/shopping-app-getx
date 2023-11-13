@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../forgot_password/for_password_mail.dart';
 import 'Forgetcontainer.dart';
 
 class ForgotPassword{
@@ -30,7 +32,7 @@ class ForgotPassword{
           ),
           forgotscontainer(
               onTap: () {
-
+          Get.to(()=>ForgetPasswordMailScreen());
               },
               title: "E-mail",
               subtitle:

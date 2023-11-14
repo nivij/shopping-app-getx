@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gocart/app/controllers/otp_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 class OtpScreen extends StatelessWidget {
@@ -7,6 +8,7 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var otp;
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -25,7 +27,10 @@ class OtpScreen extends StatelessWidget {
                   numberOfFields: 6,
                  fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                   filled: true,
-
+                   onSubmit: (code) {
+                    otp=code;
+                    OTPController.instance.verifyOTP(otp);
+                   },
 
                 ),
                 SizedBox(height: 30*2,),
@@ -36,7 +41,7 @@ class OtpScreen extends StatelessWidget {
                         backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)
                       ),
                       onPressed: () {
-
+                        OTPController.instance.verifyOTP(otp);
                   }, child: Text("Next",style: GoogleFonts.poppins(color:Theme.of(context).colorScheme.secondary ),)),
                 )
               ],

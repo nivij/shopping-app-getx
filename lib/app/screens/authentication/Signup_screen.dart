@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/controllers/SignUp_controller.dart';
+import 'package:gocart/app/screens/authentication/otp/otp_screen.dart';
 
 import 'login/login_screen.dart';
 
@@ -59,6 +60,19 @@ class SignupPage extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 16,
+                    ), TextFormField(
+                      controller: controller.phoneNo,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "phoneno",
+                        prefixIcon: Icon(Icons.confirmation_number),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
                     ),
                     TextFormField(
                       controller: controller.password,
@@ -96,6 +110,10 @@ class SignupPage extends StatelessWidget {
                               SignupController.instance.registerUser(
                                   controller.email.text.trim(),
                                   controller.password.text.trim());
+                              SignupController.instance.phoneAuthentication(controller.phoneNo.text.trim());
+                              print("-------------------");
+                              print(controller.phoneNo.text.trim());
+                              Get.to(()=> OtpScreen());
                             }
                           },
                           child: Text(

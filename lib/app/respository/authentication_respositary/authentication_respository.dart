@@ -12,6 +12,7 @@ class AuthenticationRespository extends GetxController {
 
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
+  var verificationId = ''.obs;
 
   @override
   void onReady() {
@@ -38,10 +39,43 @@ class AuthenticationRespository extends GetxController {
     }
   }
 
-  Future<void> createUserWithEmailAndPassword(String email, String password) async {
+  Future<void> phoneAuthentication(String phoneNo) async {
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phoneNo,
+      verificationCompleted: (credential) async {
+        await _auth.signInWithCredential(credential);
+      },
+      verificationFailed: (e) {
+        if (e.code == 'invalid-phone-number') {
+          Get.snackbar('Error', 'the provided phone number is not valid');
+        } else {
+          Get.snackbar('Error', 'Something went wrong. try again');
+        }
+      },
+      codeSent: (verificationId, resendToken) {
+        this.verificationId.value = verificationId;
+      },
+      codeAutoRetrievalTimeout: (verificationId) {
+        this.verificationId.value = verificationId;
+      },
+    );
+  }
+
+  Future<bool> verifyOTP(String otp) async {
+  var credentials=  await _auth.signInWithCredential(PhoneAuthProvider.credential(
+        verificationId: this.verificationId.value, smsCode: otp));
+
+  return credentials.user !=null ? true : false;
+  }
+
+  Future<void> createUserWithEmailAndPassword(
+      String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      firebaseUser.value != null ? Get.offAll(() => base()) : Get.to(() => login());
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      firebaseUser.value != null
+          ? Get.offAll(() => base())
+          : Get.to(() => login());
     } on FirebaseAuthException catch (e) {
       final ex = SignupWithEmailAndPasswordFailure.code(e.code);
       print("FIRBASE AUTH EXCEPTION - ${ex.message}");

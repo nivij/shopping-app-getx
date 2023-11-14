@@ -43,53 +43,67 @@ class _baseState extends State<base> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey, // Assign the scaffold key here
-      drawer: Navdrawer(),
-      body: PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _currentIndex =index;
+    return WillPopScope(
+      onWillPop: () async {
+        if (_currentIndex == 0) {
+          // If on the Customappbar page, open the drawer or handle custom logic
+          _scaffoldKey.currentState?.openDrawer();
+          return false;
+        } else {
+          // If on another page, navigate back to the Customappbar page
+          _pageController.jumpToPage(0);
+          return false;
+        }
+      },
+      child: Scaffold(
+        key: _scaffoldKey, // Assign the scaffold key here
+        drawer: Navdrawer(),
+        body: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex =index;
 
-          });
+            });
 
-        },
-        children: [
-          Customappbar(openDrawerCallback: () {  _scaffoldKey.currentState?.openDrawer(); },),
-          CartPage(),
-          WishlistPage(),
-          OrderConfirmationScreen()
-        ],
-      ),
-      bottomNavigationBar: GNav(
+          },
+          children: [
+            Customappbar(openDrawerCallback: () {  _scaffoldKey.currentState?.openDrawer(); },),
+            CartPage(),
+            WishlistPage(),
+            OrderConfirmationScreen()
+          ],
+        ),
+        bottomNavigationBar: GNav(
 
-       backgroundColor: Theme.of(context).colorScheme.secondary,
-        gap: 6.0,
-        tabBackgroundColor: Theme.of(context).colorScheme.onBackground,
-        activeColor: Colors.white,
-        tabBorderRadius:30.0,
-        iconSize: 30,
+         backgroundColor: Theme.of(context).colorScheme.secondary,
+          gap: 6.0,
+          tabBackgroundColor: Theme.of(context).colorScheme.onBackground,
+          activeColor: Colors.white,
+          tabBorderRadius:30.0,
+          iconSize: 30,
 
-        padding: EdgeInsets.all(5),
-        tabMargin: EdgeInsets.all(10),
-        onTabChange: (index) {
-          setState(() {
-            _pageController.jumpToPage(index);
-          });
-
-
-        } ,
+          padding: EdgeInsets.all(5),
+          tabMargin: EdgeInsets.all(10),
+          onTabChange: (index) {
+            setState(() {
+              _pageController.jumpToPage(index);
+              _currentIndex = index;
+            });
 
 
-        tabs: [
-          GButton(icon: Elusive.home_circled,text: 'Home'),
-          GButton(icon: Elusive.basket_circled,text: 'Cart'),
-          GButton(icon: Elusive.heart_circled,text: 'Whislist'),
-          GButton(icon: Elusive.calendar_circled,text: 'Orders',),
-        ],
+          } ,
 
+
+          tabs: [
+            GButton(icon: Elusive.home_circled,text: 'Home'),
+            GButton(icon: Elusive.basket_circled,text: 'Cart'),
+            GButton(icon: Elusive.heart_circled,text: 'Whislist'),
+            GButton(icon: Elusive.calendar_circled,text: 'Orders',),
+          ],
+          selectedIndex: _currentIndex,
+        ),
       ),
     );
   }

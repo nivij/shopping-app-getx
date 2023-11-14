@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/routes/app_pages.dart';
 
 import '../respository/authentication_respositary/authentication_respository.dart';
+import '../respository/authentication_respositary/exception/login_exception.dart';
 import '../screens/bottom_navigation/base.dart';
 
 class LoginController extends GetxController{
@@ -16,11 +17,16 @@ class LoginController extends GetxController{
 
    Future<void> login() async {
      try {
-       await AuthenticationRespository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+       await AuthenticationRespository.instance.loginWithEmailAndPassword(
+           email.text.trim(), password.text.trim());
        Get.offAllNamed(Routes.BASE);
      } catch (e) {
-       Get.showSnackbar(GetSnackBar(message: e.toString()));
+       if (e is LoginWithEmailAndPasswordFailure) {
+         Get.showSnackbar(GetSnackBar(message: e.message));
+       } else {
+         Get.showSnackbar(GetSnackBar(
+             duration: Duration(seconds: 2),
+             message: "fill the fields."));
+       }
      }
-   }
-
-}
+   }}

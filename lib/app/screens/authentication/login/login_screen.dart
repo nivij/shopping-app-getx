@@ -35,6 +35,13 @@ class login extends GetView<LoginController> {
                     ),
                     TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        // Additional email validation logic can be added here
+                        return null;
+                      },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -53,10 +60,13 @@ class login extends GetView<LoginController> {
                           () => TextFormField(
 
                         controller: controller.password,
-                        validator: (value) {
-                          if (value!.isEmpty) return 'Enter your password';
-                          return null;
-                        },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password';
+                              }
+                              // Additional password validation logic can be added here
+                              return null;
+                            },
 
                         obscureText: controller.showPassword.value ? false : true,
                         decoration: InputDecoration(
@@ -122,7 +132,10 @@ class login extends GetView<LoginController> {
                                 MaterialStateProperty.all(EdgeInsets.all(14)),
                           ),
                           onPressed: () {
-                            controller.login();
+                            if (loginFormKey.currentState?.validate() ?? false) {
+                              // Only proceed with login if form is valid
+                              controller.login();
+                            }
                           },
                           child: Text(
                             "Login",

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:fluttericon/elusive_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:gocart/app/screens/authentication/login/widgets/moreicons.dart';
+import 'package:gocart/app/screens/authentication/otp/phonenofield.dart';
 
 import '../../../controllers/auth_controller.dart';
 import '../../../routes/app_pages.dart';
@@ -150,6 +155,23 @@ class login extends GetView<LoginController> {
                           },
                           child: Text("Do you have a account? Signup")),
                     ),
+                 SizedBox(height: 20,),
+                    Row(
+
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        icons(onTap: () {
+
+                        },
+                        child:Image.asset("assets/google_icon.png",fit: BoxFit.scaleDown, ) , ),
+                        SizedBox(width: 20,),
+                        icons(onTap: () {
+                          Get.to(()=>PhoneNo());
+                        },
+                          child:Image.asset("assets/phone.png",fit: BoxFit.scaleDown,color: Colors.white, ) , ),
+
+                      ],
+                    )
                   ],
                 )),
           ),

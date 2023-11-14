@@ -11,7 +11,7 @@ final SplashController splashController =SplashController();
     return Scaffold(
       body:
       Center(
-        child: Text("splash screen"),
+        child: Image.asset("assets/cartSplash.gif",color: Colors.white),
       ),
     );
   }

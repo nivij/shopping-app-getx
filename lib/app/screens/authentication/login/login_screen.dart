@@ -159,11 +159,14 @@ class login extends GetView<LoginController> {
 
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        icons(onTap: () {
-                       controller.isGoogleLoading.value;
-                         controller.googleSignIn();
+                      Obx(() => icons(
+                        isLoading: controller.isGoogleLoading.value,
+                        onTap: () {
+                          controller.isGoogleLoading.value;
+                          controller.googleSignIn();
+
                         },
-                        child:Image.asset("assets/google_icon.png",fit: BoxFit.scaleDown, ) , ),
+                        child:Image.asset("assets/google_icon.png",fit: BoxFit.scaleDown, ) , ),) ,
                         SizedBox(width: 20,),
                         icons(onTap: () {
                           Get.to(()=>PhoneNo());

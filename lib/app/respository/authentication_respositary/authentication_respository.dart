@@ -23,7 +23,7 @@ class AuthenticationRespository extends GetxController {
     try {
       firebaseUser = Rx<User?>(_auth.currentUser);
       firebaseUser.bindStream(_auth.userChanges());
-      ever(firebaseUser, (callback) => _setInitialScreen(firebaseUser.value));
+      ever(firebaseUser, (callback) => setInitialScreen(firebaseUser.value));
       // FlutterNativeSplash.remove();
     } catch (e, stacktrace) {
       print("Error in onReady: $e");
@@ -31,7 +31,7 @@ class AuthenticationRespository extends GetxController {
     }
   }
 
-  _setInitialScreen(User? user) {
+  setInitialScreen(User? user) {
     try {
       if (user == null) {
         Get.offAllNamed(Routes.LOGIN);
@@ -141,7 +141,8 @@ class AuthenticationRespository extends GetxController {
   Future<void> logout() async {
     try {
       await _auth.signOut();
-      _setInitialScreen(_auth.currentUser);
+      await GoogleSignIn().signOut();
+      setInitialScreen(_auth.currentUser);
       // Get.offAllNamed(Routes.LOGIN);
       print("Logout successful");
     } catch (e) {

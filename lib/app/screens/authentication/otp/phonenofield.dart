@@ -21,12 +21,34 @@ class PhoneNo extends StatelessWidget {
           children: [
             Text("Send Otp",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: 30),),
             SizedBox(height: 30,),
-            Text("We will send you a One time Password",textAlign: TextAlign.center,),
+            Text.rich(
+              TextSpan(
+                text: "We will send you a ",
+                style: TextStyle(),
+                children: [
+                  TextSpan(
+                    text: "One time Password",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: 70,),
             Form(
               key: _formKey,
               child: TextFormField(
                 controller: controller.phoneNo,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a phone No.';
+                  }
+                  // Add password complexity validation if needed
+                  return null;
+                },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(

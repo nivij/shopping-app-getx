@@ -42,12 +42,19 @@ class SignupPage extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: controller.fullname,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your full name';
+                          }
+                          return null;
+                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           labelText: "Full Name",
+
                           prefixIcon: Icon(Icons.person_outline_rounded),
                         ),
                       ),
@@ -56,6 +63,13 @@ class SignupPage extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: controller.email,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email address';
+                          }
+                          // Add email format validation if needed
+                          return null;
+                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -70,6 +84,13 @@ class SignupPage extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: controller.password,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a password';
+                          }
+                          // Add password complexity validation if needed
+                          return null;
+                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(

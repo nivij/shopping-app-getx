@@ -12,7 +12,20 @@
           "package_name": "com.example.gocart"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "800239740642-86om1qpcmto9gb40u1a7snre29q4mrab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gocart",
+            "certificate_hash": "4d7b238c2f810c2855c95e8cfe72b256cfcecdfe"
+          }
+        },
+        {
+          "client_id": "800239740642-38qtnc2shg7dcq9gq8dpqd1d4mhe617f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD92uaP4prsmr8VyenQoEYZVBlwKzuWChQ"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800239740642-38qtnc2shg7dcq9gq8dpqd1d4mhe617f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

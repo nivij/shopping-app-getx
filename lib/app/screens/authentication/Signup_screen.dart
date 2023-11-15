@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/controllers/SignUp_controller.dart';
 import 'package:gocart/app/screens/authentication/otp/otp_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'login/login_screen.dart';
 
@@ -35,7 +36,7 @@ class SignupPage extends StatelessWidget {
                   key: _formKey,
                   child: Column(
                     children: [
-                      Text("welcome to gocart"),
+                      Text("Welcome to Gocart",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: 20),),
                       SizedBox(
                         height: 20,
                       ),
@@ -62,19 +63,6 @@ class SignupPage extends StatelessWidget {
                           ),
                           labelText: "email",
                           prefixIcon: Icon(Icons.email),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ), TextFormField(
-                        controller: controller.phoneNo,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          labelText: "phoneno",
-                          prefixIcon: Icon(Icons.confirmation_number),
                         ),
                       ),
                       SizedBox(
@@ -116,10 +104,7 @@ class SignupPage extends StatelessWidget {
                                 SignupController.instance.registerUser(
                                     controller.email.text.trim(),
                                     controller.password.text.trim());
-                                SignupController.instance.phoneAuthentication(controller.phoneNo.text.trim());
-                                // print("-------------------");
-                                // print(controller.phoneNo.text.trim());
-                                Get.to(()=> OtpScreen());
+
                               }
                             },
                             child: Text(

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/screens/authentication/login/widgets/moreicons.dart';
 import 'package:gocart/app/screens/authentication/otp/phonenofield.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/auth_controller.dart';
 import '../../../routes/app_pages.dart';
@@ -32,8 +33,9 @@ class login extends GetView<LoginController> {
             child: Form(
                 key: controller.loginFormKey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("welcome to gocart"),
+                    Text("Welcome to Gocart",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: 20),),
                     SizedBox(
                       height: 20,
                     ),
@@ -155,26 +157,21 @@ class login extends GetView<LoginController> {
                           child: Text("Do you have a account? Signup")),
                     ),
                  SizedBox(height: 20,),
-                    Row(
-
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        icons(
-
-                          onTap: () {
+                    icons(
+                text: 'Connect With Google',
+                      onTap: () {
                        controller.isGoogleLoading.value;
-                         controller.googleSignIn();
+                     controller.googleSignIn();
 
-                        },
-                        child:Image.asset("assets/google_icon.png",fit: BoxFit.scaleDown, ) , ),
-                        SizedBox(width: 20,),
-                        icons(onTap: () {
-                          Get.to(()=>PhoneNo());
-                        },
-                          child:Image.asset("assets/phone.png",fit: BoxFit.scaleDown,color: Colors.white, ) , ),
-
-                      ],
-                    )
+                    },
+                    child:Image.asset("assets/google_icon.png",height: 40, ) , ),
+                       SizedBox(height: 30,),
+                    icons(
+                      text: 'Connect With Phone no',
+                      onTap: () {
+                      Get.to(()=>PhoneNo());
+                    },
+                      child:Image.asset("assets/phone.png",height: 40,color: Theme.of(context).colorScheme.primary, ) , )
                   ],
                 )),
           ),

@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/routes/app_pages.dart';
 
 import '../respository/authentication_respositary/authentication_respository.dart';
 import '../respository/authentication_respositary/exception/login_exception.dart';
-import '../screens/bottom_navigation/base.dart';
+
 
 class LoginController extends GetxController{
 

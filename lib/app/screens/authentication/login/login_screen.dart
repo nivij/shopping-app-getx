@@ -53,7 +53,7 @@ class login extends GetView<LoginController> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         labelText: "Email",
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: Icon(Icons.email,color: Theme.of(context).colorScheme.primary),
                       ),
                       keyboardType: TextInputType.emailAddress,
                       controller: controller.email,
@@ -78,13 +78,13 @@ class login extends GetView<LoginController> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
-                          prefixIcon: const Icon(Icons.fingerprint),
+                          prefixIcon:  Icon(Icons.fingerprint,color: Theme.of(context).colorScheme.primary),
                           labelText: "password",
 
                           suffixIcon: IconButton(
                             icon: controller.showPassword.value
-                                ? const Icon(Elusive.eye)
-                                : const Icon(Elusive.eye_off),
+                                ?  Icon(Elusive.eye,color: Theme.of(context).colorScheme.primary)
+                                :  Icon(Elusive.eye_off,color: Theme.of(context).colorScheme.primary),
                             onPressed: () => controller.showPassword.value = !controller.showPassword.value,
                           ),
                         ),
@@ -118,7 +118,7 @@ class login extends GetView<LoginController> {
                           onPressed: () {
                             ForgotPassword.buildShowModalBottomSheet(context);
                           },
-                          child: Text("Forget?")),
+                          child: Text("Forget?",style: GoogleFonts.montserrat(color:  Theme.of(context).colorScheme.primary,fontWeight: FontWeight.bold),)),
                     ),
                     SizedBox(
                       height: 16,
@@ -148,15 +148,25 @@ class login extends GetView<LoginController> {
                             style: TextStyle(fontSize: 14, color: Colors.white),
                           )),
                     ),
+                    SizedBox(height: 30,),
                     Align(
                       alignment: Alignment.center,
-                      child: TextButton(
-                          onPressed: () {
-                            Get.offAllNamed(Routes.SIGNUP);
-                          },
-                          child: Text("Do you have a account? Signup")),
-                    ),
-                 SizedBox(height: 20,),
+                      child: Text.rich(TextSpan(
+                        text: "Do you have a account?",
+                        style: GoogleFonts.montserrat(color:  Theme.of(context).colorScheme.primary),
+                        children: [
+                          TextSpan(
+                            text: "Signup",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),),
+                    )
+                   ,
+                 SizedBox(height: 50,),
                     icons(
                 text: 'Connect With Google',
                       onTap: () {

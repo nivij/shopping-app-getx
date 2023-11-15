@@ -59,6 +59,7 @@ dependencies:
   firebase_auth: ^4.12.1
   cloud_firestore:
   flutter_otp_text_field: ^1.1.1
+  google_sign_in: ^6.1.6
 
 
 

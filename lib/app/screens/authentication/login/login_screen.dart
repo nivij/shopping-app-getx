@@ -14,7 +14,6 @@ import 'widgets/Forgotpassword.dart';
 
 class login extends GetView<LoginController> {
   login({super.key});
-  final loginFormKey = GlobalKey<FormState>();
   @override
 
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class login extends GetView<LoginController> {
           height: context.height,
           child: SingleChildScrollView(
             child: Form(
-                key: loginFormKey,
+                key: controller.loginFormKey,
                 child: Column(
                   children: [
                     Text("welcome to gocart"),
@@ -137,7 +136,7 @@ class login extends GetView<LoginController> {
                                 MaterialStateProperty.all(EdgeInsets.all(14)),
                           ),
                           onPressed: () {
-                            if (loginFormKey.currentState?.validate() ?? false) {
+                            if (controller.loginFormKey.currentState?.validate() ?? false) {
                               // Only proceed with login if form is valid
                               controller.login();
                             }
@@ -161,7 +160,8 @@ class login extends GetView<LoginController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         icons(onTap: () {
-
+                       controller.isGoogleLoading.value;
+                         controller.googleSignIn();
                         },
                         child:Image.asset("assets/google_icon.png",fit: BoxFit.scaleDown, ) , ),
                         SizedBox(width: 20,),

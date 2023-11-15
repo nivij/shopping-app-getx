@@ -11,9 +11,12 @@ class LoginController extends GetxController{
 
 
    static LoginController get instance => Get.find();
+   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+
    RxBool showPassword = true.obs;
    final email =TextEditingController();
    final password=TextEditingController();
+   final isGoogleLoading =false.obs;
 
    Future<void> login() async {
      try {
@@ -29,4 +32,16 @@ class LoginController extends GetxController{
              message: "fill the fields."));
        }
      }
-   }}
+   }
+Future<void> googleSignIn()
+async {
+  try{
+    isGoogleLoading.value=true;
+     await AuthenticationRespository.instance.signInWithGoogle();
+     isGoogleLoading.value=false;
+  }catch(e){
+    isGoogleLoading.value=false;
+
+  }
+}
+}

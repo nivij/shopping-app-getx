@@ -19,11 +19,9 @@ class OTPController extends GetxController{
         Get.showSnackbar(GetSnackBar(
             duration: Duration(seconds: 2),
             message: "fill the fields."));
-        // You can show a dialog, toast, or any other UI to inform the user about the error.
       } else {
         // Handle other exceptions
         print("Error occurred during OTP verification: $error");
-        // You can show a generic error message or handle it based on your requirements.
       }
     }
   }

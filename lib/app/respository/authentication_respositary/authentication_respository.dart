@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/respository/authentication_respositary/exception/signup_email_password_failure.dart';
 import 'package:gocart/app/screens/authentication/login/login_screen.dart';
 import 'package:gocart/app/screens/bottom_navigation/base.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../routes/app_pages.dart';
 import 'exception/login_exception.dart';
+import 'exception/t_exceptions.dart';
 
 class AuthenticationRespository extends GetxController {
   static AuthenticationRespository get instance => Get.find();
@@ -20,6 +24,7 @@ class AuthenticationRespository extends GetxController {
       firebaseUser = Rx<User?>(_auth.currentUser);
       firebaseUser.bindStream(_auth.userChanges());
       ever(firebaseUser, (callback) => _setInitialScreen(firebaseUser.value));
+      // FlutterNativeSplash.remove();
     } catch (e, stacktrace) {
       print("Error in onReady: $e");
       print(stacktrace);
@@ -86,6 +91,38 @@ class AuthenticationRespository extends GetxController {
       throw ex;
     }
   }
+
+
+  //google
+  Future<UserCredential> signInWithGoogle() async {
+    try{
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    }
+   on FirebaseAuthException catch(e){
+      final ex= TExceptions.fromCode(e.code);
+      throw ex.message;
+   }catch(_){
+      const ex= TExceptions();
+      throw ex.message;
+    }
+    // Trigger the authentication flow
+
+  }
+
+
+
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
     try {

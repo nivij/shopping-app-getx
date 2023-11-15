@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gocart/app/routes/app_pages.dart';
@@ -20,32 +21,62 @@ class LoginController extends GetxController{
 
    Future<void> login() async {
      try {
+       showDialog(
+         context: Get.overlayContext!,
+         barrierDismissible: false,
+         builder: (BuildContext context) {
+           return Center(
+             child: CircularProgressIndicator(),
+           );
+         },
+       );
+
        await AuthenticationRespository.instance.loginWithEmailAndPassword(
-           email.text.trim(), password.text.trim());
+         email.text.trim(),
+         password.text.trim(),
+       );
+
        Get.offAllNamed(Routes.BASE);
      } catch (e) {
        if (e is LoginWithEmailAndPasswordFailure) {
          Get.showSnackbar(GetSnackBar(message: e.message));
        } else {
-         Get.showSnackbar(GetSnackBar(
+         Get.showSnackbar(
+           GetSnackBar(
              duration: Duration(seconds: 2),
-             message: "fill the fields."));
+             message: "Fill in the fields.",
+           ),
+         );
        }
+     } finally {
+       // Close the loading dialog when the operation is done
+       Get.back();
      }
    }
-Future<void> googleSignIn()
-async {
-  try{
 
-    isGoogleLoading.value=true;
-    final auth=AuthenticationRespository.instance;
-     await auth.signInWithGoogle();
-     isGoogleLoading.value=false;
-    auth.setInitialScreen(auth.firebaseUser.value);
+   Future<void> googleSignIn() async {
+     try {
+       showDialog(
+         context: Get.overlayContext!,
+         barrierDismissible: false,
+         builder: (BuildContext context) {
+           return Center(
+             child: CircularProgressIndicator(),
+           );
+         },
+       );
 
-  }catch(e){
-    isGoogleLoading.value=false;
+       isGoogleLoading.value = true;
+       final auth = AuthenticationRespository.instance;
+       await auth.signInWithGoogle();
+       isGoogleLoading.value = false;
+       auth.setInitialScreen(auth.firebaseUser.value);
+     } catch (e) {
+       isGoogleLoading.value = false;
+     } finally {
+       // Close the loading dialog when the operation is done
+       Get.back();
+     }
+   }
 
-  }
-}
 }

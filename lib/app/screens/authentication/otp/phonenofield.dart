@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/SignUp_controller.dart';
 import 'otp_screen.dart';
@@ -15,7 +16,13 @@ class PhoneNo extends StatelessWidget {
     return Scaffold(
       body:  SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
+            Text("Send Otp",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: 30),),
+            SizedBox(height: 30,),
+            Text("We will send you a One time Password",textAlign: TextAlign.center,),
+            SizedBox(height: 70,),
             Form(
               key: _formKey,
               child: TextFormField(
@@ -30,6 +37,8 @@ class PhoneNo extends StatelessWidget {
                 ),
               ),
             ),
+
+            SizedBox(height: 30,),
             ConstrainedBox(
               constraints:
               BoxConstraints.tightFor(width: context.width),
@@ -53,8 +62,9 @@ class PhoneNo extends StatelessWidget {
                       Get.to(()=> OtpScreen());
                     }
                   },
+
                   child: Text(
-                    "Signup",
+                    "Verify",
                     style: TextStyle(fontSize: 14, color: Colors.white),
                   )),
             ),

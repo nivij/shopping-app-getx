@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
+import 'package:gocart/app/consts/mediaquery.dart';
 import 'package:gocart/app/controllers/SignUp_controller.dart';
 import 'package:gocart/app/screens/authentication/otp/otp_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +16,7 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SignupController());
 
-
+    double width = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async {
         // Handle Android back button press
@@ -61,68 +62,74 @@ class SignupPage extends StatelessWidget {
                   key: _formKey,
                   child: Column(
                     children: [
-                      Text("Welcome to Gocart",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: 20),),
+                      Text("Welcome to Gocart",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: mediaQuery.instance.Title(width)),),
                       SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        controller: controller.fullname,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your full name';
-                          }
-                          return null;
-                        },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          labelText: "Full Name",
+                      SizedBox(width:  mediaQuery.instance.textFieldForm(width),
+                        child: TextFormField(
+                          controller: controller.fullname,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your full name';
+                            }
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            labelText: "Full Name",
 
-                          prefixIcon: Icon(Icons.person_outline_rounded),
+                            prefixIcon: Icon(Icons.person_outline_rounded),
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: 16,
                       ),
-                      TextFormField(
-                        controller: controller.email,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email address';
-                          }
-                          // Add email format validation if needed
-                          return null;
-                        },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      SizedBox(width:  mediaQuery.instance.textFieldForm(width),
+                        child: TextFormField(
+                          controller: controller.email,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email address';
+                            }
+                            // Add email format validation if needed
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            labelText: "email",
+                            prefixIcon: Icon(Icons.email),
                           ),
-                          labelText: "email",
-                          prefixIcon: Icon(Icons.email),
                         ),
                       ),
                       SizedBox(
                         height: 16,
                       ),
-                      TextFormField(
-                        controller: controller.password,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a password';
-                          }
-                          // Add password complexity validation if needed
-                          return null;
-                        },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      SizedBox(width:  mediaQuery.instance.textFieldForm(width),
+                        child: TextFormField(
+                          controller: controller.password,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a password';
+                            }
+                            // Add password complexity validation if needed
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            labelText: "password",
+                            prefixIcon: Icon(Icons.numbers),
                           ),
-                          labelText: "password",
-                          prefixIcon: Icon(Icons.numbers),
                         ),
                       ),
                       SizedBox(
@@ -133,7 +140,7 @@ class SignupPage extends StatelessWidget {
                       ),
                       ConstrainedBox(
                         constraints:
-                            BoxConstraints.tightFor(width: context.width),
+                            BoxConstraints.tightFor(width:  mediaQuery.instance.textFieldForm(width)),
                         child: ElevatedButton(
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(

@@ -14,7 +14,7 @@ import '../Signup_screen.dart';
 import 'widgets/Forgetcontainer.dart';
 import 'widgets/Forgotpassword.dart';
 
-class login extends GetView<LoginController> {
+class login extends StatelessWidget {
   login({Key? key}) : super(key: key);
 
   
@@ -29,104 +29,105 @@ class login extends GetView<LoginController> {
         child: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Welcome to Gocart",
-                  style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold,
-                    fontSize: mediaQuery.instance.Title(width),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width:mediaQuery.instance.textFieldForm(width),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      labelText: "Email",
-                      prefixIcon: Icon(Icons.email,
-                          color: Theme.of(context).colorScheme.primary),
+            child: Form(
+              key: controller.loginFormKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Welcome to Gocart",
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                      fontSize: mediaQuery.instance.Title(width),
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    controller: controller.email,
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Obx(
-                      () => SizedBox(width: mediaQuery.instance.textFieldForm(width),
-                        child: TextFormField(
-                    controller: controller.password,
-                    validator: (value) {
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    width:mediaQuery.instance.textFieldForm(width),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
+                          return 'Please enter your email';
                         }
                         return null;
-                    },
-                    obscureText:
-                    controller.showPassword.value ? false : true,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        prefixIcon: Icon(Icons.fingerprint,
-                            color: Theme.of(context).colorScheme.primary),
-                        labelText: "password",
-                        suffixIcon: IconButton(
-                          icon: controller.showPassword.value
-                              ? Icon(Elusive.eye,
-                              color:
-                              Theme.of(context).colorScheme.primary)
-                              : Icon(Elusive.eye_off,
-                              color:
-                              Theme.of(context).colorScheme.primary),
-                          onPressed: () =>
-                          controller.showPassword.value =
-                          !controller.showPassword.value,
-                        ),
-                    ),
-                  ),
-                      ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                SizedBox(width: mediaQuery.instance.textFieldForm(width),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        ForgotPassword.buildShowModalBottomSheet(context);
                       },
-                      child: Text(
-                        "Forget?",
-                        style: GoogleFonts.montserrat(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Email",
+                        prefixIcon: Icon(Icons.email,
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      controller: controller.email,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Obx(
+                        () => SizedBox(width: mediaQuery.instance.textFieldForm(width),
+                          child: TextFormField(
+                      controller: controller.password,
+                      validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                      },
+                      obscureText:
+                      controller.showPassword.value ? false : true,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          prefixIcon: Icon(Icons.fingerprint,
+                              color: Theme.of(context).colorScheme.primary),
+                          labelText: "password",
+                          suffixIcon: IconButton(
+                            icon: controller.showPassword.value
+                                ? Icon(Elusive.eye,
+                                color:
+                                Theme.of(context).colorScheme.primary)
+                                : Icon(Elusive.eye_off,
+                                color:
+                                Theme.of(context).colorScheme.primary),
+                            onPressed: () =>
+                            controller.showPassword.value =
+                            !controller.showPassword.value,
+                          ),
+                      ),
+                    ),
+                        ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(width: mediaQuery.instance.textFieldForm(width),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          ForgotPassword.buildShowModalBottomSheet(context);
+                        },
+                        child: Text(
+                          "Forget?",
+                          style: GoogleFonts.montserrat(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                SizedBox(width: mediaQuery.instance.textFieldForm(width),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(width: width),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(width: mediaQuery.instance.textFieldForm(width),),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all(
@@ -138,10 +139,12 @@ class login extends GetView<LoginController> {
                         padding: MaterialStateProperty.all(EdgeInsets.all(14)),
                       ),
                       onPressed: () {
-                        if (controller.loginFormKey.currentState
-                            ?.validate() ??
-                            false) {
+                        if (controller.loginFormKey.currentState?.validate() ?? false) {
+                          // Form validation passed, call the login function
+                          print("Validation passed. Attempting login...");
                           controller.login();
+                        } else {
+                          print("Validation failed. Please check your input.");
                         }
                       },
                       child: Text(
@@ -152,65 +155,65 @@ class login extends GetView<LoginController> {
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Bounceable(
-                  onTap: () {
-                    Get.to(() => SignupPage());
-                  },
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text.rich(
-                      TextSpan(
-                        text: "Do you have an account?",
-                        style: GoogleFonts.montserrat(
-                            color:
-                            Theme.of(context).colorScheme.primary),
-                        children: [
-                          TextSpan(
-                            text: "Signup",
-                            style: TextStyle(
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Bounceable(
+                    onTap: () {
+                      Get.to(() => SignupPage());
+                    },
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text.rich(
+                        TextSpan(
+                          text: "Do you have an account?",
+                          style: GoogleFonts.montserrat(
                               color:
-                              Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.bold,
+                              Theme.of(context).colorScheme.primary),
+                          children: [
+                            TextSpan(
+                              text: "Signup",
+                              style: TextStyle(
+                                color:
+                                Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                icons(
-                  text: 'Connect With Google',
-                  onTap: () {
-                    controller.isGoogleLoading.value;
-                    controller.googleSignIn();
-                  },
-                  child: Image.asset(
-                    "assets/google_icon.png",
-                    height: 40,
+                  SizedBox(
+                    height: 50,
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                icons(
-                  text: 'Connect With Phone no',
-                  onTap: () {
-                    Get.to(() => PhoneNo());
-                  },
-                  child: Image.asset(
-                    "assets/phone.png",
-                    height: 40,
-                    color: Theme.of(context).colorScheme.primary,
+                  icons(
+                    text: 'Connect With Google',
+                    onTap: () {
+                      controller.isGoogleLoading.value;
+                      controller.googleSignIn();
+                    },
+                    child: Image.asset(
+                      "assets/google_icon.png",
+                      height: 40,
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 30,
+                  ),
+                  icons(
+                    text: 'Connect With Phone no',
+                    onTap: () {
+                      Get.to(() => PhoneNo());
+                    },
+                    child: Image.asset(
+                      "assets/phone.png",
+                      height: 40,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

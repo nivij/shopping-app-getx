@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:gocart/app/consts/mediaquery.dart';
 import 'package:gocart/app/controllers/otp_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -12,6 +13,7 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     var otp;
     return WillPopScope(
       onWillPop: () async {
@@ -28,7 +30,7 @@ class OtpScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
-                  Text("Gocart",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize: 40),),
+                  Text("Gocart",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,fontSize:  mediaQuery.instance.Title(width)),),
                   Text("Verification",style: Theme.of(context).textTheme.headline6,),
                   SizedBox(height: 40,),
                   Text("Enter the verification code sent at"+"support@gocart.com",textAlign: TextAlign.center,),
@@ -47,6 +49,7 @@ class OtpScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
+
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)
                         ),

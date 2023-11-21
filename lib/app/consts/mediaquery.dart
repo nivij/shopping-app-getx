@@ -16,4 +16,17 @@ class mediaQuery{
       return 70;
     }
   }
+  double textFieldForm(double width) {
+    if (width >= 380 && width < 600) {
+      // Mobile
+      return double.infinity;
+    } else if (width >= 600 && width < 800) {
+      // Tablet
+      return 100 * 4;
+    } else {
+      // Desktop
+      return 100 * 5;
+    }
+  }
+
 }

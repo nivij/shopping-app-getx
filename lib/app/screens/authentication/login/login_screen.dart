@@ -43,7 +43,7 @@ class login extends GetView<LoginController> {
                   height: 20,
                 ),
                 SizedBox(
-                  width: width < 600 ? double.infinity : 100 * 5,
+                  width:mediaQuery.instance.textFieldForm(width),
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
@@ -68,33 +68,55 @@ class login extends GetView<LoginController> {
                   height: 16,
                 ),
                 Obx(
-                      () => TextFormField(
+                      () => SizedBox(width: mediaQuery.instance.textFieldForm(width),
+                        child: TextFormField(
                     controller: controller.password,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
                     },
                     obscureText:
                     controller.showPassword.value ? false : true,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      prefixIcon: Icon(Icons.fingerprint,
-                          color: Theme.of(context).colorScheme.primary),
-                      labelText: "password",
-                      suffixIcon: IconButton(
-                        icon: controller.showPassword.value
-                            ? Icon(Elusive.eye,
-                            color:
-                            Theme.of(context).colorScheme.primary)
-                            : Icon(Elusive.eye_off,
-                            color:
-                            Theme.of(context).colorScheme.primary),
-                        onPressed: () =>
-                        controller.showPassword.value =
-                        !controller.showPassword.value,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        prefixIcon: Icon(Icons.fingerprint,
+                            color: Theme.of(context).colorScheme.primary),
+                        labelText: "password",
+                        suffixIcon: IconButton(
+                          icon: controller.showPassword.value
+                              ? Icon(Elusive.eye,
+                              color:
+                              Theme.of(context).colorScheme.primary)
+                              : Icon(Elusive.eye_off,
+                              color:
+                              Theme.of(context).colorScheme.primary),
+                          onPressed: () =>
+                          controller.showPassword.value =
+                          !controller.showPassword.value,
+                        ),
+                    ),
+                  ),
+                      ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                SizedBox(width: mediaQuery.instance.textFieldForm(width),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        ForgotPassword.buildShowModalBottomSheet(context);
+                      },
+                      child: Text(
+                        "Forget?",
+                        style: GoogleFonts.montserrat(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -102,48 +124,32 @@ class login extends GetView<LoginController> {
                 SizedBox(
                   height: 16,
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      ForgotPassword.buildShowModalBottomSheet(context);
-                    },
-                    child: Text(
-                      "Forget?",
-                      style: GoogleFonts.montserrat(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
+                SizedBox(width: mediaQuery.instance.textFieldForm(width),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(width: width),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            )),
+                        backgroundColor:
+                        MaterialStateProperty.all(Colors.black),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(14)),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: width),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          )),
-                      backgroundColor:
-                      MaterialStateProperty.all(Colors.black),
-                      padding: MaterialStateProperty.all(EdgeInsets.all(14)),
-                    ),
-                    onPressed: () {
-                      if (controller.loginFormKey.currentState
-                          ?.validate() ??
-                          false) {
-                        controller.login();
-                      }
-                    },
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                          fontSize: width < 600 ? 14 : 18,
-                          color: Colors.white),
+                      onPressed: () {
+                        if (controller.loginFormKey.currentState
+                            ?.validate() ??
+                            false) {
+                          controller.login();
+                        }
+                      },
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: width < 600 ? 14 : 18,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

@@ -17,7 +17,7 @@ class SplashController extends GetxController {
     final authRepository = AuthenticationRespository.instance; // Assuming you have an instance of AuthenticationRespository
 
     try {
-      await Future.delayed(Duration(seconds: 3)); // Simulate a delay for the splash screen
+      await Future.delayed(Duration(seconds: 7)); // Simulate a delay for the splash screen
 
       if (authRepository.firebaseUser.value != null) {
         // User is already logged in, navigate to the dashboard

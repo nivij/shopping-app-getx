@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/controllers/SignUp_controller.dart';
 import 'package:gocart/app/screens/authentication/otp/otp_screen.dart';
@@ -22,10 +23,34 @@ class SignupPage extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading:
+           Bounceable(
+             onTap: () {
+               Get.back();
+             },
+             child: Container(
+                  margin: EdgeInsets.all(7),
+                  width: 30, // Set the desired width
+                  height: 30, // Set the desired height
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Image.asset(
+                    "assets/left-arrow.png",
+                    color: Colors.white,
+                  )),
+           ),
+          ),
+
         body: SafeArea(
           child: Container(
             margin: EdgeInsets.only(
-              top: 60,
+              top: 10,
               left: 16,
               right: 16,
             ),

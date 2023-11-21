@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/auth_controller.dart';
 import '../../../routes/app_pages.dart';
+import '../Signup_screen.dart';
 import 'widgets/Forgetcontainer.dart';
 import 'widgets/Forgotpassword.dart';
 
@@ -149,21 +150,26 @@ class login extends GetView<LoginController> {
                           )),
                     ),
                     SizedBox(height: 30,),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text.rich(TextSpan(
-                        text: "Do you have a account?",
-                        style: GoogleFonts.montserrat(color:  Theme.of(context).colorScheme.primary),
-                        children: [
-                          TextSpan(
-                            text: "Signup",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.bold,
+                    Bounceable(
+                      onTap: () {
+                        Get.to(()=>SignupPage());
+                      },
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text.rich(TextSpan(
+                          text: "Do you have a account?",
+                          style: GoogleFonts.montserrat(color:  Theme.of(context).colorScheme.primary),
+                          children: [
+                            TextSpan(
+                              text: "Signup",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),),
+                          ],
+                        ),),
+                      ),
                     )
                    ,
                  SizedBox(height: 50,),

@@ -35,7 +35,17 @@ class LoginController extends GetxController{
          password.text.trim(),
        );
 
-       Get.offAllNamed(Routes.BASE);
+       final auth = AuthenticationRespository.instance;
+       if (auth.firebaseUser.value == null) {
+         // Show an error message if the user doesn't exist
+         Get.showSnackbar(
+           GetSnackBar(
+             message: "User not found. Please check your credentials.",
+           ),
+         );
+       } else {
+         Get.offAllNamed(Routes.BASE);
+       }
      } catch (e) {
        if (e is LoginWithEmailAndPasswordFailure) {
          Get.showSnackbar(GetSnackBar(message: e.message));

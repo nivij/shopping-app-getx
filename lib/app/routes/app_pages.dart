@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:gocart/app/screens/authentication/Signup_screen.dart';

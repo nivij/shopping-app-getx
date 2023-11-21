@@ -13,8 +13,13 @@ import 'package:gocart/app/respository/authentication_respositary/authentication
 import 'package:gocart/app/routes/app_pages.dart';
 import 'binding/root_bindings.dart';
 import 'controllers/theme_controller.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 void main() async {
+  if (!kIsWeb) {
+    Stripe.publishableKey =
+    'pk_test_51O4eNqSBlVVnbSrgqTTHYvP4m0nqUhYVCiqNLhOiguZ1sEKw1G3K1bTW5KaiTneHVS7dZijpU5oJLvCS6qBDormU00W8JGFrx8';
+
+  }
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -25,8 +30,6 @@ void main() async {
           messagingSenderId: "800239740642",
           projectId: "gocart-21c88")
   ).then((value) => Get.put(AuthenticationRespository()));
-  Stripe.publishableKey =
-      'pk_test_51O4eNqSBlVVnbSrgqTTHYvP4m0nqUhYVCiqNLhOiguZ1sEKw1G3K1bTW5KaiTneHVS7dZijpU5oJLvCS6qBDormU00W8JGFrx8';
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // status bar color

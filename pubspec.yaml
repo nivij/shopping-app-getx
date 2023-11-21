@@ -61,6 +61,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   google_sign_in: ^6.1.6
   sms_autofill: ^2.3.0
+  flutter_screenutil: ^5.9.0
 
 
 

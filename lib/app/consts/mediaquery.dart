@@ -28,5 +28,41 @@ class mediaQuery{
       return 100 * 5;
     }
   }
+  double search(double width) {
+    if (width >= 380 && width < 600) {
+      // Mobile
+      return 260;
+    } else if (width >= 600 && width < 800) {
+      // Tablet
+      return 300;
+    } else {
+      // Desktop
+      return 600;
+    }
+  }
+  double dressCardContainerwidth(double width) {
+    if (width >= 380 && width < 600) {
+      // Mobile
+      return  double.infinity;
+    } else if (width >= 600 && width < 800) {
+      // Tablet
+      return 200;
+    } else {
+      // Desktop
+      return 400;
+    }
+  }
+  double dressCardContainerheight(double width) {
+    if (width >= 380 && width < 600) {
+      // Mobile
+      return  325;
+    } else if (width >= 600 && width < 800) {
+      // Tablet
+      return 290;
+    } else {
+      // Desktop
+      return 400;
+    }
+  }
 
 }

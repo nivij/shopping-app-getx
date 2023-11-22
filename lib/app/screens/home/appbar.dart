@@ -96,7 +96,7 @@ class _CustomappbarState extends State<Customappbar> {
             actions: [
               Padding(
                 padding: const EdgeInsets.only(
-                    right: 6.0, top: 13.0, bottom: 13.0),
+                    right: 6.0, top: 13.0, bottom: 10.0),
                 child: Bounceable(
                   curve: Curves.bounceOut,
                   reverseCurve: Curves.bounceIn,
@@ -119,9 +119,9 @@ class _CustomappbarState extends State<Customappbar> {
             ],
             bottom: PreferredSize(
 
-              preferredSize: Size.fromHeight(70),
+              preferredSize: Size.fromHeight(80),
               child: Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 10,bottom: 10),
                 child: ListTile(
                   leading: SizedBox(
                     height: 50,
@@ -246,7 +246,7 @@ class _CustomappbarState extends State<Customappbar> {
                       tabs: [
                         Container(
                           height: 50,
-                          width: isDesktop ? 200 : 80,
+                          width: isDesktop ? 200 : 90,
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color: Theme
@@ -260,7 +260,7 @@ class _CustomappbarState extends State<Customappbar> {
                         ),
                         Container(
                           height: 50,
-                          width: isDesktop ? 200 : 80,
+                          width: isDesktop ? 200 : 90,
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color: Theme
@@ -274,7 +274,7 @@ class _CustomappbarState extends State<Customappbar> {
                         ),
                         Container(
                           height: 50,
-                          width: isDesktop ? 200 : 80,
+                          width: isDesktop ? 200 : 90,
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color: Theme
@@ -288,7 +288,7 @@ class _CustomappbarState extends State<Customappbar> {
                         ),
                         Container(
                           height: 50,
-                          width: isDesktop ?200 : 80,
+                          width: isDesktop ?200 : 90,
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color: Theme

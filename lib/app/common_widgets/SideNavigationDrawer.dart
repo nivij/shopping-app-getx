@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/auth_controller.dart';
 import '../controllers/theme_controller.dart';
 import '../respository/authentication_respositary/authentication_respository.dart';
+import '../screens/chat_session/chat_screen.dart';
 import '../services/themedata.dart';
 
 class Navdrawer extends StatelessWidget {
@@ -39,6 +40,13 @@ class Navdrawer extends StatelessWidget {
               title: Text('Settings'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('chat'),
+              onTap: () {
+                Get.to(ChatScreen());
               },
             ),
             ListTile(

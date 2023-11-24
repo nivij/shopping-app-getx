@@ -24,7 +24,7 @@ class RootBindings implements Bindings {
     Get.lazyPut(() => TextController(),);
     Get.lazyPut(() => ColorController(),);
     Get.put( OrderController(),);
-    Get.lazyPut(() => WishlistController(),);
+
     Get.lazyPut(() => SizeController(),);
     Get.lazyPut(() => OTPController(),);
     Get.lazyPut(() => LoginController(),);
@@ -32,6 +32,7 @@ class RootBindings implements Bindings {
     Get.put(CartController());
     Get.put(SignupController());
     Get.put(mediaQuery());
+    Get.put(WishlistController());
 
 
 

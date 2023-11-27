@@ -1,51 +1,107 @@
 import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart' as messaging;
+import 'package:http/http.dart' as http;
 class ChatScreen extends StatefulWidget {
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  TextEditingController _messageController = TextEditingController();
-  DatabaseReference _messagesRef = FirebaseDatabase.instance.reference().child('messages');
+  final TextEditingController _messageController = TextEditingController();
+  final DatabaseReference _messagesRef =
+  FirebaseDatabase.instance.reference().child('messages');
   List<Map<dynamic, dynamic>> messages = [];
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
     super.initState();
-    // Load messages from local storage when the chat screen is initialized
+    _configureFirebaseMessaging();
     _loadMessages();
-
-    // Start listening for incoming messages when the chat screen is initialized
     _listenForMessages();
+
+  }
+
+  void _configureFirebaseMessaging() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("onMessage: $message");
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("onResume: $message");
+    });
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
+
+  static Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
+    print("Handling a background message: ${message.messageId}");
   }
 
   void _listenForMessages() {
     _messagesRef.onChildAdded.listen((event) {
-      Map<dynamic, dynamic> newMessage = event.snapshot.value as Map<dynamic, dynamic>;
-      String messageId = newMessage['messageId'];
+      if (mounted) {
+        Map<dynamic, dynamic> newMessage =
+        event.snapshot.value as Map<dynamic, dynamic>;
+        String messageId = newMessage['messageId'];
 
-      // Check if the message with the same ID already exists
-      if (!messages.any((message) => message['messageId'] == messageId)) {
+        if (!messages.any((message) => message['messageId'] == messageId)) {
+          _getUserEmail(newMessage['userId']).then((userEmail) {
+            newMessage['userEmail'] = userEmail;
+            setState(() {
+              messages.add(newMessage);
+              _saveMessages();
+            });
+          });
+        }
+      }
+    });
+
+    _messagesRef.onChildRemoved.listen((event) {
+      if (mounted) {
+        String deletedMessageId = event.snapshot.key ?? '';
         setState(() {
-          messages.add(newMessage);
+          messages.removeWhere(
+                  (message) => message['messageId'] == deletedMessageId);
           _saveMessages();
         });
       }
     });
   }
 
+  Future<String> _getUserEmail(String userId) async {
+    User? user = await FirebaseAuth.instance.currentUser;
+    if (user != null && user.uid == userId) {
+      return user.email ?? '';
+    } else {
+      // Fetch user details from Firestore or your user database
+      // and return the user's email
+      // For demonstration purposes, assuming the user's email is stored in Firebase Realtime Database
+      DataSnapshot snapshot = (await FirebaseDatabase.instance
+          .reference()
+          .child('users/$userId')
+          .once())
+          .snapshot;
+      Map<dynamic, dynamic>? userData =
+      snapshot.value as Map<dynamic, dynamic>?;
+
+      return userData?['email'] ?? '';
+    }
+  }
+
   void _loadMessages() {
     final box = GetStorage();
-    // Load messages from local storage
     List<dynamic>? messagesList = box.read('messages');
     if (messagesList != null) {
       setState(() {
-        // Convert the loaded list to a list of maps
         messages = messagesList.cast<Map<dynamic, dynamic>>();
       });
     }
@@ -53,119 +109,152 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _saveMessages() {
     final box = GetStorage();
-    // Save messages to local storage
     box.write('messages', messages);
   }
 
-  Widget _buildMessage(String userId, String text, String messageId) {
-    return FutureBuilder<String>(
-      future: _getUserEmail(userId),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          String userEmail = snapshot.data!;
-          return _buildMessageWidget(userEmail, text, messageId);
-        } else {
-          return Container(); // or a loading indicator
-        }
-      },
-    );
-  }
+  Future<void> _sendFCMMessage(String message, String userId) async {
+    List<String> otherUserTokens = [];
+    for (var otherUser in messages.where((m) => m['userId'] != userId)) {
+      String otherUserId = otherUser['userId'];
+      String? token = await _getFCMToken(otherUserId);
+      if (token != null) {
+        otherUserTokens.add(token);
+      }
+    }
 
-  Future<String> _getUserEmail(String userId) async {
-    User? user = await FirebaseAuth.instance.authStateChanges().firstWhere((user) => user != null);
-    if (user != null && user.uid == userId) {
-      return user.email ?? 'Unknown Email';
-    } else {
-      return 'Unknown Email';
+    if (otherUserTokens.isNotEmpty) {
+      for (var token in otherUserTokens) {
+        await http.post(
+          Uri.parse('https://fcm.googleapis.com/fcm/send'),
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+            'Authorization': 'key=AAAAulIBZuI:APA91bH7yJJlpt7470K9XV2cbU9wCH7OUTpSR7lzqlfkcVs9WN8GLDXRLYfpmi_zEhAm6fvrBre1IHnY5JKrhTWS_PFE1MMc_5ExZArJuFElymc-Y71KmOUn8hgrQwqw_MyuayEzQOp6', // Replace with your server key
+          },
+          body: jsonEncode({
+            'to': token,
+            'data': {
+              'userId': userId,
+              'messageId': messages.last['messageId'],
+            },
+            'notification': {
+              'title': 'New Message',
+              'body': message,
+            },
+          }),
+        );
+      }
     }
   }
 
-  Widget _buildMessageWidget(String sender, String text, String messageId) {
+
+  Future<String?> _getFCMToken(String userId) async {
+    DataSnapshot snapshot = (await FirebaseDatabase.instance
+        .reference()
+        .child('users/$userId')
+        .once()).snapshot;
+    Map<dynamic, dynamic>? userData = snapshot.value as Map<dynamic, dynamic>?;
+
+    return userData?['fcmToken'];
+
+  }
+
+  Widget _buildMessage(String userId, String text, String messageId,int index) {
+    var message = messages[index];
+    var userEmail = message['userEmail'] ?? 'Unknown User';
+    print("$userEmail-usermaillllllllllllllllllllllllllllllllllll");
     return GestureDetector(
       onLongPress: () {
-        print("Long press detected for messageId: $messageId");
-        _deleteMessage(messageId);
+        _showDeleteMessageDialog(messageId);
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.grey,
-              child: Text(
-                sender[0],
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      child: Container(
+        alignment: userId == FirebaseAuth.instance.currentUser?.email
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: userId == FirebaseAuth.instance.currentUser?.email
+                ? Colors.blue
+                : Colors.grey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                text,
+                style: TextStyle(color: Colors.white),
               ),
-            ),
-            SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  sender,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    text,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              SizedBox(height: 5),
+              Text(
+                'Sent by: $userEmail',
+                style: TextStyle(fontSize: 12, color: Colors.white70),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
 
+  void _showDeleteMessageDialog(String messageId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Message?'),
+          content: Text('Are you sure you want to delete this message?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _deleteMessage(messageId);
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void _deleteMessage(String messageId) {
-    // Check if the message with messageId exists in the messages list
-    if (messages.any((message) => message['messageId'] == messageId)) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Delete Message'),
-            content: Text('Are you sure you want to delete this message?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context); // Close the dialog
-                },
-                child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Remove the message with messageId from the messages list
-                  setState(() {
-                    messages.removeWhere((message) => message['messageId'] == messageId);
-                    _saveMessages(); // Save the updated messages list to GetStorage
-                  });
+    User? user = FirebaseAuth.instance.currentUser;
 
-                  // Remove the message from Firebase
-                  _messagesRef.child(messageId).remove();
+    if (user != null) {
+      String userId = user.uid;
 
-                  Navigator.pop(context); // Close the dialog
-                },
-                child: Text('Delete'),
-              ),
-            ],
-          );
-        },
-      );
+      // Check if the current user is the sender of the message
+      if (messages.any((message) => message['messageId'] == messageId && message['userId'] == userId)) {
+        // Delete the message from the local list
+        setState(() {
+          messages.removeWhere((message) => message['messageId'] == messageId);
+          _saveMessages(); // Save the updated list to storage
+        });
+
+        // Delete the message from the Firebase Realtime Database
+        _messagesRef.child(messageId).remove().then((_) {
+          print('Message deleted from the server.');
+        }).catchError((error) {
+          print('Error deleting message from the server: $error');
+        });
+      } else {
+        print('You can only delete your own messages.');
+      }
+    } else {
+      print('User not authenticated');
     }
   }
+
+
 
 
   Widget _buildMessageInput() {
@@ -183,9 +272,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           IconButton(
             icon: Icon(Icons.send),
-            onPressed: () {
-              _sendMessage();
-            },
+            onPressed: _sendMessage,
           ),
         ],
       ),
@@ -199,8 +286,7 @@ class _ChatScreenState extends State<ChatScreen> {
       String userId = user.uid;
       String message = _messageController.text;
 
-      // Send the message to Firebase
-      String messageId = _messagesRef.push().key ?? ''; // Generate a unique message ID
+      String messageId = _messagesRef.push().key ?? '';
       _messagesRef.child(messageId).set({
         'userId': userId,
         'message': message,
@@ -208,9 +294,10 @@ class _ChatScreenState extends State<ChatScreen> {
         'messageId': messageId,
       });
 
+      _sendFCMMessage(message, userId);
+
       _messageController.clear();
     } else {
-      // Handle the case when the user is not authenticated
       print('User not authenticated');
     }
   }
@@ -230,9 +317,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 var messageSnapshot = messages[index];
 
                 return _buildMessage(
-                  messageSnapshot['userId'],
+                  messageSnapshot['userEmail'],
                   messageSnapshot['message'],
                   messageSnapshot['messageId'],
+                  index,
                 );
               },
             ),

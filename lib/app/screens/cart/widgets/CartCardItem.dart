@@ -27,6 +27,8 @@ final quantity;
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     final OrderController orderController= Get.find();
     return Bounceable(
       onTap: () {
@@ -42,116 +44,120 @@ final quantity;
         child: Container(
           color: Colors.transparent,
           height: 140,
-          child: Row(
-            children: [
-              Container(
-                height: 120,
-                width: 120,
-                decoration: BoxDecoration(
-                  color: itemcolor,
-                  borderRadius: BorderRadius.circular(20),
+
+          child: SizedBox(
+            child: Row(
+              children: [
+                Container(
+                  height: 120,
+                  width: screenWidth >= 800 ?180:120,
+                  decoration: BoxDecoration(
+                    color: itemcolor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Image.asset(product.photos[0]),
                 ),
-                child: Image.asset(product.photos[0]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 195,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Padding(
+                  padding:  EdgeInsets.only(left:  screenWidth >= 900 ? 200 *5 : screenWidth >= 600 ? 90 : 20,
+                    top: 10.0,),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 195,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              product.name,
+                              style: GoogleFonts.poppins(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Bounceable(
+                              onTap: () {
+                                orderController.removeFromCart(product);
+                              },
+                              child: Icon(Elusive.cancel_circled),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
                         children: [
                           Text(
-                            product.name,
+                            "Size : ",
+                            style: GoogleFonts.poppins(
+                              color:Theme.of(context).colorScheme.primary,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            "$size",
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Quantity : ",
+                            style: GoogleFonts.poppins(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            '$quantity',
                             style: GoogleFonts.poppins(
                               color: Theme.of(context).colorScheme.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          Bounceable(
-                            onTap: () {
-                              orderController.removeFromCart(product);
-                            },
-                            child: Icon(Elusive.cancel_circled),
-                          ),
+
+
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Size : ",
-                          style: GoogleFonts.poppins(
-                            color:Theme.of(context).colorScheme.primary,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          "$size",
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Quantity : ",
-                          style: GoogleFonts.poppins(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          '$quantity',
-                          style: GoogleFonts.poppins(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
 
-
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '\$${product.price}',
-                          style: GoogleFonts.poppins(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            '\$${product.price}',
+                            style: GoogleFonts.poppins(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        _counter(index, quantity,context)
-                      ],
-                    ),
-                  ],
+                          SizedBox(
+                            width: 40,
+                          ),
+                          _counter(index, quantity,context)
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -82,6 +82,7 @@ class _TimelineDemoState extends State<TimelineDemo> {
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
                     ),
                     child: SingleChildScrollView(
+
                       controller: scrollController,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,6 +134,7 @@ class _TimelineDemoState extends State<TimelineDemo> {
                                 child: SizedBox(
                                   height: 450,
                                   child: ListView(
+                                    physics: NeverScrollableScrollPhysics(),
                                     children: [
                                       Mytimeline(
                                           isFirst: true,
@@ -181,8 +183,69 @@ class _TimelineDemoState extends State<TimelineDemo> {
                                 ),
                               ),
                             ),
+                            Container(
+                              margin:
+                              EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                                child: SizedBox(
+                                  height: 450,
+                                  child: ListView(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    children: [
+                                      Mytimeline(
+                                          isFirst: true,
+                                          isLast: false,
+                                          isPast: true,
+                                          child2:  Text("Order placed, awaiting shipment",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary)),
+                                          child: Text("Order Placed",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary))),
+                                      Mytimeline(
+                                          isFirst: false,
+                                          isLast: false,
+                                          isPast: false,
+                                          child2: Text("Order shipped, on its way!",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary)),
+                                          child: Text("Shipped",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary))),
+                                      Mytimeline(
+                                          isFirst: false,
+                                          isLast: true,
+                                          isPast: false,
+                                          child2: Text("Order successfully delivered",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary)),
+                                          child: Text("Delivery",
+                                              style: GoogleFonts.poppins(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary))),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]
 
-                          ]),
+                      ),
                     ),
                   );
                 }),

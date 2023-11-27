@@ -24,6 +24,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final OrderController cartController = Get.find();
     final colorcontroller = Get.put(ColorController());
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(

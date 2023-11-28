@@ -56,7 +56,7 @@ Widget _buildMessageList(){
             return Text('Error ${snapshot.error}');
           }
           if(snapshot.connectionState == ConnectionState.waiting){
-            return const Text('Loading...');
+            return Center(child: const CircularProgressIndicator());
           }
           return ListView(
             children: snapshot.data!.docs.map((document) => _buildMessageItem(document)).toList() ,

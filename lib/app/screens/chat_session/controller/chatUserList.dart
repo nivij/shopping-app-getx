@@ -6,9 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:gocart/app/screens/chat_session/controller/chat_screen.dart';
+import 'package:gocart/app/screens/chat_session/chat_screen.dart';
 
-import 'controller/chat_controller.dart';
 
 class ChatList extends StatelessWidget {
   // final ChatController chatController = Get.put(ChatController());
@@ -17,7 +16,7 @@ class ChatList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer Support'),
+        title: Text('Chat'),
       ),
       body:_buildUserList(),
     );

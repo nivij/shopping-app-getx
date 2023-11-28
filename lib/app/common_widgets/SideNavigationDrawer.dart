@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/auth_controller.dart';
 import '../controllers/theme_controller.dart';
 import '../respository/authentication_respositary/authentication_respository.dart';
-import '../screens/chat_session/chatUserList.dart';
+import '../screens/chat_session/controller/chatUserList.dart';
 import '../services/themedata.dart';
 
 class Navdrawer extends StatelessWidget {

@@ -36,20 +36,35 @@ class ChatList extends StatelessWidget {
       },
     );
   }
-  Widget _buildUserListItem(DocumentSnapshot document){
-    Map<String,dynamic> data =document.data()! as Map<String,dynamic>;
-   if(_auth.currentUser!.email !=data ['email']){
-     return ListTile(
-       title: Text(data['email']),
-       onTap:  () {
-         Get.to(ChatPage(
-           receiverUserEmail: data['email'],
-           receiverUserID: data['uid'],));
-       },
-     );
-   }else{
-     return Container();
-   }
+  Widget _buildUserListItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+    if (_auth.currentUser!.email != data['email']) {
+      // Extract the first letter of the email
+      String firstLetter = data['email'][0].toUpperCase();
+
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: CircleAvatar(
+            child: Text(
+              firstLetter,
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.grey, // You can customize the color
+          ),
+          title: Text(data['email']),
+          onTap: () {
+            Get.to(ChatPage(
+              receiverUserEmail: data['email'],
+              receiverUserID: data['uid'],
+            ));
+          },
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
+
 }
 

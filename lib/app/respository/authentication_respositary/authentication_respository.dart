@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:gocart/app/respository/authentication_respositary/exception/signup_email_password_failure.dart';
@@ -17,7 +18,7 @@ class AuthenticationRespository extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
   var verificationId = ''.obs;
-
+  final FirebaseFirestore _firestore =FirebaseFirestore.instance;
   @override
   void onReady() {
     try {
@@ -78,6 +79,10 @@ class AuthenticationRespository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+        'uid': _auth.currentUser!.uid,
+        'email' : email
+      });
       firebaseUser.value != null
           ? Get.offAll(() => base())
           : Get.to(() => login());
@@ -127,6 +132,10 @@ class AuthenticationRespository extends GetxController {
   Future<void> loginWithEmailAndPassword(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+      _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+        'uid': _auth.currentUser!.uid,
+        'email' : email
+      },SetOptions(merge: true));
     } on FirebaseAuthException catch (e) {
       final ex = LoginWithEmailAndPasswordFailure.code(e.code);
       print("FIRBASE AUTH EXCEPTION - ${ex.message}");

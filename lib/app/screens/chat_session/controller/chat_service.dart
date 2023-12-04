@@ -31,6 +31,8 @@ class ChatService extends GetxController {
         .collection('message')
         .add(newMessage.toMap());
   }
+
+  //getmessage
     Stream<QuerySnapshot> getMessage(String userId, String otherUserId) {
       List<String> ids = [userId, otherUserId];
       ids.sort();
@@ -43,5 +45,19 @@ class ChatService extends GetxController {
           .orderBy('timestamp', descending: false)
           .snapshots();
     }
+
+  Future<void> deleteMessage(String receiverId, String messageId) async {
+    List<String> ids = [_firebaseAuth.currentUser!.uid, receiverId];
+    ids.sort();
+    String chatRoomId = ids.join("_");
+
+    await _firestore
+        .collection('chat_rooms')
+        .doc(chatRoomId)
+        .collection('message')
+        .doc(messageId)
+        .delete();
+  }
+
 
 }

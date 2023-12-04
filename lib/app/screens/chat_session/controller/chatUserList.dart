@@ -28,7 +28,7 @@ class ChatList extends StatelessWidget {
           return const Text('error');
         }
         if(snapshot.connectionState == ConnectionState.waiting){
-          return const Text('loading....');
+          return Center(child: const CircularProgressIndicator());
         }
         return ListView(
           children: snapshot.data!.docs.map<Widget>((doc) => _buildUserListItem(doc)).toList(),

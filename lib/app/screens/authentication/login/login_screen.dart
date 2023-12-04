@@ -160,7 +160,8 @@ class login extends StatelessWidget {
                   ),
                   Bounceable(
                     onTap: () {
-                      Get.to(() => SignupPage());
+                      Get.offAllNamed(Routes.SIGNUP);
+
                     },
                     child: Align(
                       alignment: Alignment.center,

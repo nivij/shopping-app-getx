@@ -68,7 +68,6 @@ class _TimelineDemoState extends State<TimelineDemo> {
             DraggableScrollableSheet(
               snap: true,
 
-
                 shouldCloseOnMinExtent: true,
                 builder: (BuildContext context, scrollController) {
                   return Container(

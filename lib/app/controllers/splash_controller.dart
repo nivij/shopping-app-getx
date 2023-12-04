@@ -6,14 +6,14 @@ import '../routes/app_pages.dart';
 // Import your authentication repository
 
 class SplashController extends GetxController {
-  @override
-  void onReady() {
-    super.onReady();
-    checkAuthentication();
-  }
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  //
+  // }
 
   void checkAuthentication() async {
-    final getStorage = GetStorage();
+    // final getStorage = GetStorage();
     final authRepository = AuthenticationRespository.instance; // Assuming you have an instance of AuthenticationRespository
 
     try {
@@ -33,6 +33,7 @@ class SplashController extends GetxController {
 
   @override
   void onInit() {
+    checkAuthentication();
     super.onInit();
   }
 }
